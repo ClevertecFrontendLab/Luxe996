@@ -1,34 +1,34 @@
 import React, { useState } from 'react';
+import {Layout} from "antd";
+import s from './main-page.module.scss';
+import {NavBar} from "@components/nav-bar";
+import {Trigger} from "@components/trigger";
+import logo from "../../assets/image/Logo.svg";
+import logo_mob from "../../assets/image/Logo_mob.svg";
+import AppHeader from "@components/layout/app-header";
 
-import reactLogo from '/react.svg';
-import viteLogo from '/vite.svg';
-import tsLogo from '/ts.svg';
-import './main-page.css';
+const {Footer, Sider, Content} = Layout;
 
 export const MainPage: React.FC = () => {
-    const [count, setCount] = useState(0);
+    const [collapsed, setCollapsed] = useState(true);
 
     return (
-        <>
-            <div>
-                <a href='https://vitejs.dev' target='_blank'>
-                    <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://react.dev' target='_blank'>
-                    <img src={reactLogo} className='logo react' alt='React logo' />
-                </a>
-                <a href='https://www.typescriptlang.org/' target='_blank'>
-                    <img src={tsLogo} className='logo' alt='TS logo' />
-                </a>
-            </div>
-            <h1>Vite + React + TS</h1>
-            <div className='card'>
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/pages/main-page.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-        </>
+        <Layout className={s.container}>
+            <Sider className={s.sidebar}
+                   width={208}
+                   collapsedWidth={64}
+                   trigger={<Trigger isCollapsed={collapsed}/>}
+                   collapsible
+                   collapsed={collapsed}
+                   onCollapse={() => setCollapsed(!collapsed)}>
+                <img src={!collapsed ? logo: logo_mob} alt={'logo'} className={s.logo} />
+                <NavBar isCollapsed={collapsed}/>
+            </Sider>
+            <Layout>
+                <AppHeader/>
+                <Content>Content</Content>
+                <Footer>Footer</Footer>
+            </Layout>
+        </Layout>
     );
 };

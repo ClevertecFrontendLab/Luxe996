@@ -1,0 +1,18 @@
+.trigger {
+  width: 22px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  clip-path: polygon(0 0, 100% 12%, 100% 88%, 0% 100%);
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+
+
+  & :hover {
+    cursor: pointer;
+  }
+}

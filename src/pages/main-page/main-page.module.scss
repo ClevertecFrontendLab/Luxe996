@@ -1,0 +1,20 @@
+.container {
+    margin: 0 auto;
+    max-width: 1440px;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background: url("@public/main_page.jpeg") no-repeat center;
+    background-size: cover;
+}
+
+
+.sidebar {
+    transition: all .4s;
+    position: relative;
+    background-color: #fff;
+    padding-top: 30px;
+    .logo{
+        padding-bottom: 50px;
+    }
+}

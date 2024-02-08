@@ -1,0 +1,44 @@
+
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 16px;
+  transition: all .4s ease-in;
+  height: calc(100vh - 148px);
+
+  &:last-child{
+    //margin-top: calc(50% - 16px / 2);
+    justify-content: flex-end;
+
+  }
+
+  & li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 130%;
+    text-overflow: clip;
+    overflow: hidden;
+    &:last-child{
+      //margin-top: calc(50% - 16px / 2);
+      margin-top: auto;
+      margin-bottom: 7px;
+
+    }
+  }
+}
+
+.collapsed {
+  padding: 0 calc(50% - 16px / 2);
+
+  & > span + span {
+    opacity: 0;
+  }
+}
+
