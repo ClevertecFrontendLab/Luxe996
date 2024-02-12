@@ -1,0 +1,24 @@
+@import "src/assets/style/variables";
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(min-content, 1190px) 1fr;
+  row-gap: 15px;
+  padding: 16px 24px 24px 24px;
+  min-height: 168px;
+  @media (max-width: 576px) {
+    row-gap: 10px;
+  }
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 130%;
+  grid-column: 1/ 2;
+  margin: 0;
+  @media (max-width: 992px) {
+    font-size: 24px;
+    font-weight: 500;
+  }
+}

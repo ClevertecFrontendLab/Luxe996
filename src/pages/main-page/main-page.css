@@ -4,7 +4,7 @@
 }
 
 .ant-layout-sider, .ant-layout-header {
-    background: #fff;
+    background: var(--white)
 }
 
 .ant-layout-footer,

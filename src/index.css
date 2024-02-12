@@ -1,4 +1,5 @@
 @import "/src/pages/main-page/main-page.css";
+@import "/src/components/layout/app-header/app-header.css";
 *,
 *::after,
 *::before {
@@ -15,6 +16,10 @@ body {
     font-family: 'Inter', sans-serif;
     backdrop-filter: blur(12px);
     background: rgba(121, 156, 213, 0.1);
+}
+
+:root {
+    --white: #fff;
 }
 
 
