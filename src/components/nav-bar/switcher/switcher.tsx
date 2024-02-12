@@ -1,14 +1,15 @@
 import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
-import s from './trigger.module.scss'
+import s from './switcher.module.scss'
 
 type Props = {
-    isCollapsed: boolean
+    isCollapsed: boolean;
+    onSwitch: () => void;
 }
 
-export const Trigger = ({isCollapsed}: Props) => {
+export const Switcher = ({isCollapsed, onSwitch}: Props) => {
 
     return (
-        <div className={s.trigger}>
+        <div className={s.trigger} onClick={onSwitch}>
             {isCollapsed ?
                 <MenuUnfoldOutlined /> :
                 <MenuFoldOutlined />}

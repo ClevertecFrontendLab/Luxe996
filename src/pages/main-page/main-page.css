@@ -1,0 +1,25 @@
+.ant-layout,
+.ant-layout-footer {
+    background: none;
+}
+
+.ant-layout-sider, .ant-layout-header {
+    background: #fff;
+}
+
+.ant-layout-footer,
+.ant-layout-header {
+    padding: 0;
+    height: auto;
+    line-height: 1;
+}
+
+.ant-layout.ant-layout-has-sider {
+    background: url('public/main_page_light.jpeg') no-repeat center;
+    background-size: cover;
+}
+
+
+.ant-menu-vertical .ant-menu-item:not(:last-child) {
+    margin-bottom: 16px;
+}

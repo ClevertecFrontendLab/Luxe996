@@ -1,6 +1,8 @@
 import s from './nav-bar.module.scss'
 import {Menu} from "antd";
-import {CalendarOutlined, HeartFilled, IdcardOutlined, LogoutOutlined, TrophyFilled} from "@ant-design/icons";
+import {CalendarOutlined, HeartFilled, IdcardOutlined, TrophyFilled} from "@ant-design/icons";
+import logo from "../../assets/image/Logo.svg";
+import logo_mob from "../../assets/image/Logo_mob.svg";
 
 type NavBarProps = {
     isCollapsed: boolean
@@ -34,21 +36,11 @@ export const NavBar = ({isCollapsed}:NavBarProps) => {
             label: "Профиль",
             title: ""
         },
-        {
-            key: '5',
-            icon: <LogoutOutlined  style={{color: "rgba(0, 0, 0, 1)"}}/>,
-            label: "Выход",
-            title: ""
-        }
     ]
     return (
-        <>
-
-            <Menu
-                className={`${s.menu} ${isCollapsed ? s.collapsed: ''}`}
-                items={items}
-            >
-            </Menu>
-        </>
+        <div className={s.container}>
+            <img src={!isCollapsed ? logo : logo_mob} alt={'logo'} />
+            <Menu items={items}/>
+        </div>
     )
 }

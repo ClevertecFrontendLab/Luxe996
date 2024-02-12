@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
 import {Layout} from "antd";
 import s from './main-page.module.scss';
 import {NavBar} from "@components/nav-bar";
-import {Trigger} from "@components/trigger";
-import logo from "../../assets/image/Logo.svg";
-import logo_mob from "../../assets/image/Logo_mob.svg";
-import AppHeader from "@components/layout/app-header";
+import {Switcher} from "@components/nav-bar/switcher";
+import AppHeader from "@components/layout/app-header/app-header";
+import {useState} from "react";
+import {ButtonMenu} from "@components/nav-bar/button-menu/button-menu";
 
-const {Footer, Sider, Content} = Layout;
+const {Header, Footer, Sider, Content} = Layout;
 
 export const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState(true);
 
+    const collapseHandler = () => setCollapsed((pervState) => !pervState)
+
     return (
         <Layout className={s.container}>
-            <Sider className={s.sidebar}
-                   width={208}
-                   collapsedWidth={64}
-                   trigger={<Trigger isCollapsed={collapsed}/>}
-                   collapsible
-                   collapsed={collapsed}
-                   onCollapse={() => setCollapsed(!collapsed)}>
-                <img src={!collapsed ? logo: logo_mob} alt={'logo'} className={s.logo} />
+            <Sider
+                width={208}
+                collapsedWidth={64}
+                trigger={null}
+                collapsible
+                collapsed={collapsed}
+            >
                 <NavBar isCollapsed={collapsed}/>
+                <Switcher isCollapsed={collapsed} onSwitch = {collapseHandler}/>
+                <ButtonMenu>{collapsed ? '' : 'Выход'}</ButtonMenu>
             </Sider>
             <Layout>
-                <AppHeader/>
+                <Header>
+                    <AppHeader/>
+                </Header>
                 <Content>Content</Content>
                 <Footer>Footer</Footer>
             </Layout>
