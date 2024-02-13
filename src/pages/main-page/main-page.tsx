@@ -8,8 +8,10 @@ import {useState} from "react";
 import {ButtonMenu} from "@components/nav-bar/button-menu/button-menu";
 import {AppContent} from "@components/app-content/app-content";
 import {AppCard} from "@components/app-card/app-card";
-import {CalendarOutlined, HeartFilled, IdcardOutlined} from "@ant-design/icons";
+import {HeartFilled} from "@ant-design/icons";
 import {FooterCard} from "@components/footer-card/footer-card";
+import {CalendarIconCard} from "@components/custom-icons/calendar-icon-card";
+import {ProfileIconCard} from "@components/custom-icons/profile-icon-card";
 
 const {Header, Footer, Sider, Content} = Layout;
 
@@ -22,8 +24,7 @@ export const MainPage: React.FC = () => {
     return (
         <Layout className={s.container}>
             <Sider
-                className={s.nav}
-                width={208}
+                width={`${breakpoint.xs ? 106 : 208}`}
                 collapsedWidth={`${breakpoint.xs ? 0 : 64}`}
                 trigger={null}
                 collapsible
@@ -40,8 +41,8 @@ export const MainPage: React.FC = () => {
                 <Content>
                     <AppContent>
                         <AppCard title={'Расписать тренировки'} link={'Тренировки'} icon={<HeartFilled />}/>
-                        <AppCard title={'Назначить календарь'} link={'Календарь'} icon={<CalendarOutlined />}/>
-                        <AppCard title={'Заполнить профиль'} link={'Профиль'} icon={<IdcardOutlined />}/>
+                        <AppCard title={'Назначить календарь'} link={'Календарь'} icon={<CalendarIconCard />}/>
+                        <AppCard title={'Заполнить профиль'} link={'Профиль'} icon={<ProfileIconCard />}/>
                     </AppContent>
                 </Content>
                 <Footer>

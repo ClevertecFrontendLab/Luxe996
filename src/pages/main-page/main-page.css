@@ -35,4 +35,9 @@
     .ant-layout-content {
         padding: 24px 16px
     }
+    .ant-layout-sider{
+        position: absolute;
+        z-index: 9;
+        height: 100vh;
+    }
 }

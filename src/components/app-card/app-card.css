@@ -8,6 +8,10 @@
     font-weight: 400;
 }
 
+.ant-btn-link{
+    color: var(--primaryLight6);
+}
+
 
 @media (max-width: 992px) {
     .ant-card-head-title {

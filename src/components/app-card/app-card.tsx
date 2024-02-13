@@ -19,6 +19,7 @@ export const AppCard = ({title, link, icon}: AppCardProps) => (
         <Button
             type={'link'}
             icon={icon}
+            style={{color:'--primaryLight6'}}
         >
             {link}
         </Button>

@@ -1,7 +1,10 @@
 import {Menu} from "antd";
-import {CalendarOutlined, HeartFilled, IdcardOutlined, TrophyFilled} from "@ant-design/icons";
-import logo from "../../assets/image/Logo.svg";
-import logo_mob from "../../assets/image/Logo_mob.svg";
+import { HeartFilled, TrophyFilled} from "@ant-design/icons";
+// import logo from "../../assets/image/Logo.svg";
+// import logo_mob from "../../assets/image/Logo_mob.svg";
+import {CalendarIconSidebar} from "@components/custom-icons/calendar-icon-sidebar";
+import {ProfileIconSidebar} from "@components/custom-icons/profile-icon-sidebar";
+import {Logo} from "@components/logo/logo";
 
 type NavBarProps = {
     isCollapsed: boolean
@@ -11,7 +14,7 @@ export const NavBar = ({isCollapsed}:NavBarProps) => {
     const items = [
         {
             key: '1',
-            icon: <CalendarOutlined style={{color: "rgba(6, 17, 120, 1)"}}/>,
+            icon: <CalendarIconSidebar/>,
             label: "Календарь",
             title: ""
         },
@@ -30,14 +33,15 @@ export const NavBar = ({isCollapsed}:NavBarProps) => {
         },
         {
             key: '4',
-            icon: <IdcardOutlined style={{color: "rgba(6, 17, 120, 1)"}} height={'16px'} width={'16px'}/>,
+            icon: <ProfileIconSidebar />,
             label: "Профиль",
             title: ""
         },
     ]
     return (
         <div>
-            <img src={!isCollapsed ? logo : logo_mob} alt={'logo'} />
+            {/*<img src={!isCollapsed ? logo : logo_mob} alt={'logo'} />*/}
+            <Logo isCollapsed={isCollapsed}/>
             <Menu items={items}/>
         </div>
     )
