@@ -7,8 +7,7 @@ type ButtonMenuProps = {
     children : ReactNode
 }
 
-export const ButtonMenu = ({children}:ButtonMenuProps) => {
-    return (
+export const ButtonMenu = ({children}:ButtonMenuProps) =>  (
         <Button
             block
             style={{ position: 'absolute', textAlign: 'start', border: 'none',}}
@@ -20,4 +19,3 @@ export const ButtonMenu = ({children}:ButtonMenuProps) => {
             {children}
         </Button>
     )
-}
