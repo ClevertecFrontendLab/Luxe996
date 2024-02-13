@@ -1,0 +1,25 @@
+.ant-card-head-wrapper {
+    padding: 0 8px;
+}
+
+.ant-card-head-title {
+    white-space: pre-wrap;
+    text-align: center;
+    font-weight: 400;
+}
+
+
+@media (max-width: 992px) {
+    .ant-card-head-title {
+        text-align: start;
+
+    }
+}
+
+
+@media (max-width: 992px) {
+    .ant-card-head-title {
+        text-align: center;
+
+    }
+}
