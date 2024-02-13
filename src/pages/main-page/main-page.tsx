@@ -4,7 +4,7 @@ import {NavBar} from "@components/nav-bar";
 import {Switcher} from "@components/nav-bar/switcher";
 import AppHeader from "@components/layout/app-header/app-header";
 import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ButtonMenu} from "@components/nav-bar/button-menu/button-menu";
 import {AppContent} from "@components/app-content/app-content";
 import {AppCard} from "@components/app-card/app-card";
@@ -12,6 +12,7 @@ import {HeartFilled} from "@ant-design/icons";
 import {FooterCard} from "@components/footer-card/footer-card";
 import {CalendarIconCard} from "@components/custom-icons/calendar-icon-card";
 import {ProfileIconCard} from "@components/custom-icons/profile-icon-card";
+import {BlockScroll} from "@utils/block-scroll";
 
 const {Header, Footer, Sider, Content} = Layout;
 
@@ -19,12 +20,17 @@ export const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState(true);
     const breakpoint = useBreakpoint();
 
+    useEffect(() => {
+        BlockScroll(!collapsed)
+    }, [collapsed])
+
     const collapseHandler = () => setCollapsed((pervState) => !pervState)
 
     return (
         <Layout className={s.container}>
             <Sider
                 width={`${breakpoint.xs ? 106 : 208}`}
+
                 collapsedWidth={`${breakpoint.xs ? 0 : 64}`}
                 trigger={null}
                 collapsible
