@@ -19,7 +19,20 @@
     background-size: cover;
 }
 
-
 .ant-menu-vertical .ant-menu-item:not(:last-child) {
     margin-bottom: 16px;
+}
+
+.ant-layout-content {
+    padding: 24px;
+}
+
+.ant-layout-footer {
+    padding-bottom: 42px;
+}
+
+@media (max-width: 576px) {
+    .ant-layout-content {
+        padding: 24px 16px
+    }
 }
