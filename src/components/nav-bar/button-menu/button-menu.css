@@ -1,0 +1,9 @@
+.icon {
+    margin-right: 15px;
+}
+
+@media (max-width: 576px) {
+    .anticon.icon {
+        display: none;
+    }
+}

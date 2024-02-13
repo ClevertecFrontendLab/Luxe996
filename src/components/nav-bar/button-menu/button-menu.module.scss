@@ -2,4 +2,9 @@
   border-top: 1px solid transparent;
   transform: translateY(-100%);
   overflow: hidden;
+
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  font-size: 14px;
 }

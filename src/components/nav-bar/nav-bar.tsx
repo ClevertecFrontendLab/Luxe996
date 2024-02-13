@@ -1,4 +1,3 @@
-import s from './nav-bar.module.scss'
 import {Menu} from "antd";
 import {CalendarOutlined, HeartFilled, IdcardOutlined, TrophyFilled} from "@ant-design/icons";
 import logo from "../../assets/image/Logo.svg";
@@ -32,13 +31,12 @@ export const NavBar = ({isCollapsed}:NavBarProps) => {
         {
             key: '4',
             icon: <IdcardOutlined style={{color: "rgba(6, 17, 120, 1)"}} height={'16px'} width={'16px'}/>,
-
             label: "Профиль",
             title: ""
         },
     ]
     return (
-        <div className={s.container}>
+        <div>
             <img src={!isCollapsed ? logo : logo_mob} alt={'logo'} />
             <Menu items={items}/>
         </div>

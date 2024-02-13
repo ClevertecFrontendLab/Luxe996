@@ -13,6 +13,7 @@ export const ButtonMenu = ({children}:ButtonMenuProps) => {
             block
             style={{ position: 'absolute', textAlign: 'start', border: 'none',}}
             size={'large'}
+            type={'default'}
             icon={<LogoutOutlined />}
             className={s['button-menu']}
         >
