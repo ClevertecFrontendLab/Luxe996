@@ -17,10 +17,6 @@ import {CustomIconComponentProps} from '@ant-design/icons/lib/components/Icon';
     </svg>
 )
 
-
-
-
-
  export const ExitIcon = (props: Partial<CustomIconComponentProps>) => (
      <Icon component={ExitSVG} {...props} />
  )

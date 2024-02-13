@@ -16,7 +16,6 @@ const CalendarSVG = () => (
 
 )
 
-
 export const CalendarIconCard = (props: Partial<CustomIconComponentProps>) => (
     <Icon component={CalendarSVG} {...props}/>
 )
