@@ -44,7 +44,7 @@ export const MainPage: React.FC = () => {
             </Sider>
 
             <Layout>
-                <Header>
+                <Header className={s.header}>
                     <AppHeader />
                 </Header>
                 <Content>
@@ -66,17 +66,14 @@ export const MainPage: React.FC = () => {
                         />
                     </AppContent>
                 </Content>
-                <Footer>
-                    <div className={s.footer}>
-                        <div>
-                            <Button type={'link'} size={'large'}>
-                                Смотреть отзывы
-                            </Button>
-                        </div>
-
-                        <div className={s['footer-card']}>
-                            <FooterCard />
-                        </div>
+                <Footer className={s.footer}>
+                    <div>
+                        <Button type={'link'} size={'large'}>
+                            Смотреть отзывы
+                        </Button>
+                    </div>
+                    <div className={s['footer-card']}>
+                        <FooterCard />
                     </div>
                 </Footer>
             </Layout>

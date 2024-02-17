@@ -7,9 +7,11 @@
   row-gap: 24px;
   max-width: 752px;
   column-gap: 16px;
+  padding: 24px;
 
 
   @media (max-width: 576px) {
+    padding: 24px 16px;
     margin-bottom: 0;
   }
 }

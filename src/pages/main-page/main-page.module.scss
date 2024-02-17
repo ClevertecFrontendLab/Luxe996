@@ -1,6 +1,6 @@
 @import "./src/assets/style/variables";
 
-:global(.ant-layout){
+:global(.ant-layout ){
     background: none;
 }
 .container {
@@ -51,16 +51,30 @@
     }
 }
 
+.header {
+    background: var(--white);
+    padding: 0;
+    height: auto;
+    line-height: 1;
+}
+
 .footer {
     display: flex;
     justify-content: space-between;
     align-items: end;
     flex-wrap: wrap;
     row-gap: 24px;
-    padding: 0 24px;
+    padding: 0 24px 42px 24px;
+    background: none;
     @media (max-width: 480px) {
         padding: 16px;
         justify-content: center;
+
+        :global{
+            .ant-card-head-title {
+                text-align: center;
+            }
+        }
     }
     &-card {
         width: 240px;
