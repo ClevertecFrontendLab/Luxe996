@@ -1,9 +1,9 @@
-@import "/src/pages/main-page/main-page.css";
-@import "src/components/nav-bar/nav-bar.css";
-@import "src/components/nav-bar/button-menu/button-menu.css";
-@import "/src/components/layout/app-header/app-header.css";
-@import "/src/components/app-card/app-card.css";
-@import "src/components/footer-card/footer-card.css";
+/*@import "/src/pages/main-page/main-page.css";*/
+/*@import "src/components/nav-bar/nav-bar.css";*/
+/*@import "src/components/nav-bar/button-menu/button-menu.css";*/
+/*@import "/src/components/layout/app-header/app-header.css";*/
+/*@import "/src/components/app-card/app-card.css";*/
+/*@import "src/components/footer-card/footer-card.css";*/
 
 *,
 *::after,
@@ -17,10 +17,9 @@ h1, h2, h3, h4, p {
     margin: 0;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    backdrop-filter: blur(12px);
-    background: rgba(121, 156, 213, 0.1);
+body{
+    font-family: Inter, sans-serif;
+    overflow-y: scroll;
 }
 
 ul {
