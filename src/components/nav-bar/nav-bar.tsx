@@ -1,13 +1,13 @@
 import { Menu } from 'antd';
 import { HeartFilled, TrophyFilled } from '@ant-design/icons';
-import { CalendarIconSidebar } from '@components/custom-icons/calendar-icon-sidebar';
-import { ProfileIconSidebar } from '@components/custom-icons/profile-icon-sidebar';
+import CalendarSider from '@public/calendar-sider.svg?react';
+import ProfileSidebar from '@public/profile-sider.svg?react';
 
 export const NavBar = () => {
     const items = [
         {
             key: '1',
-            icon: <CalendarIconSidebar />,
+            icon: <CalendarSider />,
             label: 'Календарь',
             title: '',
         },
@@ -25,7 +25,7 @@ export const NavBar = () => {
         },
         {
             key: '4',
-            icon: <ProfileIconSidebar />,
+            icon: <ProfileSidebar />,
             label: 'Профиль',
             title: '',
         },

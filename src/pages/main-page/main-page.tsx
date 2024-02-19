@@ -10,10 +10,10 @@ import { AppContent } from '@components/app-content/app-content';
 import { AppCard } from '@components/app-card/app-card';
 import { HeartFilled } from '@ant-design/icons';
 import { FooterCard } from '@components/footer-card/footer-card';
-import { CalendarIconCard } from '@components/custom-icons/calendar-icon-card';
-import { ProfileIconCard } from '@components/custom-icons/profile-icon-card';
 import { BlockScroll } from '@utils/block-scroll';
 import { Logo } from '@components/logo/logo';
+import CalendarCard from '@public/calendar-card.svg?react';
+import ProfileCard from '@public/profile-card.svg?react';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -57,12 +57,12 @@ export const MainPage: React.FC = () => {
                         <AppCard
                             title={'Назначить календарь'}
                             link={'Календарь'}
-                            icon={<CalendarIconCard />}
+                            icon={<CalendarCard />}
                         />
                         <AppCard
                             title={'Заполнить профиль'}
                             link={'Профиль'}
-                            icon={<ProfileIconCard />}
+                            icon={<ProfileCard />}
                         />
                     </AppContent>
                 </Content>
