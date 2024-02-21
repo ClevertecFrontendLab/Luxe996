@@ -1,6 +1,5 @@
 import { Button, Checkbox, Form, Input, Row } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import s from './login-form.module.scss';
 
 interface LoginForm {
     email: string;
@@ -13,7 +12,7 @@ export const LoginForm = () => {
         console.log(email, password);
     };
     return (
-        <Form className={s.form} onFinish={onFinish}>
+        <Form onFinish={onFinish}>
             <div>
                 <Form.Item
                     rules={[
