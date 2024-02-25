@@ -14,16 +14,25 @@ import { BlockScroll } from '@utils/block-scroll';
 import { Logo } from '@components/logo/logo';
 import CalendarCard from '@public/calendar-card.svg?react';
 import ProfileCard from '@public/profile-card.svg?react';
+import { Path } from '../../routes/path';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 const { Header, Footer, Sider, Content } = Layout;
 
 export const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState(true);
     const breakpoint = useBreakpoint();
+    const navigate = useNavigate();
+    const { isAuth } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
         BlockScroll(!collapsed);
     }, [collapsed]);
+
+    useEffect(() => {
+        !isAuth && navigate(Path.AUTH);
+    }, [isAuth, navigate]);
 
     const collapseHandler = () => setCollapsed((pervState) => !pervState);
 

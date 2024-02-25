@@ -1,25 +1,41 @@
 import { Button, Checkbox, Form, Input, Row } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-
-interface LoginForm {
-    email: string;
-    password: string;
-    remember: boolean;
-}
+import { LoginFormProps } from '@types/auth';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { LoginTC } from '@redux/reducers/auth-reducer';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Path } from '../../routes/path';
 
 export const LoginForm = () => {
-    const onFinish = ({ email, password }: LoginForm) => {
-        console.log(email, password);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const { statusCode } = useAppSelector((state) => state.auth.AuthError);
+    const { isAuth } = useAppSelector((state) => state.auth);
+
+    const onFinish = ({ email, password }: LoginFormProps) => {
+        dispatch(LoginTC(email, password));
     };
+
+    useEffect(() => {
+        isAuth && navigate(Path.MAIN);
+    }, [isAuth, navigate]);
+
+    useEffect(() => {
+        if (statusCode) {
+            navigate(Path.RESULT.LOGIN_ERROR);
+        }
+    }, [statusCode, navigate]);
+
     return (
         <Form onFinish={onFinish}>
             <div>
                 <Form.Item
+                    name={'email'}
                     rules={[
                         { required: true, message: '' },
                         { type: 'email', message: '' },
                     ]}
-                    name={'email'}
                 >
                     <Input addonBefore='e-mail:' size={'large'} />
                 </Form.Item>

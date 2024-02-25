@@ -3,4 +3,9 @@ export const Path = {
     MAIN: '/main',
     AUTH: '/auth',
     REGISTRATION: '/auth/registration',
+    RESULT: {
+        LOGIN_ERROR: '/result/error-login',
+        REGISTER_SUCCESS: '/result/success',
+        REGISTER_ERROR: '/result/error',
+    },
 };

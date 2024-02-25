@@ -6,10 +6,13 @@ import { LoginForm } from '@components/login-form/login-form';
 import { RegisterForm } from '@components/register-form/register-form';
 import { useEffect, useState } from 'react';
 import { Path } from '../../routes/path';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { LoginAC } from '@redux/reducers/auth-reducer';
 
 export const AuthPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useAppDispatch();
     const [key, setKey] = useState('1');
 
     const items = [
@@ -24,6 +27,15 @@ export const AuthPage = () => {
             children: <RegisterForm />,
         },
     ];
+
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        if (token) {
+            dispatch(LoginAC(true, null));
+            navigate(Path.MAIN);
+        }
+    }, [dispatch, navigate, token]);
 
     useEffect(() => {
         location.pathname === `${Path.REGISTRATION}` ? setKey('2') : setKey('1');

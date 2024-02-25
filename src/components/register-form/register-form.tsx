@@ -1,5 +1,10 @@
 import { Button, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { RegisterTC } from '@redux/reducers/auth-reducer';
+import { useEffect } from 'react';
+import { Path } from '../../routes/path';
+import { useNavigate } from 'react-router-dom';
 
 interface RegisterForm {
     email: string;
@@ -8,9 +13,29 @@ interface RegisterForm {
 }
 
 export const RegisterForm = () => {
-    const onFinish = ({ email, password, confirmPass }: RegisterForm) => {
-        console.log(email, password, confirmPass);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const { statusCode } = useAppSelector((state) => state.auth.AuthError);
+    const { email, password } = useAppSelector((state) => state.auth.regInfo);
+    const { isRegister } = useAppSelector((state) => state.auth);
+
+    const onFinish = (values: RegisterForm) => {
+        dispatch(RegisterTC(values.email, values.password));
     };
+
+    useEffect(() => {
+        if (statusCode && statusCode !== 409) {
+            navigate(Path.RESULT.REGISTER_ERROR);
+        }
+        if (email && password) {
+            dispatch(RegisterTC(email, password));
+        }
+    }, [statusCode, navigate, email, password, dispatch]);
+
+    useEffect(() => {
+        isRegister && navigate(Path.RESULT.REGISTER_SUCCESS);
+    }, [isRegister, navigate]);
 
     return (
         <Form onFinish={onFinish}>

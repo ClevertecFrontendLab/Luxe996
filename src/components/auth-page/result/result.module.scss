@@ -1,0 +1,22 @@
+@import "../../../assets/style/variables";
+
+.result {
+  text-align: center;
+
+  .title {
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  .text {
+    color: rgba(140, 140, 140, 1);
+
+  }
+
+  .button {
+    margin-top: 24px;
+    width: 100%;
+    background-color: $primaryLight6;
+  }
+}
