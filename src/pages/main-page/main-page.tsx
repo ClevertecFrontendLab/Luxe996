@@ -10,7 +10,6 @@ import { AppContent } from '@components/app-content/app-content';
 import { AppCard } from '@components/app-card/app-card';
 import { HeartFilled } from '@ant-design/icons';
 import { FooterCard } from '@components/footer-card/footer-card';
-import { BlockScroll } from '@utils/block-scroll';
 import { Logo } from '@components/logo/logo';
 import CalendarCard from '@public/calendar-card.svg?react';
 import ProfileCard from '@public/profile-card.svg?react';
@@ -25,10 +24,6 @@ export const MainPage: React.FC = () => {
     const breakpoint = useBreakpoint();
     const navigate = useNavigate();
     const { isAuth } = useAppSelector((state) => state.auth);
-
-    useEffect(() => {
-        BlockScroll(!collapsed);
-    }, [collapsed]);
 
     useEffect(() => {
         !isAuth && navigate(Path.AUTH);

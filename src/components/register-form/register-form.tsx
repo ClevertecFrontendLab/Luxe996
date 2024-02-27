@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { RegisterTC } from '@redux/reducers/auth-reducer';
 import { useEffect } from 'react';
 import { Path } from '../../routes/path';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface RegisterForm {
     email: string;
@@ -15,6 +15,8 @@ interface RegisterForm {
 export const RegisterForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+    // console.log('reg loc', location);
 
     const { statusCode } = useAppSelector((state) => state.auth.AuthError);
     const { email, password } = useAppSelector((state) => state.auth.regInfo);
@@ -25,17 +27,19 @@ export const RegisterForm = () => {
     };
 
     useEffect(() => {
-        if (statusCode && statusCode !== 409) {
-            navigate(Path.RESULT.REGISTER_ERROR);
+        if (email && statusCode && statusCode !== 409) {
+            navigate(Path.RESULT.REGISTER_ERROR, { state: { from: location.pathname } });
         }
-        if (email && password) {
+
+        if (email && location.state?.from === Path.RESULT.REGISTER_ERROR) {
             dispatch(RegisterTC(email, password));
         }
-    }, [statusCode, navigate, email, password, dispatch]);
+    }, [statusCode, navigate, email, password, dispatch, location.state, location.pathname]);
 
     useEffect(() => {
-        isRegister && navigate(Path.RESULT.REGISTER_SUCCESS);
-    }, [isRegister, navigate]);
+        isRegister &&
+            navigate(Path.RESULT.REGISTER_SUCCESS, { state: { from: location.pathname } });
+    }, [isRegister, location.pathname, navigate]);
 
     return (
         <Form onFinish={onFinish}>

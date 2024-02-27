@@ -4,18 +4,20 @@ import { LoginFormProps } from '@types/auth';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { LoginTC } from '@redux/reducers/auth-reducer';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Path } from '../../routes/path';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
     const { statusCode } = useAppSelector((state) => state.auth.AuthError);
     const { isAuth } = useAppSelector((state) => state.auth);
 
+    console.log('log loc', location);
+
     const onFinish = ({ email, password, remember }: LoginFormProps) => {
-        dispatch(LoginTC(email, password));
-        console.log(remember);
+        dispatch(LoginTC(email, password, remember));
     };
 
     useEffect(() => {
@@ -24,9 +26,9 @@ export const LoginForm = () => {
 
     useEffect(() => {
         if (statusCode) {
-            navigate(Path.RESULT.LOGIN_ERROR);
+            navigate(Path.RESULT.LOGIN_ERROR, { state: { from: location.pathname } });
         }
-    }, [statusCode, navigate]);
+    }, [statusCode, navigate, location.pathname]);
 
     return (
         <Form onFinish={onFinish}>

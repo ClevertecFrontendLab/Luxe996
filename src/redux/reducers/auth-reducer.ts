@@ -38,7 +38,7 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
             return {
                 ...state,
                 isRegister: false,
-                isAuth: false,
+                //         isAuth: false,
                 AuthError: {
                     statusCode: null,
                 },
