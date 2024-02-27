@@ -12,7 +12,7 @@ export const Result = ({ icon, title, text, textBtn, pathBtn, testData }: Result
     const location = useLocation();
     const dispatch = useAppDispatch();
 
-    console.log('res loc', location);
+    // console.log('res loc', location);
 
     const { statusCode } = useAppSelector((state) => state.auth.AuthError);
     const { isRegister } = useAppSelector((state) => state.auth);
@@ -22,7 +22,7 @@ export const Result = ({ icon, title, text, textBtn, pathBtn, testData }: Result
     };
 
     useEffect(() => {
-        !isRegister && (!statusCode || !location.state) ? navigate(location.state.from) : '';
+        !isRegister && (!statusCode || !location.state) ? navigate(location.state?.from) : '';
     }, [isRegister, location.state, navigate, statusCode]);
 
     return (

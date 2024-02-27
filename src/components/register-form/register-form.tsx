@@ -27,8 +27,12 @@ export const RegisterForm = () => {
     };
 
     useEffect(() => {
-        if (email && statusCode && statusCode !== 409) {
-            navigate(Path.RESULT.REGISTER_ERROR, { state: { from: location.pathname } });
+        if (email && statusCode) {
+            if (statusCode !== 409) {
+                navigate(Path.RESULT.REGISTER_ERROR, { state: { from: location.pathname } });
+            } else {
+                navigate(Path.RESULT.ERROR_USER_EXIST, { state: { from: location.pathname } });
+            }
         }
 
         if (email && location.state?.from === Path.RESULT.REGISTER_ERROR) {
@@ -51,7 +55,7 @@ export const RegisterForm = () => {
                     ]}
                     name={'email'}
                 >
-                    <Input addonBefore='e-mail:' size={'large'} />
+                    <Input addonBefore='e-mail:' size={'large'} data-test-id='registration-email' />
                 </Form.Item>
 
                 <Form.Item
@@ -69,7 +73,11 @@ export const RegisterForm = () => {
                         </span>
                     }
                 >
-                    <Input.Password size={'large'} placeholder='Пароль'></Input.Password>
+                    <Input.Password
+                        size={'large'}
+                        placeholder='Пароль'
+                        data-test-id='registration-password'
+                    ></Input.Password>
                 </Form.Item>
 
                 <Form.Item
@@ -90,13 +98,23 @@ export const RegisterForm = () => {
                         }),
                     ]}
                 >
-                    <Input.Password size={'large'} placeholder='Повторите пароль'></Input.Password>
+                    <Input.Password
+                        size={'large'}
+                        placeholder='Повторите пароль'
+                        data-test-id='registration-confirm-password'
+                    ></Input.Password>
                 </Form.Item>
             </div>
 
             <div>
                 <Form.Item>
-                    <Button htmlType='submit' block type={'primary'} size={'large'}>
+                    <Button
+                        htmlType='submit'
+                        block
+                        type={'primary'}
+                        size={'large'}
+                        data-test-id='registration-submit-button'
+                    >
                         Войти
                     </Button>
                 </Form.Item>

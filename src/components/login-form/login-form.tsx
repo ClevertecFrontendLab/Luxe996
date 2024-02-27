@@ -14,7 +14,7 @@ export const LoginForm = () => {
     const { statusCode } = useAppSelector((state) => state.auth.AuthError);
     const { isAuth } = useAppSelector((state) => state.auth);
 
-    console.log('log loc', location);
+    console.log('status', statusCode);
 
     const onFinish = ({ email, password, remember }: LoginFormProps) => {
         dispatch(LoginTC(email, password, remember));

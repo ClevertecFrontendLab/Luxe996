@@ -37,4 +37,16 @@ export const resData: ResTypes = {
         pathBtn: Path.AUTH,
         testData: 'registration-enter-button',
     },
+    error_user_exist: {
+        icon: (
+            <CloseCircleFilled
+                style={{ color: '#ff4d4f', fontSize: '80px', marginBottom: '24px' }}
+            />
+        ),
+        title: 'Данные не сохранились',
+        text: 'Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.',
+        textBtn: 'Назад к регистрации',
+        pathBtn: Path.REGISTRATION,
+        testData: 'registration-back-button',
+    },
 };

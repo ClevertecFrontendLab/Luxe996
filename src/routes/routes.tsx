@@ -71,6 +71,22 @@ export const routes = (
             }
         />
 
+        <Route
+            path={Path.RESULT.ERROR_USER_EXIST}
+            element={
+                <AuthWrapper>
+                    <Result
+                        icon={resData.error_user_exist.icon}
+                        title={resData.error_user_exist.title}
+                        text={resData.error_user_exist.text}
+                        textBtn={resData.error_user_exist.textBtn}
+                        pathBtn={resData.error_user_exist.pathBtn}
+                        testData={resData.error_user_exist.testData}
+                    />
+                </AuthWrapper>
+            }
+        />
+
         <Route path={Path.MAIN} element={<MainPage />} />
     </Routes>
 );

@@ -100,8 +100,9 @@ export const LoginTC =
                 dispatch(LoadingAC(false));
             })
             .catch((rej) => {
+                console.log(rej.response.status);
                 if (rej.response.data) {
-                    dispatch(LoginAC(false, rej.response.data.statusCode));
+                    dispatch(LoginAC(false, rej.response.status));
                 }
                 dispatch(LoadingAC(false));
             });
@@ -125,7 +126,7 @@ export const RegisterTC = (email: string, password: string) => async (dispatch: 
             dispatch(LoadingAC(false));
         })
         .catch((rej) => {
-            dispatch(RegisterAC(false, rej.response.data.statusCode, email, password));
+            dispatch(RegisterAC(false, rej.response.status, email, password));
             dispatch(LoadingAC(false));
         });
 };
