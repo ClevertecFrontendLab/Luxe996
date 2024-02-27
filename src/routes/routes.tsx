@@ -119,6 +119,21 @@ export const routes = (
                 </AuthWrapper>
             }
         />
+        <Route
+            path={Path.RESULT.ERROR_EMAIL_NO_EXIST}
+            element={
+                <AuthWrapper>
+                    <Result
+                        icon={resData.error_email_no_exist.icon}
+                        title={resData.error_email_no_exist.title}
+                        text={resData.error_email_no_exist.text}
+                        textBtn={resData.error_email_no_exist.textBtn}
+                        pathBtn={resData.error_email_no_exist.pathBtn}
+                        testData={resData.error_email_no_exist.testData}
+                    />
+                </AuthWrapper>
+            }
+        />
 
         <Route path={Path.MAIN} element={<MainPage />} />
     </Routes>

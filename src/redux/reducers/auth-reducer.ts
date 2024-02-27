@@ -20,6 +20,7 @@ type initialState = {
     };
     AuthError: {
         statusCode: number | null;
+        message: string | null;
     };
     isCodeValid: boolean | null;
     isChanged: boolean | null;
@@ -36,6 +37,7 @@ const initialState: initialState = {
     recEmail: null,
     AuthError: {
         statusCode: null,
+        message: null,
     },
     isCodeValid: null,
     isChanged: null,
@@ -85,6 +87,10 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
             return {
                 ...state,
                 recEmail: action.email,
+                AuthError: {
+                    statusCode: action.statusCode,
+                    message: action.message,
+                },
             };
         }
         case CHECK_CODE: {
@@ -173,16 +179,18 @@ export const RegisterTC = (email: string, password: string) => async (dispatch: 
 
 //Check Email
 type CheckEmailAT = ReturnType<typeof CheckEmailAC>;
-const CheckEmailAC = (email: string) => ({ type: CHECK_EMAIL, email } as const);
+const CheckEmailAC = (email: string, statusCode: number | null, message: string | null) =>
+    ({ type: CHECK_EMAIL, email, statusCode, message } as const);
 export const CheckEmailTC = (email: string) => async (dispatch: AppDispatch) => {
     dispatch(LoadingAC(true));
     await AuthApi.checkEmail(email)
         .then((res) => {
-            dispatch(CheckEmailAC(res.data.email));
+            dispatch(CheckEmailAC(res.data.email, null, null));
             dispatch(LoadingAC(false));
         })
         .catch((rej) => {
             console.log(rej);
+            dispatch(CheckEmailAC(null, rej.response.data.statusCode, rej.response.data.message));
             dispatch(LoadingAC(false));
         });
 };

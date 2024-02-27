@@ -61,4 +61,16 @@ export const resData: ResTypes = {
         pathBtn: Path.AUTH,
         testData: 'change-entry-button',
     },
+    error_email_no_exist: {
+        icon: (
+            <CloseCircleFilled
+                style={{ color: '#ff4d4f', fontSize: '80px', marginBottom: '24px' }}
+            />
+        ),
+        title: 'Такой e-mail не зарегистрирован',
+        text: 'Мы не нашли в базе вашего e-mail. Попробуйте войти с другим e-mail.',
+        textBtn: 'Попробовать снова',
+        pathBtn: Path.AUTH,
+        testData: 'check-retry-button',
+    },
 };

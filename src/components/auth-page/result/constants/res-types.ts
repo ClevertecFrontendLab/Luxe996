@@ -13,4 +13,5 @@ export interface ResTypes {
     success_register: ResultDataTypes;
     error_user_exist: ResultDataTypes;
     success_change_password: ResultDataTypes;
+    error_email_no_exist: ResultDataTypes;
 }

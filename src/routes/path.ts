@@ -11,5 +11,6 @@ export const Path = {
         REGISTER_ERROR: '/result/error',
         ERROR_USER_EXIST: '/result/error-user-exist',
         SUCCESS_CHANGE_PASSWORD: '/result/success-change-password',
+        ERROR_EMAIL_NO_EXIST: '/result/error-check-email-no-exist',
     },
 };

@@ -12,12 +12,12 @@ export const LoginForm = () => {
     const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const { statusCode } = useAppSelector((state) => state.auth.AuthError);
+    const { statusCode, message } = useAppSelector((state) => state.auth.AuthError);
     const { recEmail } = useAppSelector((state) => state.auth);
     const { isAuth } = useAppSelector((state) => state.auth);
     const [emailForm, setEmailForm] = useState('');
     const [forgotPass, setForgotPass] = useState(false);
-    console.log('recEm', recEmail);
+    console.log(statusCode, message);
 
     const onFinish = ({ email, password, remember }: LoginFormProps) => {
         dispatch(LoginTC(email, password, remember));
@@ -32,9 +32,11 @@ export const LoginForm = () => {
 
     useEffect(() => {
         if (statusCode) {
-            navigate(Path.RESULT.LOGIN_ERROR, { state: { from: location.pathname } });
+            statusCode === 404 && message === 'Email не найден'
+                ? navigate(Path.RESULT.ERROR_EMAIL_NO_EXIST, { state: { from: location.pathname } })
+                : navigate(Path.RESULT.LOGIN_ERROR, { state: { from: location.pathname } });
         }
-    }, [statusCode, navigate, location.pathname]);
+    }, [statusCode, navigate, location.pathname, message]);
 
     useEffect(() => {
         recEmail && navigate(Path.CONFIRM_EMAIL, { state: { from: location.pathname } });
