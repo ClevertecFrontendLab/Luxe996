@@ -14,4 +14,5 @@ export interface ResTypes {
     error_user_exist: ResultDataTypes;
     success_change_password: ResultDataTypes;
     error_email_no_exist: ResultDataTypes;
+    error_change_password: ResultDataTypes;
 }

@@ -149,6 +149,21 @@ export const routes = (
                 </AuthWrapper>
             }
         />
+        <Route
+            path={Path.RESULT.ERROR_CHANGE_PASSWORD}
+            element={
+                <AuthWrapper>
+                    <Result
+                        icon={resData.error_change_password.icon}
+                        title={resData.error_change_password.title}
+                        text={resData.error_change_password.text}
+                        textBtn={resData.error_change_password.textBtn}
+                        pathBtn={resData.error_change_password.pathBtn}
+                        testData={resData.error_change_password.testData}
+                    />
+                </AuthWrapper>
+            }
+        />
 
         <Route path={Path.MAIN} element={<MainPage />} />
     </Routes>

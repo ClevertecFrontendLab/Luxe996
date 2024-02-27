@@ -20,23 +20,35 @@ export const ChangePassword = () => {
     const location = useLocation();
 
     const { isChanged } = useAppSelector((state) => state.auth);
+    const { pass, confPass } = useAppSelector((state) => state.auth.recInfo);
 
     const onFinish = (values: ChangePasswordForm) => {
         dispatch(ChangePassTC(values.password, values.confirmPassword));
     };
 
     useEffect(() => {
-        if (location.state?.from !== Path.CONFIRM_EMAIL) {
+        if (
+            location.state?.from !== Path.CONFIRM_EMAIL &&
+            location.state?.from !== Path.RESULT.ERROR_CHANGE_PASSWORD
+        ) {
             navigate(Path.AUTH);
         }
     }, [location.state?.from, navigate]);
 
     useEffect(() => {
-        if (isChanged) {
+        if (isChanged === true) {
             navigate(Path.RESULT.SUCCESS_CHANGE_PASSWORD);
             dispatch(ResetStoreAC());
+        } else {
+            isChanged === false && navigate(Path.RESULT.ERROR_CHANGE_PASSWORD);
         }
     }, [dispatch, isChanged, navigate]);
+
+    useEffect(() => {
+        if (pass && confPass) {
+            dispatch(ChangePassTC(pass, confPass));
+        }
+    }, [confPass, dispatch, pass]);
 
     return (
         <Form className={s.form} initialValues={{ remember: true }} onFinish={onFinish}>

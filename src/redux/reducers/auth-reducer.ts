@@ -24,6 +24,10 @@ type initialState = {
     };
     isCodeValid: boolean | null;
     isChanged: boolean | null;
+    recInfo: {
+        pass: string | null;
+        confPass: string | null;
+    };
 };
 
 const initialState: initialState = {
@@ -41,6 +45,10 @@ const initialState: initialState = {
     },
     isCodeValid: null,
     isChanged: null,
+    recInfo: {
+        pass: null,
+        confPass: null,
+    },
 };
 
 export const AuthReducer = (state = initialState, action: ActionType) => {
@@ -105,6 +113,10 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
             return {
                 ...state,
                 isChanged: action.isChanged,
+                recInfo: {
+                    pass: action.pass,
+                    confPass: action.confPass,
+                },
             };
         }
 
@@ -144,7 +156,6 @@ export const LoginTC =
                 dispatch(LoadingAC(false));
             })
             .catch((rej) => {
-                console.log(rej.response.status);
                 if (rej.response.data) {
                     dispatch(LoginAC(false, rej.response.status));
                 }
@@ -191,7 +202,6 @@ export const CheckEmailTC = (email: string) => async (dispatch: AppDispatch) => 
             dispatch(LoadingAC(false));
         })
         .catch((rej) => {
-            console.log(rej);
             dispatch(CheckEmailAC(null, rej.response.data.statusCode, rej.response.data.message));
             dispatch(LoadingAC(false));
         });
@@ -204,12 +214,10 @@ export const CheckCodeTC = (email: string, code: string) => async (dispatch: App
     dispatch(LoadingAC(true));
     await AuthApi.checkCode(email, code)
         .then((res) => {
-            console.log(res);
             dispatch(CheckCodeAC(true));
             dispatch(LoadingAC(false));
         })
         .catch((rej) => {
-            console.log(rej);
             dispatch(CheckCodeAC(false));
             dispatch(LoadingAC(false));
         });
@@ -217,7 +225,8 @@ export const CheckCodeTC = (email: string, code: string) => async (dispatch: App
 
 //Change Password
 type ChangePassAT = ReturnType<typeof ChangePassAC>;
-const ChangePassAC = (isChanged: boolean) => ({ type: CHANGE_PASS, isChanged } as const);
+const ChangePassAC = (isChanged: boolean, pass?: string, confPass?: string) =>
+    ({ type: CHANGE_PASS, isChanged, pass, confPass } as const);
 export const ChangePassTC = (pass: string, confPass: string) => async (dispatch: AppDispatch) => {
     dispatch(LoadingAC(true));
     await AuthApi.setNewPass(pass, confPass)
@@ -226,7 +235,7 @@ export const ChangePassTC = (pass: string, confPass: string) => async (dispatch:
             dispatch(LoadingAC(false));
         })
         .catch((rej) => {
-            console.log(rej);
+            dispatch(ChangePassAC(false, pass, confPass));
             dispatch(LoadingAC(false));
         });
 };

@@ -82,4 +82,16 @@ export const resData: ResTypes = {
         pathBtn: Path.AUTH,
         testData: 'check-back-button',
     },
+    error_change_password: {
+        icon: (
+            <CloseCircleFilled
+                style={{ color: '#ff4d4f', fontSize: '80px', marginBottom: '24px' }}
+            />
+        ),
+        title: 'Данные не сохранились',
+        text: 'Что-то пошло не так попробуйте ещё раз.',
+        textBtn: 'Повторить',
+        pathBtn: Path.CHANGE_PASSWORD,
+        testData: 'change-retry-button',
+    },
 };
