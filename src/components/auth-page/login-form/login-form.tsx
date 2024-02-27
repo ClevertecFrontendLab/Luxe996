@@ -2,22 +2,28 @@ import { Button, Checkbox, Form, Input, Row } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { LoginFormProps } from '@types/auth';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { LoginTC } from '@redux/reducers/auth-reducer';
-import { useEffect } from 'react';
+import { CheckEmailTC, LoginTC } from '@redux/reducers/auth-reducer';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Path } from '../../routes/path';
+import { Path } from '../../../routes/path';
+import { Rule } from 'antd/lib/form';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
     const { statusCode } = useAppSelector((state) => state.auth.AuthError);
+    const { recEmail } = useAppSelector((state) => state.auth);
     const { isAuth } = useAppSelector((state) => state.auth);
-
-    console.log('status', statusCode);
+    const [emailForm, setEmailForm] = useState('');
+    const [forgotPass, setForgotPass] = useState(false);
+    console.log('recEm', recEmail);
 
     const onFinish = ({ email, password, remember }: LoginFormProps) => {
         dispatch(LoginTC(email, password, remember));
+    };
+    const onForgotClick = (email: string) => {
+        dispatch(CheckEmailTC(email));
     };
 
     useEffect(() => {
@@ -30,6 +36,10 @@ export const LoginForm = () => {
         }
     }, [statusCode, navigate, location.pathname]);
 
+    useEffect(() => {
+        recEmail && navigate(Path.CONFIRM_EMAIL, { state: { from: location.pathname } });
+    }, [recEmail, location.pathname, navigate]);
+
     return (
         <Form onFinish={onFinish}>
             <div>
@@ -38,25 +48,40 @@ export const LoginForm = () => {
                     rules={[
                         { required: true, message: '' },
                         { type: 'email', message: '' },
+                        {
+                            validator: (_: Rule, email: string) => {
+                                const emailRegex = /^[\w]{1}[\w-.]*@[\w-]+\.[a-z]{2,4}$/i;
+                                if (emailRegex.test(email)) {
+                                    setEmailForm(email);
+                                    setForgotPass(true);
+                                    return Promise.resolve();
+                                } else {
+                                    setForgotPass(false);
+                                    return Promise.reject();
+                                }
+                            },
+                        },
                     ]}
                 >
                     <Input addonBefore='e-mail:' size={'large'} data-test-id='login-email' />
                 </Form.Item>
 
-                {/*<Form.Item rules={[{ required: true, message: '' }]} name={'password'}>*/}
                 <Form.Item
                     rules={[
                         {
-                            required: true,
-                            message: '',
+                            validator(_: Rule, value: string) {
+                                if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}/.test(value)) {
+                                    return Promise.resolve();
+                                } else {
+                                    return Promise.reject(
+                                        new Error(
+                                            'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                                        ),
+                                    );
+                                }
+                            },
                         },
-                        { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ },
                     ]}
-                    help={
-                        <span style={{ fontSize: '0.75rem' }}>
-                            Пароль не менее 8 символов, с заглавной буквой и цифрой
-                        </span>
-                    }
                     name={'password'}
                 >
                     <Input.Password
@@ -72,7 +97,14 @@ export const LoginForm = () => {
                     <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                 </Form.Item>
 
-                <Button size={'large'} type={'link'}>
+                <Button
+                    size={'large'}
+                    type={'link'}
+                    data-test-id='login-forgot-button'
+                    onClick={() => {
+                        forgotPass && onForgotClick(emailForm);
+                    }}
+                >
                     Забыли пароль?
                 </Button>
             </Row>

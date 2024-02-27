@@ -5,6 +5,7 @@ export const baseURL = 'https://marathon-api.clevertec.ru';
 
 export const instance = axios.create({
     baseURL,
+    withCredentials: true,
 });
 
 export const AuthApi = {
@@ -18,6 +19,23 @@ export const AuthApi = {
         return instance.post(Endpoints.Auth.Register, {
             email,
             password,
+        });
+    },
+    checkEmail(email: string) {
+        return instance.post(Endpoints.Auth.CheckEmail, {
+            email,
+        });
+    },
+    checkCode(email: string, code: string) {
+        return instance.post(Endpoints.Auth.CheckCode, {
+            email,
+            code,
+        });
+    },
+    setNewPass(password: string, confirmPassword: string) {
+        return instance.post(Endpoints.Auth.SetNewPass, {
+            password,
+            confirmPassword,
         });
     },
 };

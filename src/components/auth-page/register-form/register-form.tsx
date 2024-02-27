@@ -3,7 +3,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { RegisterTC } from '@redux/reducers/auth-reducer';
 import { useEffect } from 'react';
-import { Path } from '../../routes/path';
+import { Path } from '../../../routes/path';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 interface RegisterForm {
@@ -16,7 +16,6 @@ export const RegisterForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-    // console.log('reg loc', location);
 
     const { statusCode } = useAppSelector((state) => state.auth.AuthError);
     const { email, password } = useAppSelector((state) => state.auth.regInfo);

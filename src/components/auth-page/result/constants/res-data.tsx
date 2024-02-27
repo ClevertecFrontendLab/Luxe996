@@ -49,4 +49,16 @@ export const resData: ResTypes = {
         pathBtn: Path.REGISTRATION,
         testData: 'registration-back-button',
     },
+    success_change_password: {
+        icon: (
+            <CheckCircleFilled
+                style={{ color: '#52c41a', fontSize: '80px', marginBottom: '24px' }}
+            />
+        ),
+        title: 'Пароль успешно изменен',
+        text: 'Теперь можно войти в аккаунт, используя свой логин и новый пароль',
+        textBtn: 'Вход',
+        pathBtn: Path.AUTH,
+        testData: 'change-entry-button',
+    },
 };

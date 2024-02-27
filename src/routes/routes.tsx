@@ -5,6 +5,8 @@ import { Path } from './path';
 import { AuthWrapper } from '@pages/auth-wrapper/auth-wrapper';
 import { Result } from '@components/auth-page/result/result';
 import { resData } from '@components/auth-page/result/constants/res-data';
+import { ConfirmEmail } from '@components/auth-page/confirm-email/confirm-email';
+import { ChangePassword } from '@components/auth-page/change-password/change-password';
 
 export const routes = (
     <Routes>
@@ -82,6 +84,37 @@ export const routes = (
                         textBtn={resData.error_user_exist.textBtn}
                         pathBtn={resData.error_user_exist.pathBtn}
                         testData={resData.error_user_exist.testData}
+                    />
+                </AuthWrapper>
+            }
+        />
+        <Route
+            path={Path.CONFIRM_EMAIL}
+            element={
+                <AuthWrapper>
+                    <ConfirmEmail />
+                </AuthWrapper>
+            }
+        />
+        <Route
+            path={Path.CHANGE_PASSWORD}
+            element={
+                <AuthWrapper>
+                    <ChangePassword />
+                </AuthWrapper>
+            }
+        />
+        <Route
+            path={Path.RESULT.SUCCESS_CHANGE_PASSWORD}
+            element={
+                <AuthWrapper>
+                    <Result
+                        icon={resData.success_change_password.icon}
+                        title={resData.success_change_password.title}
+                        text={resData.success_change_password.text}
+                        textBtn={resData.success_change_password.textBtn}
+                        pathBtn={resData.success_change_password.pathBtn}
+                        testData={resData.success_change_password.testData}
                     />
                 </AuthWrapper>
             }
