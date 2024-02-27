@@ -1,6 +1,7 @@
 import { ResTypes } from '@components/auth-page/result/constants/res-types';
 import { CheckCircleFilled, CloseCircleFilled, WarningFilled } from '@ant-design/icons';
 import { Path } from '../../../../routes/path';
+import Error from '@public/error.svg?react';
 
 export const resData: ResTypes = {
     error_login: {
@@ -72,5 +73,13 @@ export const resData: ResTypes = {
         textBtn: 'Попробовать снова',
         pathBtn: Path.AUTH,
         testData: 'check-retry-button',
+    },
+    error_check_email: {
+        icon: <Error />,
+        title: 'Что-то пошло не так',
+        text: 'Произошла ошибка, попробуйте отправить форму ещё раз.',
+        textBtn: 'Назад',
+        pathBtn: Path.AUTH,
+        testData: 'check-back-button',
     },
 };

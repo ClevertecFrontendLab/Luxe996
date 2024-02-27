@@ -134,6 +134,21 @@ export const routes = (
                 </AuthWrapper>
             }
         />
+        <Route
+            path={Path.RESULT.ERROR_CHECK_EMAIL}
+            element={
+                <AuthWrapper>
+                    <Result
+                        icon={resData.error_check_email.icon}
+                        title={resData.error_check_email.title}
+                        text={resData.error_check_email.text}
+                        textBtn={resData.error_check_email.textBtn}
+                        pathBtn={resData.error_check_email.pathBtn}
+                        testData={resData.error_check_email.testData}
+                    />
+                </AuthWrapper>
+            }
+        />
 
         <Route path={Path.MAIN} element={<MainPage />} />
     </Routes>

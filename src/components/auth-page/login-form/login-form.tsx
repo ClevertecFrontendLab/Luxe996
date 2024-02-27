@@ -33,11 +33,19 @@ export const LoginForm = () => {
 
     useEffect(() => {
         if (statusCode) {
-            statusCode === 404 && message === 'Email не найден'
-                ? navigate(Path.RESULT.ERROR_EMAIL_NO_EXIST, { state: { from: location.pathname } })
-                : navigate(Path.RESULT.LOGIN_ERROR, { state: { from: location.pathname } });
+            if (message) {
+                statusCode === 404 && message === 'Email не найден'
+                    ? navigate(Path.RESULT.ERROR_EMAIL_NO_EXIST, {
+                          state: { from: location.pathname },
+                      })
+                    : navigate(Path.RESULT.ERROR_CHECK_EMAIL, {
+                          state: { from: location.pathname },
+                      });
+            } else {
+                navigate(Path.RESULT.LOGIN_ERROR, { state: { from: location.pathname } });
+            }
         }
-    }, [statusCode, navigate, location.pathname, message]);
+    }, [statusCode, navigate, location.pathname, message, recEmail]);
 
     useEffect(() => {
         recEmail && navigate(Path.CONFIRM_EMAIL, { state: { from: location.pathname } });
