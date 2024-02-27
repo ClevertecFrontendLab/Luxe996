@@ -18,6 +18,7 @@ export const LoginForm = () => {
     const [emailForm, setEmailForm] = useState('');
     const [forgotPass, setForgotPass] = useState(false);
     console.log(statusCode, message);
+    console.log(recEmail);
 
     const onFinish = ({ email, password, remember }: LoginFormProps) => {
         dispatch(LoginTC(email, password, remember));

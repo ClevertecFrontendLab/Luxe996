@@ -1,7 +1,7 @@
 // import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { Button, Form, Input, Typography } from 'antd';
 import s from './change.module.scss';
-import { ChangePassTC } from '@redux/reducers/auth-reducer';
+import { ChangePassTC, ResetStoreAC } from '@redux/reducers/auth-reducer';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -32,8 +32,11 @@ export const ChangePassword = () => {
     }, [location.state?.from, navigate]);
 
     useEffect(() => {
-        isChanged && navigate(Path.RESULT.SUCCESS_CHANGE_PASSWORD);
-    }, [isChanged, navigate]);
+        if (isChanged) {
+            navigate(Path.RESULT.SUCCESS_CHANGE_PASSWORD);
+            dispatch(ResetStoreAC());
+        }
+    }, [dispatch, isChanged, navigate]);
 
     return (
         <Form className={s.form} initialValues={{ remember: true }} onFinish={onFinish}>

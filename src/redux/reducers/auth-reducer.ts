@@ -53,6 +53,8 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
                     statusCode: null,
                 },
                 recEmail: null,
+                isChanged: null,
+                isCodeValid: null,
             };
         }
         case LOADING: {
