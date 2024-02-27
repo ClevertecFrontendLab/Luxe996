@@ -4,8 +4,10 @@ import { AuthApi } from '@redux/constants/api';
 const RESET_STORE = 'RESET_STORE';
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
+const LOADING = 'LOADING';
 
 type initialState = {
+    isLoading: boolean;
     isRegister: boolean;
     isAuth: boolean;
     regInfo: {
@@ -18,6 +20,7 @@ type initialState = {
 };
 
 const initialState: initialState = {
+    isLoading: false,
     isRegister: false,
     isAuth: false,
     regInfo: {
@@ -39,6 +42,12 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
                 AuthError: {
                     statusCode: null,
                 },
+            };
+        }
+        case LOADING: {
+            return {
+                ...state,
+                isLoading: action.loading,
             };
         }
         case LOGIN: {
@@ -70,25 +79,33 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
     }
 };
 
-type ActionType = LoginAT | ResetStoreAT | RegisterAT;
+type ActionType = LoginAT | ResetStoreAT | RegisterAT | LoadingAT;
 
-type LoginAT = ReturnType<typeof LoginAC>;
 type ResetStoreAT = ReturnType<typeof ResetStoreAC>;
 export const ResetStoreAC = () => ({ type: RESET_STORE });
-export const LoginAC = (isAuth: boolean, statusCode: number) =>
+type LoadingAT = ReturnType<typeof LoadingAC>;
+const LoadingAC = (loading: boolean) => ({ type: LOADING, loading });
+type LoginAT = ReturnType<typeof LoginAC>;
+export const LoginAC = (isAuth: boolean, statusCode: number | null) =>
     ({ type: LOGIN, isAuth, statusCode } as const);
-export const LoginTC = (email: string, password: string) => async (dispatch: AppDispatch) => {
-    await AuthApi.login(email, password)
-        .then((res) => {
-            localStorage.setItem('token', res.data.accessToken);
-            dispatch(LoginAC(true, null));
-        })
-        .catch((rej) => {
-            if (rej.response.data) {
-                dispatch(LoginAC(false, rej.response.data.statusCode));
-            }
-        });
-};
+export const LoginTC =
+    (email: string, password: string, remember?: boolean) => async (dispatch: AppDispatch) => {
+        dispatch(LoadingAC(true));
+        await AuthApi.login(email, password)
+            .then((res) => {
+                if (remember) {
+                    localStorage.setItem('token', res.data.accessToken);
+                }
+                dispatch(LoginAC(true, null));
+                dispatch(LoadingAC(false));
+            })
+            .catch((rej) => {
+                if (rej.response.data) {
+                    dispatch(LoginAC(false, rej.response.data.statusCode));
+                }
+                dispatch(LoadingAC(false));
+            });
+    };
 
 type RegisterAT = ReturnType<typeof RegisterAC>;
 const RegisterAC = (isRegister: boolean, statusCode: number, email: string, password: string) => ({
@@ -100,12 +117,15 @@ const RegisterAC = (isRegister: boolean, statusCode: number, email: string, pass
 });
 
 export const RegisterTC = (email: string, password: string) => async (dispatch: AppDispatch) => {
+    dispatch(LoadingAC(true));
     await AuthApi.register(email, password)
         .then((res) => {
             console.log(res);
             dispatch(RegisterAC(true, null, null, null));
+            dispatch(LoadingAC(false));
         })
         .catch((rej) => {
             dispatch(RegisterAC(false, rej.response.data.statusCode, email, password));
+            dispatch(LoadingAC(false));
         });
 };

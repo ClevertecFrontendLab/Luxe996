@@ -13,8 +13,9 @@ export const LoginForm = () => {
     const { statusCode } = useAppSelector((state) => state.auth.AuthError);
     const { isAuth } = useAppSelector((state) => state.auth);
 
-    const onFinish = ({ email, password }: LoginFormProps) => {
+    const onFinish = ({ email, password, remember }: LoginFormProps) => {
         dispatch(LoginTC(email, password));
+        console.log(remember);
     };
 
     useEffect(() => {
@@ -37,17 +38,36 @@ export const LoginForm = () => {
                         { type: 'email', message: '' },
                     ]}
                 >
-                    <Input addonBefore='e-mail:' size={'large'} />
+                    <Input addonBefore='e-mail:' size={'large'} data-test-id='login-email' />
                 </Form.Item>
 
-                <Form.Item rules={[{ required: true, message: '' }]} name={'password'}>
-                    <Input.Password size={'large'} placeholder='Пароль'></Input.Password>
+                {/*<Form.Item rules={[{ required: true, message: '' }]} name={'password'}>*/}
+                <Form.Item
+                    rules={[
+                        {
+                            required: true,
+                            message: '',
+                        },
+                        { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ },
+                    ]}
+                    help={
+                        <span style={{ fontSize: '0.75rem' }}>
+                            Пароль не менее 8 символов, с заглавной буквой и цифрой
+                        </span>
+                    }
+                    name={'password'}
+                >
+                    <Input.Password
+                        size={'large'}
+                        placeholder='Пароль'
+                        data-test-id='login-password'
+                    ></Input.Password>
                 </Form.Item>
             </div>
 
             <Row justify={'space-between'} align={'middle'} wrap={false}>
-                <Form.Item style={{ marginBottom: 0 }}>
-                    <Checkbox>Запомнить меня</Checkbox>
+                <Form.Item name='remember' valuePropName='checked' style={{ marginBottom: 0 }}>
+                    <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                 </Form.Item>
 
                 <Button size={'large'} type={'link'}>
@@ -57,7 +77,13 @@ export const LoginForm = () => {
 
             <div>
                 <Form.Item>
-                    <Button htmlType='submit' block type={'primary'} size={'large'}>
+                    <Button
+                        htmlType='submit'
+                        block
+                        type={'primary'}
+                        size={'large'}
+                        data-test-id='login-submit-button'
+                    >
                         Войти
                     </Button>
                 </Form.Item>
