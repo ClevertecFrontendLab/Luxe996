@@ -22,16 +22,9 @@ export const LoginForm = () => {
     // Повторный запрос при 404
     useEffect(() => {
         if (location.state?.from === Path.RESULT.ERROR_CHECK_EMAIL && statusCode) {
-            dispatch(CheckEmailTC(email));
+            email && dispatch(CheckEmailTC(email));
         }
     }, [dispatch, email, location.state?.from, statusCode]);
-
-    //Проверка email на валидность
-    // useEffect(() => {
-    //     if (isCheckSuccess) {
-    //         isRequestPendingRef.current = true;
-    //     }
-    // }, [isCheckSuccess]);
 
     const onFinish = ({ email, password, remember }: LoginFormProps) => {
         dispatch(LoginTC(email, password, remember));

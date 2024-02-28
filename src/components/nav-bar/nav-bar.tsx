@@ -2,6 +2,7 @@ import { Menu } from 'antd';
 import { HeartFilled, TrophyFilled } from '@ant-design/icons';
 import CalendarSider from '@public/calendar-sider.svg?react';
 import ProfileSidebar from '@public/profile-sider.svg?react';
+import s from './nav-bar.module.scss';
 
 export const NavBar = () => {
     const items = [
@@ -30,5 +31,5 @@ export const NavBar = () => {
             title: '',
         },
     ];
-    return <Menu items={items} />;
+    return <Menu items={items} className={s.menu} />;
 };

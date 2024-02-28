@@ -1,9 +1,10 @@
 import { Button, Card } from 'antd';
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
+import s from './footer-card.module.scss';
 
 export const FooterCard = () => (
     <Card
-        // headStyle={{padding: '10px 0'}}
+        className={s.card}
         bodyStyle={{ padding: '12px 0', textAlign: 'center' }}
         title={
             <div className={'footer-card-title'}>

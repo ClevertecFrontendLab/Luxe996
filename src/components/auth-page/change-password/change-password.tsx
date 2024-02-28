@@ -53,7 +53,7 @@ export const ChangePassword = () => {
     return (
         <Form className={s.form} initialValues={{ remember: true }} onFinish={onFinish}>
             <Title level={3} className={s.title}>
-                Восстановление аккауанта
+                Восстановление аккаунта
             </Title>
             <Form.Item
                 name='password'
@@ -107,7 +107,7 @@ export const ChangePassword = () => {
                         type='primary'
                         data-test-id='change-submit-button'
                         htmlType='submit'
-                        className='login-form-button'
+                        className={s.button}
                     >
                         Сохранить
                     </Button>
