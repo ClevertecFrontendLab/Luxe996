@@ -51,12 +51,12 @@ export const ConfirmEmail = () => {
                 <ExclamationCircleFilled className={s.icon} />
             )}
 
-            <Title level={3}>
+            <Title level={3} className={s.title}>
                 {isCodeValid === false ? 'Неверный код. ' : ''}Введите код для восстановления
                 аккаунта
             </Title>
-            <Text disabled>
-                Мы отправили вам на e-mail {email} шестизначный код. Введите его в поле ниже.
+            <Text className={s.description}>
+                Мы отправили вам на e-mail <b>{email}</b> шестизначный код. Введите его в поле ниже.
             </Text>
             <VerificationInput
                 value={code}
@@ -71,7 +71,7 @@ export const ConfirmEmail = () => {
                 onChange={(value) => setCode(value)}
                 onComplete={onFinish}
             />
-            <Text disabled>Не пришло письмо? Проверьте папку Спам.</Text>
+            <Text className={s.description}>Не пришло письмо? Проверьте папку Спам.</Text>
         </div>
     );
 };

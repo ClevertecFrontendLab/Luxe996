@@ -52,7 +52,7 @@ export const ChangePassword = () => {
 
     return (
         <Form className={s.form} initialValues={{ remember: true }} onFinish={onFinish}>
-            <Title level={3} className='change-password__title'>
+            <Title level={3} className={s.title}>
                 Восстановление аккауанта
             </Title>
             <Form.Item

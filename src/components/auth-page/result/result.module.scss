@@ -11,12 +11,14 @@
 
   .text {
     color: rgba(140, 140, 140, 1);
-
+    font-weight: 400;
+    font-size: 14px;
   }
 
   .button {
     margin-top: 24px;
     width: 100%;
+    height: 40px;
     background-color: $primaryLight6;
   }
 }
