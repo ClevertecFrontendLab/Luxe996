@@ -16,11 +16,11 @@ export const ConfirmEmail = () => {
     const dispatch = useAppDispatch();
 
     const [code, setCode] = useState('');
-    const { recEmail } = useAppSelector((state) => state.auth);
     const { isCodeValid } = useAppSelector((state) => state.auth);
-    // const isCodeValid = true;
+
+    const email = sessionStorage.getItem('email');
     const onFinish = (code: string) => {
-        dispatch(CheckCodeTC(recEmail, code));
+        email && dispatch(CheckCodeTC(email, code));
     };
 
     useEffect(() => {
@@ -53,10 +53,10 @@ export const ConfirmEmail = () => {
 
             <Title level={3}>
                 {isCodeValid === false ? 'Неверный код. ' : ''}Введите код для восстановления
-                аккауанта
+                аккаунта
             </Title>
             <Text disabled>
-                Мы отправили вам на e-mail {recEmail} шестизначный код. Введите его в поле ниже.
+                Мы отправили вам на e-mail {email} шестизначный код. Введите его в поле ниже.
             </Text>
             <VerificationInput
                 value={code}
@@ -66,7 +66,6 @@ export const ConfirmEmail = () => {
                     container: `${s.container}`,
                     character: `${isCodeValid === false ? `${s.error}` : `${s.character}`}`,
                     characterInactive: `${s.inactive}`,
-                    // characterSelected: `${s.inactive}` 'character__selected',
                     characterFilled: `${s.filled}`,
                 }}
                 onChange={(value) => setCode(value)}

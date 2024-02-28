@@ -45,13 +45,6 @@ export const LoginForm = () => {
         isAuth && navigate(Path.MAIN);
     }, [isAuth, navigate]);
 
-    // useEffect(() => {
-    //     if (location.state?.from === Path.RESULT.ERROR_CHECK_EMAIL) {
-    //         console.log(1);
-    //         dispatch(CheckEmailTC('valadzkoaliaksei@tut.by'));
-    //     }
-    // }, [dispatch, emailForm, location.state?.from, recEmail]);
-
     // Обработки ошибок (Логинизация, НЕвалидный емаил)
     useEffect(() => {
         if (statusCode) {
