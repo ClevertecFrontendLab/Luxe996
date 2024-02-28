@@ -1,0 +1,40 @@
+
+.confirm {
+  text-align: center;
+  .icon {
+    font-size: 80px;
+    margin-bottom: 24px;
+    color: #2f54eb;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+  .description{
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(140, 140, 140, 1);
+  }
+  .container {
+    margin: 24px auto;
+  }
+
+  .character {
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+  }
+
+  .error {
+    border: 1px solid #ff4d4f;
+    border-radius: 2px;
+  }
+  .inactive {
+    background: none;
+  }
+  .filled {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

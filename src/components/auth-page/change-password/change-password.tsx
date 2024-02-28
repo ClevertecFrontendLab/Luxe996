@@ -1,0 +1,118 @@
+// import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { Button, Form, Input, Typography } from 'antd';
+import s from './change.module.scss';
+import { ChangePassTC, ResetStoreAC } from '@redux/reducers/auth-reducer';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Path } from '../../../routes/path';
+
+const { Title } = Typography;
+
+export interface ChangePasswordForm {
+    password: string;
+    confirmPassword: string;
+}
+
+export const ChangePassword = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const { isChanged } = useAppSelector((state) => state.auth);
+    const { pass, confPass } = useAppSelector((state) => state.auth.recInfo);
+
+    const onFinish = (values: ChangePasswordForm) => {
+        dispatch(ChangePassTC(values.password, values.confirmPassword));
+    };
+
+    useEffect(() => {
+        if (
+            location.state?.from !== Path.CONFIRM_EMAIL &&
+            location.state?.from !== Path.RESULT.ERROR_CHANGE_PASSWORD
+        ) {
+            navigate(Path.AUTH);
+        }
+    }, [location.state?.from, navigate]);
+
+    useEffect(() => {
+        if (isChanged === true) {
+            navigate(Path.RESULT.SUCCESS_CHANGE_PASSWORD);
+            dispatch(ResetStoreAC());
+        } else {
+            isChanged === false && navigate(Path.RESULT.ERROR_CHANGE_PASSWORD);
+        }
+    }, [dispatch, isChanged, navigate]);
+
+    useEffect(() => {
+        if (pass && confPass) {
+            dispatch(ChangePassTC(pass, confPass));
+        }
+    }, [confPass, dispatch, pass]);
+
+    return (
+        <Form className={s.form} initialValues={{ remember: true }} onFinish={onFinish}>
+            <Title level={3} className={s.title}>
+                Восстановление аккаунта
+            </Title>
+            <Form.Item
+                name='password'
+                help={
+                    <span style={{ fontSize: '0.75rem' }}>
+                        Пароль не менее 8 символов, с заглавной буквой и цифрой
+                    </span>
+                }
+                rules={[
+                    {
+                        required: true,
+                        message: '',
+                    },
+                    { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/ },
+                ]}
+            >
+                <Input.Password
+                    type='password'
+                    placeholder='Пароль'
+                    data-test-id='change-password'
+                />
+            </Form.Item>
+            <Form.Item
+                name='confirmPassword'
+                dependencies={['password']}
+                rules={[
+                    {
+                        required: true,
+                        message: 'Пароли не совпадают',
+                    },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('Пароли не совпадают'));
+                        },
+                    }),
+                ]}
+            >
+                <Input.Password
+                    type='password'
+                    placeholder='Повторите пароль'
+                    data-test-id='change-confirm-password'
+                />
+            </Form.Item>
+
+            <Form.Item shouldUpdate>
+                {() => (
+                    <Button
+                        type='primary'
+                        data-test-id='change-submit-button'
+                        htmlType='submit'
+                        className={s.button}
+                    >
+                        Сохранить
+                    </Button>
+                )}
+            </Form.Item>
+        </Form>
+    );
+};
