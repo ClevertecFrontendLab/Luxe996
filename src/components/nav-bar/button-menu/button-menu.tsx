@@ -13,7 +13,7 @@ export const ButtonMenu = ({ children }: ButtonMenuProps) => {
     const dispatch = useAppDispatch();
     const onClick = () => {
         localStorage.removeItem('token');
-        dispatch(LoginAC(false, null));
+        dispatch(LoginAC(null, null));
     };
 
     return (

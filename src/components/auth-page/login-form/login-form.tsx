@@ -13,26 +13,50 @@ export const LoginForm = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { statusCode, message } = useAppSelector((state) => state.auth.AuthError);
-    const { recEmail } = useAppSelector((state) => state.auth);
-    const { isAuth } = useAppSelector((state) => state.auth);
+    const { isCheckSuccess, isAuth } = useAppSelector((state) => state.auth);
     const [emailForm, setEmailForm] = useState('');
     const [forgotPass, setForgotPass] = useState(false);
+
+    const email = sessionStorage.getItem('email');
+
+    // Повторный запрос при 404
+    useEffect(() => {
+        if (location.state?.from === Path.RESULT.ERROR_CHECK_EMAIL && statusCode) {
+            dispatch(CheckEmailTC(email));
+        }
+    }, [dispatch, email, location.state?.from, statusCode]);
+
+    //Проверка email на валидность
+    // useEffect(() => {
+    //     if (isCheckSuccess) {
+    //         isRequestPendingRef.current = true;
+    //     }
+    // }, [isCheckSuccess]);
 
     const onFinish = ({ email, password, remember }: LoginFormProps) => {
         dispatch(LoginTC(email, password, remember));
     };
     const onForgotClick = (email: string) => {
         dispatch(CheckEmailTC(email));
+        sessionStorage.setItem('email', email);
     };
-
+    // Редирект на главную
     useEffect(() => {
         isAuth && navigate(Path.MAIN);
     }, [isAuth, navigate]);
 
+    // useEffect(() => {
+    //     if (location.state?.from === Path.RESULT.ERROR_CHECK_EMAIL) {
+    //         console.log(1);
+    //         dispatch(CheckEmailTC('valadzkoaliaksei@tut.by'));
+    //     }
+    // }, [dispatch, emailForm, location.state?.from, recEmail]);
+
+    // Обработки ошибок (Логинизация, НЕвалидный емаил)
     useEffect(() => {
         if (statusCode) {
-            if (message) {
-                statusCode === 404 && message === 'Email не найден'
+            if (isAuth !== false) {
+                message === 'Email не найден'
                     ? navigate(Path.RESULT.ERROR_EMAIL_NO_EXIST, {
                           state: { from: location.pathname },
                       })
@@ -43,11 +67,13 @@ export const LoginForm = () => {
                 navigate(Path.RESULT.LOGIN_ERROR, { state: { from: location.pathname } });
             }
         }
-    }, [statusCode, navigate, location.pathname, message, recEmail]);
+    }, [isAuth, location.pathname, message, navigate, statusCode]);
 
     useEffect(() => {
-        recEmail && navigate(Path.CONFIRM_EMAIL, { state: { from: location.pathname } });
-    }, [recEmail, location.pathname, navigate]);
+        if (email && statusCode === null && isCheckSuccess) {
+            navigate(Path.CONFIRM_EMAIL, { state: { from: location.pathname } });
+        }
+    }, [email, location.pathname, navigate, statusCode, isCheckSuccess]);
 
     return (
         <Form onFinish={onFinish}>

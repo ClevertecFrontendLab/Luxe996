@@ -12,8 +12,8 @@ const CHANGE_PASS = 'CHANGE_PASS';
 type initialState = {
     isLoading: boolean;
     isRegister: boolean;
-    isAuth: boolean;
-    recEmail: string | null;
+    isAuth: boolean | null;
+    isCheckSuccess: boolean;
     regInfo: {
         email: string | null;
         password: string | null;
@@ -33,12 +33,12 @@ type initialState = {
 const initialState: initialState = {
     isLoading: false,
     isRegister: false,
-    isAuth: false,
+    isAuth: null,
     regInfo: {
         email: null,
         password: null,
     },
-    recEmail: null,
+    isCheckSuccess: false,
     AuthError: {
         statusCode: null,
         message: null,
@@ -57,10 +57,10 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
             return {
                 ...state,
                 isRegister: false,
+                recEmail: null,
                 AuthError: {
                     statusCode: null,
                 },
-                recEmail: null,
                 isChanged: null,
                 isCodeValid: null,
             };
@@ -96,7 +96,7 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
         case CHECK_EMAIL: {
             return {
                 ...state,
-                recEmail: action.email,
+                isCheckSuccess: action.isCheckSuccess,
                 AuthError: {
                     statusCode: action.statusCode,
                     message: action.message,
@@ -156,9 +156,9 @@ export const LoginTC =
                 dispatch(LoadingAC(false));
             })
             .catch((rej) => {
-                if (rej.response.data) {
-                    dispatch(LoginAC(false, rej.response.status));
-                }
+                console.log(rej);
+                dispatch(LoginAC(false, rej.response.status));
+
                 dispatch(LoadingAC(false));
             });
     };
@@ -192,17 +192,17 @@ export const RegisterTC = (email: string, password: string) => async (dispatch: 
 
 //Check Email
 type CheckEmailAT = ReturnType<typeof CheckEmailAC>;
-const CheckEmailAC = (email: string, statusCode: number | null, message: string | null) =>
-    ({ type: CHECK_EMAIL, email, statusCode, message } as const);
+const CheckEmailAC = (isCheckSuccess: boolean, statusCode: number | null, message: string | null) =>
+    ({ type: CHECK_EMAIL, isCheckSuccess, statusCode, message } as const);
 export const CheckEmailTC = (email: string) => async (dispatch: AppDispatch) => {
     dispatch(LoadingAC(true));
     await AuthApi.checkEmail(email)
         .then((res) => {
-            dispatch(CheckEmailAC(res.data.email, null, null));
+            dispatch(CheckEmailAC(true, null, null));
             dispatch(LoadingAC(false));
         })
         .catch((rej) => {
-            dispatch(CheckEmailAC(null, rej.response.data.statusCode, rej.response.data.message));
+            dispatch(CheckEmailAC(false, rej.response.status, rej.response.data.message));
             dispatch(LoadingAC(false));
         });
 };
