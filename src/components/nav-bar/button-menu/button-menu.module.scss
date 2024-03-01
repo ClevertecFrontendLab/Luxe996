@@ -2,9 +2,21 @@
   border-top: 1px solid transparent;
   transform: translateY(-100%);
   overflow: hidden;
+  display: flex;
+  align-items: center;
 
   position: absolute;
-  width: 100%;
   top: 100%;
   font-size: 14px;
+
 }
+
+:global {
+  .ant-btn{
+    border: none;
+    span {
+      margin-left: 10px;
+    }
+  }
+}
+

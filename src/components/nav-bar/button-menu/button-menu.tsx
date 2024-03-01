@@ -19,7 +19,7 @@ export const ButtonMenu = ({ children }: ButtonMenuProps) => {
     return (
         <Button
             block
-            style={{ position: 'absolute', textAlign: 'start', border: 'none' }}
+            style={{ padding: '0 16px' }}
             size={'large'}
             type={'default'}
             icon={<ExitIcon />}
