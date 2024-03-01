@@ -1,4 +1,4 @@
-import { Layout } from 'antd';
+import { Breadcrumb, Layout } from 'antd';
 import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -39,7 +39,10 @@ export const MainWrapper = () => {
                 <Switcher isCollapsed={collapsed} onSwitch={collapseHandler} />
                 <ButtonMenu>{collapsed ? '' : 'Выход'}</ButtonMenu>
             </Sider>
-            <Outlet />
+            <Layout>
+                <Breadcrumb className={s.breadcrums}>Главная</Breadcrumb>
+                <Outlet />
+            </Layout>
         </Layout>
     );
 };
