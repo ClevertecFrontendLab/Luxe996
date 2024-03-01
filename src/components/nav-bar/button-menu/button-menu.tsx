@@ -4,6 +4,7 @@ import s from './button-menu.module.scss';
 import ExitIcon from '@public/exit-menu.svg?react';
 import { LoginAC } from '@redux/reducers/auth-reducer';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
 
 type ButtonMenuProps = {
     children: ReactNode;
@@ -11,6 +12,7 @@ type ButtonMenuProps = {
 
 export const ButtonMenu = ({ children }: ButtonMenuProps) => {
     const dispatch = useAppDispatch();
+    const breakpoint = useBreakpoint();
     const onClick = () => {
         localStorage.removeItem('token');
         dispatch(LoginAC(null, null));
@@ -19,7 +21,7 @@ export const ButtonMenu = ({ children }: ButtonMenuProps) => {
     return (
         <Button
             block
-            style={{ padding: '0 16px' }}
+            style={breakpoint.xs ? {} : { padding: '0 16px' }}
             size={'large'}
             type={'default'}
             icon={<ExitIcon />}

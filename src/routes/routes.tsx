@@ -7,6 +7,7 @@ import { Result } from '@components/auth-page/result/result';
 import { resData } from '@components/auth-page/result/constants/res-data';
 import { ConfirmEmail } from '@components/auth-page/confirm-email/confirm-email';
 import { ChangePassword } from '@components/auth-page/change-password/change-password';
+import { MainWrapper } from '@components/layout/main-wrapper/main-wrapper';
 
 export const routes = (
     <Routes>
@@ -164,7 +165,8 @@ export const routes = (
                 </AuthWrapper>
             }
         />
-
-        <Route path={Path.MAIN} element={<MainPage />} />
+        <Route element={<MainWrapper />}>
+            <Route path={Path.MAIN} element={<MainPage />} />
+        </Route>
     </Routes>
 );
