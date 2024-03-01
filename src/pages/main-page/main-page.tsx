@@ -7,15 +7,18 @@ import { HeartFilled } from '@ant-design/icons';
 import { FooterCard } from '@components/footer-card/footer-card';
 import CalendarCard from '@public/calendar-card.svg?react';
 import ProfileCard from '@public/profile-card.svg?react';
+import { useNavigate } from 'react-router-dom';
+import { Path } from '../../routes/path';
 
-const { Header, Footer, Content } = Layout;
+const { Footer, Content } = Layout;
 
 export const MainPage: React.FC = () => {
+    const navigate = useNavigate();
     return (
         <Layout>
-            <Header className={s.header}>
-                <AppHeader />
-            </Header>
+            {/*<Header className={s.header}>*/}
+            <AppHeader />
+            {/*</Header>*/}
             <Content>
                 <AppContent>
                     <AppCard
@@ -33,7 +36,7 @@ export const MainPage: React.FC = () => {
             </Content>
             <Footer className={s.footer}>
                 <div>
-                    <Button type={'link'} size={'large'}>
+                    <Button type={'link'} size={'large'} onClick={() => navigate(Path.FEEDBACKS)}>
                         Смотреть отзывы
                     </Button>
                 </div>

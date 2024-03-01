@@ -3,7 +3,7 @@ import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useEffect, useState } from 'react';
-import { Path } from '../../../routes/path';
+import { Path } from '../../routes/path';
 import s from './main-wrapper.module.scss';
 import { Logo } from '@components/logo/logo';
 import { NavBar } from '@components/nav-bar';

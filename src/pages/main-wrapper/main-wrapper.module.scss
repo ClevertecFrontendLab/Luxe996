@@ -1,4 +1,4 @@
-@import "src/assets/style/variables";
+@import "../../assets/style/variables";
 .container {
   max-width: 1440px;
   min-height: 100vh;
@@ -6,7 +6,7 @@
   margin-left: auto;
   margin-right: auto;
 
-  background: url('public/main_page_light.jpeg') no-repeat center;
+  background: url('@public/main_page_light.jpeg') no-repeat center;
   background-size: cover;
 
   @media (max-width: 992px) {
@@ -50,7 +50,7 @@
     }
   }
   .breadcrums{
-    background: var(--white);
-    padding: 16px 24px 0;
+    background: #F0F5FF;
+    padding: 16px 24px;
   }
 }

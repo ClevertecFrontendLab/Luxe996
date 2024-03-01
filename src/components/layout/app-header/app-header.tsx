@@ -1,12 +1,14 @@
 import s from './app-header.module.scss';
-import { Button } from 'antd';
+import { Button, Layout } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
+
+const { Header } = Layout;
 
 export default function AppHeader() {
     const breakpoints = useBreakpoint();
     return (
-        <div className={s.header}>
+        <Header className={s.header}>
             <h1 className={s.title}>
                 <p>Приветствуем тебя в CleverFit — приложении,</p>
                 <p>которое поможет тебе добиться своей мечты!</p>
@@ -18,6 +20,6 @@ export default function AppHeader() {
                     Настройки
                 </Button>
             )}
-        </div>
+        </Header>
     );
 }
