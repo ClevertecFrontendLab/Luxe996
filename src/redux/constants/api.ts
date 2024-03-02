@@ -22,9 +22,10 @@ instance.interceptors.request.use(async (config) => {
     }
 
     const token = localStorage.getItem('token');
-
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
+    } else {
+        config.headers.Authorization = `Bearer ${sessionStorage.getItem('token')}`;
     }
     return config;
 });

@@ -1,10 +1,17 @@
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import s from './feedbacks.module.scss';
 import { Button, Card, Typography } from 'antd';
+import { useEffect } from 'react';
+import { GetFeedbacksTC } from '@redux/reducers/feedbacks-reducer';
 
 const { Title, Text } = Typography;
 export const FeedbacksPage = () => {
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(GetFeedbacksTC());
+    }, [dispatch]);
+
     return (
         <div className={s.wrapper}>
             <Card className={s.card}>

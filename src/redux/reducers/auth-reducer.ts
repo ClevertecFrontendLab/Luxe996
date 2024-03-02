@@ -1,16 +1,15 @@
 import { AppDispatch } from '@redux/configure-store';
 import { AuthApi } from '@redux/constants/api';
+import { LoadingAC } from '@redux/reducers/app-reducer';
 
 const RESET_STORE = 'RESET_STORE';
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
-const LOADING = 'LOADING';
 const CHECK_EMAIL = 'CHECK_EMAIL';
 const CHECK_CODE = 'CHECK_CODE';
 const CHANGE_PASS = 'CHANGE_PASS';
 
 type initialState = {
-    isLoading: boolean;
     isRegister: boolean;
     isAuth: boolean | null;
     isCheckSuccess: boolean;
@@ -31,7 +30,6 @@ type initialState = {
 };
 
 const initialState: initialState = {
-    isLoading: false,
     isRegister: false,
     isAuth: null,
     regInfo: {
@@ -65,12 +63,7 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
                 isCodeValid: null,
             };
         }
-        case LOADING: {
-            return {
-                ...state,
-                isLoading: action.loading,
-            };
-        }
+
         case LOGIN: {
             return {
                 ...state,
@@ -126,22 +119,13 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
     }
 };
 
-type ActionType =
-    | LoginAT
-    | ResetStoreAT
-    | RegisterAT
-    | LoadingAT
-    | CheckEmailAT
-    | CheckCodelAT
-    | ChangePassAT;
-//Loader
-type LoadingAT = ReturnType<typeof LoadingAC>;
-const LoadingAC = (loading: boolean) => ({ type: LOADING, loading } as const);
-type LoginAT = ReturnType<typeof LoginAC>;
+type ActionType = LoginAT | ResetStoreAT | RegisterAT | CheckEmailAT | CheckCodelAT | ChangePassAT;
+
 //Reset Store
 type ResetStoreAT = ReturnType<typeof ResetStoreAC>;
 export const ResetStoreAC = () => ({ type: RESET_STORE });
 //Login
+type LoginAT = ReturnType<typeof LoginAC>;
 export const LoginAC = (isAuth: boolean | null, statusCode: number | null) =>
     ({ type: LOGIN, isAuth, statusCode } as const);
 export const LoginTC =
@@ -149,16 +133,14 @@ export const LoginTC =
         dispatch(LoadingAC(true));
         await AuthApi.login(email, password)
             .then((res) => {
-                if (remember) {
-                    localStorage.setItem('token', res.data.accessToken);
-                }
+                remember
+                    ? localStorage.setItem('token', res.data.accessToken)
+                    : sessionStorage.setItem('token', res.data.accessToken);
                 dispatch(LoginAC(true, null));
                 dispatch(LoadingAC(false));
             })
             .catch((rej) => {
-                console.log(rej);
                 dispatch(LoginAC(false, rej.response.status));
-
                 dispatch(LoadingAC(false));
             });
     };

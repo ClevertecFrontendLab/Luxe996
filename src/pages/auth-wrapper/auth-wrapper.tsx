@@ -10,7 +10,7 @@ interface AuthWrapper {
 
 const { Content } = Layout;
 export const AuthWrapper = ({ children }: AuthWrapper) => {
-    const { isLoading } = useAppSelector((state) => state.auth);
+    const { isLoading } = useAppSelector((state) => state.app);
     return (
         <>
             {isLoading && <Loader />}
