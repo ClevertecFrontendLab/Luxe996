@@ -6,4 +6,5 @@ export const Endpoints = {
         CheckCode: '/auth/confirm-email',
         SetNewPass: '/auth/change-password',
     },
+    FeedBacks: '/feedback',
 };

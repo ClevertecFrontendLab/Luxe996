@@ -8,6 +8,27 @@ export const instance = axios.create({
     withCredentials: true,
 });
 
+const urlsSkipAuth = [
+    Endpoints.Auth.Login,
+    Endpoints.Auth.Register,
+    Endpoints.Auth.CheckCode,
+    Endpoints.Auth.CheckEmail,
+    Endpoints.Auth.SetNewPass,
+];
+
+instance.interceptors.request.use(async (config) => {
+    if (config.url && urlsSkipAuth.includes(config.url)) {
+        return config;
+    }
+
+    const token = localStorage.getItem('token');
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
 export const AuthApi = {
     login(email: string, password: string) {
         return instance.post(Endpoints.Auth.Login, {
@@ -37,5 +58,10 @@ export const AuthApi = {
             password,
             confirmPassword,
         });
+    },
+};
+export const FeedbacksApi = {
+    getFeedbacks() {
+        return instance.get(Endpoints.FeedBacks);
     },
 };
