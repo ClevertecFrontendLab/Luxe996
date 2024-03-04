@@ -1,37 +1,65 @@
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import s from './feedbacks.module.scss';
-import { Button, Card, Typography } from 'antd';
-import { useEffect } from 'react';
-import { GetFeedbacksTC } from '@redux/reducers/feedbacks-reducer';
+import { Button, Form, Modal, Rate } from 'antd';
+import { useEffect, useState } from 'react';
+// import { StarTwoTone } from '@ant-design/icons';
+import Star from '@public/star.svg?react';
+import TextArea from 'antd/lib/input/TextArea';
+import { useNavigate } from 'react-router-dom';
+import { Path } from '../../routes/path';
+import { EmptyFeedback } from '@components/feedbacks/empty-feedback/empty-feedback';
 
-const { Title, Text } = Typography;
 export const FeedbacksPage = () => {
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    // const { feedbacks, isError } = useAppSelector((state) => state.feedbacks);
+    const [showModal, setShowModal] = useState(false);
+    const [formValues, setFormValues] = useState({ rating: 0, massage: '' });
+    console.log(formValues);
+
+    const { feedbacks, isError } = useAppSelector((state) => state.feedbacks);
+
+    const setModalHandler = () => setShowModal((pervState) => !pervState);
 
     useEffect(() => {
-        dispatch(GetFeedbacksTC());
-    }, [dispatch]);
+        if (!feedbacks && isError) {
+            navigate(Path.MAIN);
+        }
+    }, [feedbacks, isError, navigate]);
 
     return (
         <div className={s.wrapper}>
-            <Card className={s.card}>
-                <div className={s.content}>
-                    <Title className={s.title}>Оставьте свой отзыв первым</Title>
-                    <Text type='secondary'>
-                        Вы можете быть первым, кто оставит отзыв об этом фитнесс приложении.
-                        Поделитесь своим мнением и опытом с другими пользователями, и помогите им
-                        сделать правильный выбор.
-                    </Text>
-                </div>
-            </Card>
-            <Button
-                type='primary'
-                data-test-id='change-submit-button'
-                htmlType='submit'
-                className={s.button}
+            <EmptyFeedback setModalHandler={setModalHandler} />
+            <Modal
+                title='Ваш отзыв'
+                open={showModal}
+                onCancel={setModalHandler}
+                centered
+                footer={[
+                    <Button key='submit' type='primary' className={s.button}>
+                        Опубликовать
+                    </Button>,
+                ]}
             >
-                Написать отзыв
-            </Button>
+                <div className={s.form}>
+                    <Form
+                        onValuesChange={(_, values) => setFormValues(values)}
+                        initialValues={formValues}
+                    >
+                        <Form.Item name='rating'>
+                            <Rate
+                                character={
+                                    // <StarTwoTone color={'#FAAD14'} />
+                                    <Star />
+                                }
+                            />
+                        </Form.Item>
+                        <Form.Item name='massage'>
+                            <TextArea placeholder='Autosize height with minimum and maximum number of lines' />
+                        </Form.Item>
+                    </Form>
+                </div>
+            </Modal>
         </div>
     );
 };

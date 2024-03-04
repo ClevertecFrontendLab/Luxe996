@@ -1,4 +1,4 @@
-import { Button, Layout } from 'antd';
+import { Button, Layout, Modal, Result } from 'antd';
 import s from './main-page.module.scss';
 import AppHeader from '@components/layout/app-header/app-header';
 import { AppContent } from '@components/app-content/app-content';
@@ -9,16 +9,50 @@ import CalendarCard from '@public/calendar-card.svg?react';
 import ProfileCard from '@public/profile-card.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../routes/path';
+import { GetFeedbacksTC } from '@redux/reducers/feedbacks-reducer';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useEffect, useState } from 'react';
 
 const { Footer, Content } = Layout;
 
-export const MainPage: React.FC = () => {
+export const MainPage = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const { feedbacks, isError } = useAppSelector((state) => state.feedbacks);
+
+    const [errorModal, setErrorModal] = useState(isError);
+
+    const handleErrorModal = () => setErrorModal((pervState) => !pervState);
+
+    const onButtonClick = () => {
+        dispatch(GetFeedbacksTC());
+        navigate(Path.FEEDBACKS);
+    };
+
     return (
         <Layout>
-            {/*<Header className={s.header}>*/}
+            {!feedbacks && (
+                <Modal
+                    open={errorModal}
+                    onCancel={handleErrorModal}
+                    footer={null}
+                    centered
+                    closable={false}
+                    maskStyle={{ background: '#799cd480', backdropFilter: 'blur(5px)' }}
+                >
+                    <Result
+                        status='500'
+                        title='Что-то пошло не так'
+                        subTitle='Произошла ошибка, попробуйте ещё раз.'
+                        extra={
+                            <Button type='primary' onClick={handleErrorModal}>
+                                Назад
+                            </Button>
+                        }
+                    />
+                </Modal>
+            )}
             <AppHeader />
-            {/*</Header>*/}
             <Content>
                 <AppContent>
                     <AppCard
@@ -36,7 +70,7 @@ export const MainPage: React.FC = () => {
             </Content>
             <Footer className={s.footer}>
                 <div>
-                    <Button type={'link'} size={'large'} onClick={() => navigate(Path.FEEDBACKS)}>
+                    <Button type={'link'} size={'large'} onClick={onButtonClick}>
                         Смотреть отзывы
                     </Button>
                 </div>

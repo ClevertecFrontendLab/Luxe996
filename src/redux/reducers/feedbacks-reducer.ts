@@ -1,10 +1,11 @@
 import { LoadingAC } from '@redux/reducers/app-reducer';
 import { AppDispatch } from '@redux/configure-store';
 import { FeedbacksApi } from '@redux/constants/api';
+import { LoginAC } from '@redux/reducers/auth-reducer';
 
 const GET_FEEDBACKS = 'GET_FEEDBACKS';
 
-type initialStateT = {
+type feedbackT = {
     createdAt: string;
     fullName: string | null;
     id: string;
@@ -13,12 +14,22 @@ type initialStateT = {
     rating: number;
 };
 
-const initialState: initialStateT[] = [];
+type initialStateT = {
+    feedbacks: feedbackT[] | null;
+    isError: boolean | null;
+};
+
+const initialState: initialStateT = {
+    feedbacks: null,
+    isError: null,
+};
 export const FeedbacksReducer = (state = initialState, action: ActionsT) => {
     switch (action.type) {
         case GET_FEEDBACKS: {
             return {
                 ...state,
+                feedbacks: action.feedbacks,
+                isError: action.isError,
             };
         }
         default: {
@@ -31,16 +42,27 @@ type ActionsT = GetFeedbacksAT;
 
 // Get Feedbacks
 type GetFeedbacksAT = ReturnType<typeof GetFeedbacksAC>;
-export const GetFeedbacksAC = () => ({ type: GET_FEEDBACKS });
+export const GetFeedbacksAC = (feedbacks: feedbackT[] | null, isError: boolean | null) => ({
+    type: GET_FEEDBACKS,
+    feedbacks,
+    isError,
+});
 export const GetFeedbacksTC = () => async (dispatch: AppDispatch) => {
     dispatch(LoadingAC(true));
     await FeedbacksApi.getFeedbacks()
         .then((res) => {
             console.log(res.data);
+            dispatch(GetFeedbacksAC(res.data, null));
             dispatch(LoadingAC(false));
         })
         .catch((rej) => {
-            console.log(rej);
+            console.log(rej.response);
+            if (rej.response.status === 403) {
+                localStorage.removeItem('token');
+                sessionStorage.removeItem('token');
+                dispatch(LoginAC(false));
+            }
+            dispatch(GetFeedbacksAC(null, true));
             dispatch(LoadingAC(false));
         });
 };
