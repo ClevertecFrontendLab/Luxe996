@@ -117,7 +117,7 @@ export const FeedbacksPage = () => {
                         <Form.Item name='massage'>
                             <TextArea
                                 placeholder='Autosize height with minimum and maximum number of lines'
-                                autoSize
+                                autoSize={{ minRows: 2 }}
                             />
                         </Form.Item>
                     </Form>
