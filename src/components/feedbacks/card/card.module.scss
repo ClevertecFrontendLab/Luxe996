@@ -18,6 +18,48 @@
       font-size: 16px;
     }
 
+    @media (max-width: 576px) {
+      .ant-comment-inner{
+        height: auto;
+        flex-direction: column;
+      }
+      .ant-comment-avatar {
+        display: flex;
+        margin-bottom: 12px;
+        p{
+          margin: 0;
+          margin-left: 16px;
+          text-align: left;
+        }
+      }
+      .ant-comment-content-author{
+        margin-bottom: 12px;
+      }
+    }
+
+
+    //:global {
+    //  @media (max-width: 576px) {
+    //    .ant-menu-item-icon {
+    //      display: none;
+    //      text-align: center;
+    //    }
+    //
+    //    .ant-menu-vertical .ant-menu-item {
+    //      padding: 0;
+    //    }
+    //
+    //    .anticon .ant-menu-item-icon {
+    //      display: none;
+    //    }
+    //
+    //    .ant-menu-vertical .ant-menu-item:not(:last-child) {
+    //      margin-bottom: 10px;
+    //    }
+    //
+    //  }
+    //}
+
 
     .ant-rate-star-full .anticon svg path:last-child,
     .ant-rate-star-full .anticon svg path:first-child,

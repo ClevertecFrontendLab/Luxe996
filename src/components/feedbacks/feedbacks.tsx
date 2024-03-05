@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { feedbackT } from '@redux/reducers/feedbacks-reducer';
 
 type FeedbacksPT = {
-    feedbacks: feedbackT;
+    feedbacks: feedbackT[];
     setModalHandler: () => void;
 };
 
