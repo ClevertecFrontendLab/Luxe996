@@ -5,6 +5,7 @@ import { RegisterTC } from '@redux/reducers/auth-reducer';
 import { useEffect } from 'react';
 import { Path } from '../../../routes/path';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { baseURL } from '@redux/constants/api';
 
 interface RegisterForm {
     email: string;
@@ -23,6 +24,10 @@ export const RegisterForm = () => {
 
     const onFinish = (values: RegisterForm) => {
         dispatch(RegisterTC(values.email, values.password));
+    };
+
+    const onGoogleRegister = () => {
+        window.location.href = `${baseURL}/auth/google`;
     };
 
     useEffect(() => {
@@ -117,7 +122,13 @@ export const RegisterForm = () => {
                         Войти
                     </Button>
                 </Form.Item>
-                <Button block type={'default'} size={'large'} icon={<GooglePlusOutlined />}>
+                <Button
+                    block
+                    type={'default'}
+                    size={'large'}
+                    icon={<GooglePlusOutlined />}
+                    onClick={onGoogleRegister}
+                >
                     Регистрация через Google
                 </Button>
             </div>

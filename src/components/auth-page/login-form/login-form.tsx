@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Path } from '../../../routes/path';
 import { Rule } from 'antd/lib/form';
+import { baseURL } from '@redux/constants/api';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
@@ -18,6 +19,10 @@ export const LoginForm = () => {
     const [forgotPass, setForgotPass] = useState(false);
 
     const email = sessionStorage.getItem('email');
+
+    const onGoogleLogin = () => {
+        window.location.href = `${baseURL}/auth/google`;
+    };
 
     // Повторный запрос при 404
     useEffect(() => {
@@ -142,7 +147,13 @@ export const LoginForm = () => {
                         Войти
                     </Button>
                 </Form.Item>
-                <Button block type={'default'} size={'large'} icon={<GooglePlusOutlined />}>
+                <Button
+                    block
+                    type={'default'}
+                    size={'large'}
+                    icon={<GooglePlusOutlined />}
+                    onClick={onGoogleLogin}
+                >
                     Войти через Google
                 </Button>
             </div>
