@@ -19,4 +19,17 @@
   .ant-rate-star-zero .anticon svg path:first-child {
     fill: transparent;
   }
+ .ant-modal-body{
+   padding: 0;
+ }
+  .ant-result{
+    padding: 64px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 576px) {
+    .ant-result{
+      padding: 32px 16px;
+    }
+  }
 }

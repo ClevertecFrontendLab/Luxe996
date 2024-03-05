@@ -115,7 +115,10 @@ export const FeedbacksPage = () => {
                             <Rate character={<StarTwoTone />} />
                         </Form.Item>
                         <Form.Item name='massage'>
-                            <TextArea placeholder='Autosize height with minimum and maximum number of lines' />
+                            <TextArea
+                                placeholder='Autosize height with minimum and maximum number of lines'
+                                autoSize
+                            />
                         </Form.Item>
                     </Form>
                 </div>
