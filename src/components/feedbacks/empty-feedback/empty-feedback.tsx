@@ -20,7 +20,7 @@ export const EmptyFeedback = ({ setModalHandler }: EmptyFeedbackPT) => {
             </Card>
             <Button
                 type='primary'
-                data-test-id='change-submit-button'
+                data-test-id='write-review'
                 htmlType='submit'
                 onClick={setModalHandler}
             >

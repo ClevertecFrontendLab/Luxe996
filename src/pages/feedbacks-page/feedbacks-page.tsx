@@ -1,28 +1,47 @@
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import s from './feedbacks-page.module.scss';
-import { Button, Form, Modal, Rate } from 'antd';
+import { Button, Form, Modal, Rate, Result } from 'antd';
 import { useEffect, useState } from 'react';
 import { StarTwoTone } from '@ant-design/icons';
 import TextArea from 'antd/lib/input/TextArea';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../routes/path';
 import { EmptyFeedback } from '@components/feedbacks/empty-feedback/empty-feedback';
-import { GetFeedbacksTC } from '@redux/reducers/feedbacks-reducer';
+import { GetFeedbacksTC, PostFeedbacksAC, PostFeedBackTC } from '@redux/reducers/feedbacks-reducer';
 import { Feedbacks } from '@components/feedbacks/feedbacks';
 
 export const FeedbacksPage = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    // const { feedbacks, isError } = useAppSelector((state) => state.feedbacks);
+
+    const { feedbacks, isError, isSuccess } = useAppSelector((state) => state.feedbacks);
+
     const [showModal, setShowModal] = useState(false);
-
     const [formValues, setFormValues] = useState({ rating: 0, massage: '' });
-    console.log(formValues);
+    const [resultModal, setResultModal] = useState(false);
 
-    const { feedbacks, isError } = useAppSelector((state) => state.feedbacks);
-    // const { isError } = useAppSelector((state) => state.feedbacks);
-    // const feedbacks = [];
     const setModalHandler = () => setShowModal((pervState) => !pervState);
+    const addFeedBack = () => {
+        setFormValues({ rating: 0, massage: '' });
+        setShowModal(false);
+        dispatch(PostFeedBackTC(formValues.rating, formValues.massage));
+    };
+
+    const tryAgain = () => {
+        dispatch(PostFeedbacksAC(null, null));
+        setResultModal(false);
+        setShowModal(true);
+    };
+    const closeError = () => {
+        dispatch(PostFeedbacksAC(null, null));
+        setResultModal(false);
+    };
+
+    const updateFeedbacks = () => {
+        dispatch(GetFeedbacksTC());
+        dispatch(PostFeedbacksAC(null, null));
+        setResultModal(false);
+    };
 
     useEffect(() => {
         dispatch(GetFeedbacksTC());
@@ -34,6 +53,12 @@ export const FeedbacksPage = () => {
         }
     }, [feedbacks, isError, navigate]);
 
+    useEffect(() => {
+        if ((feedbacks && isError) || isSuccess) {
+            setResultModal(true);
+        }
+    }, [feedbacks, isError, isSuccess]);
+
     return (
         <div className={s.wrapper}>
             {feedbacks &&
@@ -42,16 +67,24 @@ export const FeedbacksPage = () => {
                 ) : (
                     <Feedbacks feedbacks={feedbacks} setModalHandler={setModalHandler} />
                 ))}
+            {/* Add Feedback Modal*/}
             <Modal
                 title='Ваш отзыв'
                 open={showModal}
                 onCancel={setModalHandler}
                 centered
                 footer={[
-                    <Button key='submit' type='primary' className={s.button}>
+                    <Button
+                        key='submit'
+                        type='primary'
+                        className={s.button}
+                        onClick={addFeedBack}
+                        data-test-id='new-review-submit-button'
+                    >
                         Опубликовать
                     </Button>,
                 ]}
+                maskStyle={{ background: '#799cd480', backdropFilter: 'blur(5px)' }}
             >
                 <div className={s.form}>
                     <Form
@@ -66,6 +99,48 @@ export const FeedbacksPage = () => {
                         </Form.Item>
                     </Form>
                 </div>
+            </Modal>
+            {/*    Result Modal*/}
+            <Modal
+                open={resultModal}
+                footer={null}
+                centered
+                maskStyle={{ background: '#799cd480', backdropFilter: 'blur(5px)' }}
+            >
+                {isSuccess ? (
+                    <Result
+                        status='success'
+                        title='Отзыв успешно опубликован'
+                        extra={
+                            <Button
+                                type='primary'
+                                style={{ width: '100%' }}
+                                onClick={updateFeedbacks}
+                            >
+                                Отлично
+                            </Button>
+                        }
+                    />
+                ) : (
+                    <Result
+                        status='error'
+                        title='Данные не сохранились'
+                        subTitle='Что-то пошло не так. Попробуйте ещё раз.'
+                        extra={[
+                            <Button
+                                type='primary'
+                                key='newReview'
+                                onClick={tryAgain}
+                                data-test-id='write-review-not-saved-modal'
+                            >
+                                Написать отзыв
+                            </Button>,
+                            <Button type='text' key='close' onClick={closeError}>
+                                Закрыть
+                            </Button>,
+                        ]}
+                    />
+                )}
             </Modal>
         </div>
     );

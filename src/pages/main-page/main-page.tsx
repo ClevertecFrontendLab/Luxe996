@@ -67,7 +67,12 @@ export const MainPage = () => {
             </Content>
             <Footer className={s.footer}>
                 <div>
-                    <Button type={'link'} size={'large'} onClick={onButtonClick}>
+                    <Button
+                        type={'link'}
+                        size={'large'}
+                        onClick={onButtonClick}
+                        data-test-id='see-reviews'
+                    >
                         Смотреть отзывы
                     </Button>
                 </div>

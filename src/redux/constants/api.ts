@@ -65,4 +65,10 @@ export const FeedbacksApi = {
     getFeedbacks() {
         return instance.get(Endpoints.FeedBacks);
     },
+    postFeedbacks(rating: number, message: string) {
+        return instance.post(Endpoints.FeedBacks, {
+            message,
+            rating,
+        });
+    },
 };
