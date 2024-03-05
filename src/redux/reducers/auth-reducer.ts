@@ -126,7 +126,7 @@ type ResetStoreAT = ReturnType<typeof ResetStoreAC>;
 export const ResetStoreAC = () => ({ type: RESET_STORE });
 //Login
 type LoginAT = ReturnType<typeof LoginAC>;
-export const LoginAC = (isAuth: boolean | null, statusCode: number | null) =>
+export const LoginAC = (isAuth: boolean | null, statusCode?: number | null) =>
     ({ type: LOGIN, isAuth, statusCode } as const);
 export const LoginTC =
     (email: string, password: string, remember?: boolean) => async (dispatch: AppDispatch) => {

@@ -9,15 +9,13 @@ import CalendarCard from '@public/calendar-card.svg?react';
 import ProfileCard from '@public/profile-card.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../routes/path';
-import { GetFeedbacksTC } from '@redux/reducers/feedbacks-reducer';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useEffect, useState } from 'react';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useState } from 'react';
 
 const { Footer, Content } = Layout;
 
 export const MainPage = () => {
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const { feedbacks, isError } = useAppSelector((state) => state.feedbacks);
 
     const [errorModal, setErrorModal] = useState(isError);
@@ -25,7 +23,6 @@ export const MainPage = () => {
     const handleErrorModal = () => setErrorModal((pervState) => !pervState);
 
     const onButtonClick = () => {
-        dispatch(GetFeedbacksTC());
         navigate(Path.FEEDBACKS);
     };
 

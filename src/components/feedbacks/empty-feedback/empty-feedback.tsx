@@ -7,7 +7,7 @@ type EmptyFeedbackPT = {
 };
 export const EmptyFeedback = ({ setModalHandler }: EmptyFeedbackPT) => {
     return (
-        <>
+        <div className={s.container}>
             <Card className={s.card}>
                 <div className={s.content}>
                     <Title className={s.title}>Оставьте свой отзыв первым</Title>
@@ -26,6 +26,6 @@ export const EmptyFeedback = ({ setModalHandler }: EmptyFeedbackPT) => {
             >
                 Написать отзыв
             </Button>
-        </>
+        </div>
     );
 };

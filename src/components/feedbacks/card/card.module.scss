@@ -1,0 +1,36 @@
+@import "src/assets/style/variables";
+.comment {
+  margin-bottom: 20px;
+  width: 100%;
+  //width: calc(100% - 48px);
+  background:$white;
+  :global{
+    .ant-comment-inner{
+      min-height: 128px;
+      padding: 16px;
+    }
+    .ant-comment-avatar {
+      width: 175px;
+      text-align: center;
+    }
+    .ant-rate {
+      margin-right: 16px;
+      font-size: 16px;
+    }
+
+
+    .ant-rate-star-full .anticon svg path:last-child,
+    .ant-rate-star-full .anticon svg path:first-child,
+    .ant-rate-star-zero .anticon svg path:last-child {
+      fill: $starColor;
+    }
+    .ant-rate-star-zero .anticon svg path:first-child {
+      fill: transparent;
+    }
+  }
+
+  .author {
+    max-width: 85px;
+    margin: 0 auto;
+  }
+}

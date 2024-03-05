@@ -21,10 +21,11 @@ export const MainWrapper = () => {
     const collapseHandler = () => setCollapsed((pervState) => !pervState);
 
     const { Sider } = Layout;
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        !isAuth && navigate(Path.AUTH);
-    }, [isAuth, navigate]);
+        !isAuth && !token && navigate(Path.AUTH);
+    }, [isAuth, navigate, token]);
 
     return (
         <>

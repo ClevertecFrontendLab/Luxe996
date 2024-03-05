@@ -5,10 +5,10 @@ import { LoginAC } from '@redux/reducers/auth-reducer';
 
 const GET_FEEDBACKS = 'GET_FEEDBACKS';
 
-type feedbackT = {
+export type feedbackT = {
     createdAt: string;
     fullName: string | null;
-    id: string;
+    id?: string;
     imageSrc: string | null;
     message: string;
     rating: number;
@@ -51,12 +51,10 @@ export const GetFeedbacksTC = () => async (dispatch: AppDispatch) => {
     dispatch(LoadingAC(true));
     await FeedbacksApi.getFeedbacks()
         .then((res) => {
-            console.log(res.data);
-            dispatch(GetFeedbacksAC(res.data, null));
+            dispatch(GetFeedbacksAC(res.data.reverse(), null));
             dispatch(LoadingAC(false));
         })
         .catch((rej) => {
-            console.log(rej.response);
             if (rej.response.status === 403) {
                 localStorage.removeItem('token');
                 sessionStorage.removeItem('token');
