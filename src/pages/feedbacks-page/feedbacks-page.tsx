@@ -20,6 +20,10 @@ export const FeedbacksPage = () => {
     const [formValues, setFormValues] = useState({ rating: 0, massage: '' });
     const [resultModal, setResultModal] = useState(false);
 
+    const handleErrorModal = () => {
+        navigate(Path.MAIN);
+    };
+
     const setModalHandler = () => setShowModal((pervState) => !pervState);
     const addFeedBack = () => {
         setFormValues({ rating: 0, massage: '' });
@@ -48,12 +52,6 @@ export const FeedbacksPage = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (!feedbacks && isError) {
-            navigate(Path.MAIN);
-        }
-    }, [feedbacks, isError, navigate]);
-
-    useEffect(() => {
         if ((feedbacks && isError) || isSuccess) {
             setResultModal(true);
         }
@@ -67,6 +65,28 @@ export const FeedbacksPage = () => {
                 ) : (
                     <Feedbacks feedbacks={feedbacks} setModalHandler={setModalHandler} />
                 ))}
+            {/* Error modal*/}
+            {!feedbacks && (
+                <Modal
+                    open={isError}
+                    onCancel={handleErrorModal}
+                    footer={null}
+                    centered
+                    closable={false}
+                    maskStyle={{ background: '#799cd480', backdropFilter: 'blur(5px)' }}
+                >
+                    <Result
+                        status='500'
+                        title='Что-то пошло не так'
+                        subTitle='Произошла ошибка, попробуйте ещё раз.'
+                        extra={
+                            <Button type='primary' onClick={handleErrorModal}>
+                                Назад
+                            </Button>
+                        }
+                    />
+                </Modal>
+            )}
             {/* Add Feedback Modal*/}
             <Modal
                 title='Ваш отзыв'
