@@ -1,3 +1,4 @@
+@import "../../assets/style/variables";
 .wrapper {
   height: 100vh;
   background: url("@public/enter_page_light.png") center no-repeat;
@@ -36,7 +37,7 @@
     max-height: 742px;
     width: 540px;
     padding: 64px 80px;
-    background: var(--white);
+    background: $white;
 
     @media (max-width: 480px) {
       padding: 32px 16px;

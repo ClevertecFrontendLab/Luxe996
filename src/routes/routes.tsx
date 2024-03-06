@@ -1,5 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { MainPage } from '@pages/main-page';
+import { Route, Routes } from 'react-router-dom';
+import { MainPage } from '@pages/./main-page';
 import { AuthPage } from '@pages/../components/auth-page/auth-page';
 import { Path } from './path';
 import { AuthWrapper } from '@pages/auth-wrapper/auth-wrapper';
@@ -7,10 +7,13 @@ import { Result } from '@components/auth-page/result/result';
 import { resData } from '@components/auth-page/result/constants/res-data';
 import { ConfirmEmail } from '@components/auth-page/confirm-email/confirm-email';
 import { ChangePassword } from '@components/auth-page/change-password/change-password';
+import { MainWrapper } from '@components/../pages/main-wrapper/main-wrapper';
+import { FeedbacksPage } from '@pages/feedbacks-page';
+import { AppLayout } from '@components/layout/app-layout';
 
 export const routes = (
     <Routes>
-        <Route path={Path.INIT} element={<Navigate to={Path.AUTH} />} />
+        <Route path={Path.INIT} element={<AppLayout />} />
         <Route
             path={Path.AUTH}
             element={
@@ -164,7 +167,9 @@ export const routes = (
                 </AuthWrapper>
             }
         />
-
-        <Route path={Path.MAIN} element={<MainPage />} />
+        <Route element={<MainWrapper />}>
+            <Route path={Path.MAIN} element={<MainPage />} />
+            <Route path={Path.FEEDBACKS} element={<FeedbacksPage />} />
+        </Route>
     </Routes>
 );

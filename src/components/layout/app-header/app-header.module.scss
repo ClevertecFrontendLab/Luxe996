@@ -1,10 +1,14 @@
 @import "src/assets/style/variables";
 
 .header {
+  background: #F0F5FF;
+  height: auto;
+  line-height: 1;
+
   display: grid;
   grid-template-columns: minmax(min-content, 1190px) 1fr;
   row-gap: 15px;
-  padding: 16px 24px 24px 24px;
+  padding: 0 24px 24px 24px;
   overflow: hidden;
   @media (max-width: 576px) {
     row-gap: 10px;

@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Path } from '../../../routes/path';
+import { authSelector } from '../../../selectors';
 
 const { Title } = Typography;
 
@@ -19,8 +20,8 @@ export const ChangePassword = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { isChanged } = useAppSelector((state) => state.auth);
-    const { pass, confPass } = useAppSelector((state) => state.auth.recInfo);
+    const { isChanged } = useAppSelector(authSelector);
+    const { pass, confPass } = useAppSelector(authSelector).recInfo;
 
     const onFinish = (values: ChangePasswordForm) => {
         dispatch(ChangePassTC(values.password, values.confirmPassword));

@@ -1,0 +1,36 @@
+@import "src/assets/style/variables";
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+:global{
+  .ant-rate-star-full .anticon svg path:last-child,
+  .ant-rate-star-full .anticon svg path:first-child,
+  .ant-rate-star-zero .anticon svg path:last-child {
+    fill: $starColor;
+  }
+  .ant-rate-star-zero .anticon svg path:first-child {
+    fill: transparent;
+  }
+ .ant-modal-body{
+   padding: 0;
+ }
+  .ant-modal-content{
+    padding: 16px 24px;
+  }
+  .ant-result{
+    padding: 64px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 576px) {
+    .ant-result{
+      padding: 32px 16px;
+    }
+  }
+}

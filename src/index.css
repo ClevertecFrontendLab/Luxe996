@@ -10,7 +10,7 @@ h1, h2, h3, h4, p {
     margin: 0;
 }
 
-body{
+body {
     font-family: Inter, sans-serif;
     overflow-y: scroll;
 }
@@ -21,15 +21,16 @@ ul {
     padding: 0;
 }
 
-:root {
-    --white: #fff;
-    --primaryLight6: #2f54eb
+:root .ant-btn-primary {
+    height: 40px;
+    background: #2F54EB;
+    border-color: #2F54EB;
 }
 
+:root .ant-btn-primary span {
+    margin: 0;
+}
 
-
-
-
-
-
-
+:root .ant-btn-link {
+    color: #2F54EB;
+}
