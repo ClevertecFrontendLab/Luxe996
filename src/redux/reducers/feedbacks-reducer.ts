@@ -9,10 +9,10 @@ const POST_FEEDBACKS = 'POST_FEEDBACKS';
 export type feedbackT = {
     createdAt: string;
     fullName: string | null;
-    id?: string;
     imageSrc: string | null;
     message: string;
     rating: number;
+    id?: string;
 };
 
 type initialStateT = {

@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ResetStoreAC } from '@redux/reducers/auth-reducer';
 import { ResultProps } from '@types/auth';
 import { Path } from '../../../routes/path';
+import { authSelector } from '../../../selectors';
 
 const { Title, Text } = Typography;
 export const Result = ({ icon, title, text, textBtn, pathBtn, testData }: ResultProps) => {
@@ -13,8 +14,8 @@ export const Result = ({ icon, title, text, textBtn, pathBtn, testData }: Result
     const location = useLocation();
     const dispatch = useAppDispatch();
 
-    const { statusCode } = useAppSelector((state) => state.auth.AuthError);
-    const { isRegister } = useAppSelector((state) => state.auth);
+    const { statusCode } = useAppSelector(authSelector).AuthError;
+    const { isRegister } = useAppSelector(authSelector);
     const onButtonClick = () => {
         if (location.pathname !== Path.RESULT.ERROR_CHECK_EMAIL) {
             dispatch(ResetStoreAC());

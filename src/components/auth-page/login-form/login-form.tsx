@@ -8,20 +8,22 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Path } from '../../../routes/path';
 import { Rule } from 'antd/lib/form';
 import { baseURL } from '@redux/constants/api';
+import { Endpoints } from '@redux/constants/endpoint-names';
+import { authSelector } from '../../../selectors';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const { statusCode, message } = useAppSelector((state) => state.auth.AuthError);
-    const { isCheckSuccess, isAuth } = useAppSelector((state) => state.auth);
+    const { statusCode, message } = useAppSelector(authSelector).AuthError;
+    const { isCheckSuccess, isAuth } = useAppSelector(authSelector);
     const [emailForm, setEmailForm] = useState('');
     const [forgotPass, setForgotPass] = useState(false);
 
     const email = sessionStorage.getItem('email');
 
     const onGoogleLogin = () => {
-        window.location.href = `${baseURL}/auth/google`;
+        window.location.href = `${baseURL}${Endpoints.Google}`;
     };
 
     // Повторный запрос при 404
@@ -70,7 +72,7 @@ export const LoginForm = () => {
         <Form onFinish={onFinish}>
             <div>
                 <Form.Item
-                    name={'email'}
+                    name='email'
                     rules={[
                         { required: true, message: '' },
                         { type: 'email', message: '' },
@@ -89,7 +91,7 @@ export const LoginForm = () => {
                         },
                     ]}
                 >
-                    <Input addonBefore='e-mail:' size={'large'} data-test-id='login-email' />
+                    <Input addonBefore='e-mail:' size='large' data-test-id='login-email' />
                 </Form.Item>
 
                 <Form.Item
@@ -108,10 +110,10 @@ export const LoginForm = () => {
                             },
                         },
                     ]}
-                    name={'password'}
+                    name='password'
                 >
                     <Input.Password
-                        size={'large'}
+                        size='large'
                         placeholder='Пароль'
                         data-test-id='login-password'
                     ></Input.Password>
@@ -124,8 +126,8 @@ export const LoginForm = () => {
                 </Form.Item>
 
                 <Button
-                    size={'large'}
-                    type={'link'}
+                    size='large'
+                    type='link'
                     data-test-id='login-forgot-button'
                     onClick={() => {
                         forgotPass && onForgotClick(emailForm);
@@ -140,8 +142,8 @@ export const LoginForm = () => {
                     <Button
                         htmlType='submit'
                         block
-                        type={'primary'}
-                        size={'large'}
+                        type='primary'
+                        size='large'
                         data-test-id='login-submit-button'
                     >
                         Войти
@@ -149,8 +151,8 @@ export const LoginForm = () => {
                 </Form.Item>
                 <Button
                     block
-                    type={'default'}
-                    size={'large'}
+                    type='default'
+                    size='large'
                     icon={<GooglePlusOutlined />}
                     onClick={onGoogleLogin}
                 >

@@ -7,6 +7,7 @@ import s from './confirm.module.scss';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Path } from '../../../routes/path';
 import { CheckCodeTC } from '@redux/reducers/auth-reducer';
+import { authSelector } from '../../../selectors';
 
 const { Title, Text } = Typography;
 
@@ -16,7 +17,7 @@ export const ConfirmEmail = () => {
     const dispatch = useAppDispatch();
 
     const [code, setCode] = useState('');
-    const { isCodeValid } = useAppSelector((state) => state.auth);
+    const { isCodeValid } = useAppSelector(authSelector);
 
     const email = sessionStorage.getItem('email');
     const onFinish = (code: string) => {

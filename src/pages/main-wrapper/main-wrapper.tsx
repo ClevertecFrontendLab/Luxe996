@@ -10,12 +10,13 @@ import { NavBar } from '@components/nav-bar';
 import { Switcher } from '@components/nav-bar/switcher';
 import { ButtonMenu } from '@components/nav-bar/button-menu/button-menu';
 import { Loader } from '@components/loader/loader';
+import { appSelector, authSelector } from '../../selectors';
 
 export const MainWrapper = () => {
     const breakpoint = useBreakpoint();
     const navigate = useNavigate();
-    const { isAuth } = useAppSelector((state) => state.auth);
-    const { isLoading } = useAppSelector((state) => state.app);
+    const { isAuth } = useAppSelector(authSelector);
+    const { isLoading } = useAppSelector(appSelector);
 
     const [collapsed, setCollapsed] = useState(true);
     const collapseHandler = () => setCollapsed((pervState) => !pervState);

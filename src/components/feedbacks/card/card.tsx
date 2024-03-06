@@ -21,7 +21,7 @@ export const CustomCard = ({ imageSrc, fullName, message, rating, createdAt }: f
                         }}
                         alt='Avatar'
                     />{' '}
-                    <p className={s.author}>{fullName ? `${fullName}` : ''}</p>
+                    <p className={s.author}>{fullName || ''}</p>
                 </>
             }
             content={<Text type='secondary'>{message}</Text>}

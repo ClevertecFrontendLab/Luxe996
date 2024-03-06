@@ -7,4 +7,5 @@ export const Endpoints = {
         SetNewPass: '/auth/change-password',
     },
     FeedBacks: '/feedback',
+    Google: '/auth/google',
 };

@@ -9,22 +9,24 @@ import { Path } from '../../routes/path';
 import { EmptyFeedback } from '@components/feedbacks/empty-feedback/empty-feedback';
 import { GetFeedbacksTC, PostFeedbacksAC, PostFeedBackTC } from '@redux/reducers/feedbacks-reducer';
 import { Feedbacks } from '@components/feedbacks/feedbacks';
+import { feedbackSelector } from '../../selectors';
 
 export const FeedbacksPage = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const { feedbacks, isError, isSuccess } = useAppSelector((state) => state.feedbacks);
+    const { feedbacks, isError, isSuccess } = useAppSelector(feedbackSelector);
 
     const [showModal, setShowModal] = useState(false);
     const [formValues, setFormValues] = useState({ rating: 0, massage: '' });
     const [resultModal, setResultModal] = useState(false);
 
+    const setModalHandler = () => setShowModal((pervState) => !pervState);
+
     const handleErrorModal = () => {
         navigate(Path.MAIN);
     };
 
-    const setModalHandler = () => setShowModal((pervState) => !pervState);
     const addFeedBack = () => {
         setFormValues({ rating: 0, massage: '' });
         setShowModal(false);
@@ -65,7 +67,7 @@ export const FeedbacksPage = () => {
                 ) : (
                     <Feedbacks feedbacks={feedbacks} setModalHandler={setModalHandler} />
                 ))}
-            {/* Error modal*/}
+
             {!feedbacks && (
                 <Modal
                     open={isError}
@@ -87,7 +89,7 @@ export const FeedbacksPage = () => {
                     />
                 </Modal>
             )}
-            {/* Add Feedback Modal*/}
+
             <Modal
                 title='Ваш отзыв'
                 open={showModal}
@@ -123,7 +125,7 @@ export const FeedbacksPage = () => {
                     </Form>
                 </div>
             </Modal>
-            {/*    Result Modal*/}
+
             <Modal
                 open={resultModal}
                 footer={null}
