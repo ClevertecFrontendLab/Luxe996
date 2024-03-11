@@ -1,7 +1,7 @@
-import { LoadingAC } from '@redux/reducers/app-reducer';
+import { loadingAC } from '@redux/reducers/app-reducer';
 import { AppDispatch } from '@redux/configure-store';
 import { FeedbacksApi } from '@redux/constants/api';
-import { LoginAC } from '@redux/reducers/auth-reducer';
+import { loginAC } from '@redux/reducers/auth-reducer';
 
 const GET_FEEDBACKS = 'GET_FEEDBACKS';
 const POST_FEEDBACKS = 'POST_FEEDBACKS';
@@ -51,49 +51,49 @@ export const FeedbacksReducer = (state = initialState, action: ActionsT) => {
 type ActionsT = GetFeedbacksAT | PostFeedbacksAT;
 
 // Get Feedbacks
-type GetFeedbacksAT = ReturnType<typeof GetFeedbacksAC>;
-export const GetFeedbacksAC = (feedbacks: feedbackT[] | null, isError: boolean | null) =>
+type GetFeedbacksAT = ReturnType<typeof getFeedbacksAC>;
+export const getFeedbacksAC = (feedbacks: feedbackT[] | null, isError: boolean | null) =>
     ({
         type: GET_FEEDBACKS,
         feedbacks,
         isError,
     } as const);
-export const GetFeedbacksTC = () => async (dispatch: AppDispatch) => {
-    dispatch(LoadingAC(true));
+export const getFeedbacksTC = () => async (dispatch: AppDispatch) => {
+    dispatch(loadingAC(true));
     await FeedbacksApi.getFeedbacks()
         .then((res) => {
-            dispatch(GetFeedbacksAC(res.data.reverse(), null));
-            dispatch(LoadingAC(false));
+            dispatch(getFeedbacksAC(res.data.reverse(), null));
+            dispatch(loadingAC(false));
         })
         .catch((rej) => {
             if (rej.response.status === 403) {
                 localStorage.removeItem('token');
                 sessionStorage.removeItem('token');
-                dispatch(LoginAC(false));
+                dispatch(loginAC(false));
             }
-            dispatch(GetFeedbacksAC(null, true));
-            dispatch(LoadingAC(false));
+            dispatch(getFeedbacksAC(null, true));
+            dispatch(loadingAC(false));
         });
 };
 
 // Post Feedback
-type PostFeedbacksAT = ReturnType<typeof PostFeedbacksAC>;
-export const PostFeedbacksAC = (isSuccess: boolean | null, isError: boolean | null) =>
+type PostFeedbacksAT = ReturnType<typeof postFeedbacksAC>;
+export const postFeedbacksAC = (isSuccess: boolean | null, isError: boolean | null) =>
     ({
         type: POST_FEEDBACKS,
         isSuccess,
         isError,
     } as const);
-export const PostFeedBackTC =
+export const postFeedBackTC =
     (rating: number, message: string) => async (dispatch: AppDispatch) => {
-        dispatch(LoadingAC(true));
+        dispatch(loadingAC(true));
         await FeedbacksApi.postFeedbacks(rating, message)
             .then((res) => {
-                dispatch(PostFeedbacksAC(true, false));
-                dispatch(LoadingAC(false));
+                dispatch(postFeedbacksAC(true, false));
+                dispatch(loadingAC(false));
             })
             .catch((rej) => {
-                dispatch(PostFeedbacksAC(false, true));
-                dispatch(LoadingAC(false));
+                dispatch(postFeedbacksAC(false, true));
+                dispatch(loadingAC(false));
             });
     };

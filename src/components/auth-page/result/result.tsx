@@ -3,7 +3,7 @@ import s from './result.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { ResetStoreAC } from '@redux/reducers/auth-reducer';
+import { resetStoreAC } from '@redux/reducers/auth-reducer';
 import { ResultProps } from '@types/auth';
 import { Path } from '../../../routes/path';
 import { authSelector } from '../../../selectors';
@@ -14,11 +14,11 @@ export const Result = ({ icon, title, text, textBtn, pathBtn, testData }: Result
     const location = useLocation();
     const dispatch = useAppDispatch();
 
-    const { statusCode } = useAppSelector(authSelector).AuthError;
+    const { statusCode } = useAppSelector(authSelector).authError;
     const { isRegister } = useAppSelector(authSelector);
     const onButtonClick = () => {
         if (location.pathname !== Path.RESULT.ERROR_CHECK_EMAIL) {
-            dispatch(ResetStoreAC());
+            dispatch(resetStoreAC());
             sessionStorage.clear();
         }
 

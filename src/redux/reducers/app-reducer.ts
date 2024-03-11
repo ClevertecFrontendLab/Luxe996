@@ -24,5 +24,5 @@ export const AppReducer = (state = initialState, action: ActionType) => {
 
 type ActionType = LoadingAT;
 //Loader
-type LoadingAT = ReturnType<typeof LoadingAC>;
-export const LoadingAC = (loading: boolean) => ({ type: LOADING, loading } as const);
+type LoadingAT = ReturnType<typeof loadingAC>;
+export const loadingAC = (loading: boolean) => ({ type: LOADING, loading } as const);

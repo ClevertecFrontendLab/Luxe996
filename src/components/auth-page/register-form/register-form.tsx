@@ -1,7 +1,7 @@
 import { Button, Form, Input } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { RegisterTC } from '@redux/reducers/auth-reducer';
+import { registerTC } from '@redux/reducers/auth-reducer';
 import { useEffect } from 'react';
 import { Path } from '../../../routes/path';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -19,12 +19,12 @@ export const RegisterForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { statusCode } = useAppSelector(authSelector).AuthError;
+    const { statusCode } = useAppSelector(authSelector).authError;
     const { email, password } = useAppSelector(authSelector).regInfo;
     const { isRegister } = useAppSelector(authSelector);
 
     const onFinish = (values: RegisterForm) => {
-        dispatch(RegisterTC(values.email, values.password));
+        dispatch(registerTC(values.email, values.password));
     };
 
     const onGoogleRegister = () => {
@@ -41,7 +41,7 @@ export const RegisterForm = () => {
         }
 
         if (email && location.state?.from === Path.RESULT.REGISTER_ERROR) {
-            dispatch(RegisterTC(email, password));
+            dispatch(registerTC(email, password));
         }
     }, [statusCode, navigate, email, password, dispatch, location.state, location.pathname]);
 

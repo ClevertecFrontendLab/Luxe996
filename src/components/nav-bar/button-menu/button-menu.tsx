@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import { ReactNode } from 'react';
 import s from './button-menu.module.scss';
 import ExitIcon from '@public/exit-menu.svg?react';
-import { LoginAC } from '@redux/reducers/auth-reducer';
+import { loginAC } from '@redux/reducers/auth-reducer';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
 
@@ -15,7 +15,7 @@ export const ButtonMenu = ({ children }: ButtonMenuProps) => {
     const breakpoint = useBreakpoint();
     const onClick = () => {
         localStorage.removeItem('token');
-        dispatch(LoginAC(null, null));
+        dispatch(loginAC(null, null));
     };
 
     return (
