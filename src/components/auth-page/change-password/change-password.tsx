@@ -10,10 +10,10 @@ import { authSelector } from '../../../selectors';
 
 const { Title } = Typography;
 
-export interface ChangePasswordForm {
+export type ChangePasswordFormType = {
     password: string;
     confirmPassword: string;
-}
+};
 
 export const ChangePassword = () => {
     const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const ChangePassword = () => {
     const { isChanged } = useAppSelector(authSelector);
     const { pass, confPass } = useAppSelector(authSelector).recInfo;
 
-    const onFinish = (values: ChangePasswordForm) => {
+    const onFinish = (values: ChangePasswordFormType) => {
         dispatch(changePassTC(values.password, values.confirmPassword));
     };
 

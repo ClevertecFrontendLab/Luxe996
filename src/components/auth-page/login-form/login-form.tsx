@@ -1,6 +1,6 @@
 import { Button, Checkbox, Form, Input, Row } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { LoginFormProps } from '@types/auth';
+import { LoginFormType } from '@types/auth';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { checkEmailTC, loginTC } from '@redux/reducers/auth-reducer';
 import { useEffect, useState } from 'react';
@@ -33,7 +33,7 @@ export const LoginForm = () => {
         }
     }, [dispatch, email, location.state?.from, statusCode]);
 
-    const onFinish = ({ email, password, remember }: LoginFormProps) => {
+    const onFinish = ({ email, password, remember }: LoginFormType) => {
         dispatch(loginTC(email, password, remember));
     };
     const onForgotClick = (email: string) => {

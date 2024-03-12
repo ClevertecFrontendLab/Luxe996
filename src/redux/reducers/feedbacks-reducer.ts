@@ -6,7 +6,7 @@ import { loginAC } from '@redux/reducers/auth-reducer';
 const GET_FEEDBACKS = 'GET_FEEDBACKS';
 const POST_FEEDBACKS = 'POST_FEEDBACKS';
 
-export type feedbackT = {
+export type FeedbackType = {
     createdAt: string;
     fullName: string | null;
     imageSrc: string | null;
@@ -15,18 +15,18 @@ export type feedbackT = {
     id?: string;
 };
 
-type initialStateT = {
-    feedbacks: feedbackT[] | null;
+type InitialStateType = {
+    feedbacks: FeedbackType[] | null;
     isError: boolean | null;
     isSuccess: boolean;
 };
 
-const initialState: initialStateT = {
+const initialState: InitialStateType = {
     feedbacks: null,
     isError: null,
     isSuccess: null,
 };
-export const FeedbacksReducer = (state = initialState, action: ActionsT) => {
+export const FeedbacksReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case GET_FEEDBACKS: {
             return {
@@ -48,7 +48,7 @@ export const FeedbacksReducer = (state = initialState, action: ActionsT) => {
     }
 };
 
-type ActionsT = GetFeedbacksAT | PostFeedbacksAT;
+type ActionsType = GetFeedbacksAT | PostFeedbacksAT;
 
 // Get Feedbacks
 type GetFeedbacksAT = ReturnType<typeof getFeedbacksAC>;

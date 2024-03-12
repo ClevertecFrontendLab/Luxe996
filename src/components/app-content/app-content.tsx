@@ -1,30 +1,26 @@
-import s from './app-content.module.scss'
-import {ReactNode} from "react";
+import s from './app-content.module.scss';
+import { PropsWithChildren } from 'react';
 
-type AppContentProps = {
-    children: ReactNode
-}
-export const AppContent = ({children}:AppContentProps) => (
+export const AppContent = ({ children }: PropsWithChildren) => (
     <>
         <div className={s.content}>
             <div className={s.advantages}>
                 <p>С CleverFit ты сможешь:</p>
                 <ul>
                     <li>
-                        — планировать свои тренировки на календаре, выбирая тип и уровень
-                        нагрузки;
+                        — планировать свои тренировки на календаре, выбирая тип и уровень нагрузки;
                     </li>
                     <li>
                         — отслеживать свои достижения в разделе статистики, сравнивая свои
                         результаты с нормами и рекордами;
                     </li>
                     <li>
-                        — создавать свой профиль, где тыможешь загружать свои фото, видео и
-                        отзывы о тренировках;
+                        — создавать свой профиль, где тыможешь загружать свои фото, видео и отзывы о
+                        тренировках;
                     </li>
                     <li>
-                        — выполнять расписанные тренировки для разных частей тела, следуя
-                        подробным инструкциям и советам профессиональных тренеров.
+                        — выполнять расписанные тренировки для разных частей тела, следуя подробным
+                        инструкциям и советам профессиональных тренеров.
                     </li>
                 </ul>
             </div>
@@ -35,5 +31,4 @@ export const AppContent = ({children}:AppContentProps) => (
             {children}
         </div>
     </>
-)
-
+);

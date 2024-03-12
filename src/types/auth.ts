@@ -1,14 +1,14 @@
-export interface LoginFormProps {
+export type LoginFormType = {
     email: string;
     password: string;
     remember: boolean;
-}
+};
 
-export interface ResultProps {
+export type ResultProps = {
     icon: React.ReactNode;
     title: string;
     text: string;
     textBtn: string;
     pathBtn: string;
     testData: string;
-}
+};

@@ -8,11 +8,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { baseURL } from '@redux/constants/api';
 import { authSelector } from '../../../selectors';
 
-interface RegisterForm {
+type RegisterFormType = {
     email: string;
     password: string;
     confirmPass: string;
-}
+};
 
 export const RegisterForm = () => {
     const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const RegisterForm = () => {
     const { email, password } = useAppSelector(authSelector).regInfo;
     const { isRegister } = useAppSelector(authSelector);
 
-    const onFinish = (values: RegisterForm) => {
+    const onFinish = (values: RegisterFormType) => {
         dispatch(registerTC(values.email, values.password));
     };
 

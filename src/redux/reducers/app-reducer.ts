@@ -1,10 +1,10 @@
 const LOADING = 'LOADING';
 
-type initialState = {
+type initialStateType = {
     isLoading: boolean;
 };
 
-const initialState: initialState = {
+const initialState: initialStateType = {
     isLoading: false,
 };
 
