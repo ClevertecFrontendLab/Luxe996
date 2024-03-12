@@ -18,7 +18,7 @@ export type FeedbackType = {
 type InitialStateType = {
     feedbacks: FeedbackType[] | null;
     isError: boolean | null;
-    isSuccess: boolean;
+    isSuccess: boolean | null;
 };
 
 const initialState: InitialStateType = {
