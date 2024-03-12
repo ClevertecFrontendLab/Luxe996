@@ -1,6 +1,6 @@
 import { Breadcrumb, Layout } from 'antd';
 import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useEffect, useState } from 'react';
 import { Path } from '../../routes/path';
@@ -11,10 +11,12 @@ import { Switcher } from '@components/nav-bar/switcher';
 import { ButtonMenu } from '@components/nav-bar/button-menu/button-menu';
 import { Loader } from '@components/loader/loader';
 import { appSelector, authSelector } from '../../selectors';
+import { getPathName } from '@utils/path-names';
 
 export const MainWrapper = () => {
     const breakpoint = useBreakpoint();
     const navigate = useNavigate();
+    const location = useLocation();
     const { isAuth } = useAppSelector(authSelector);
     const { isLoading } = useAppSelector(appSelector);
 
@@ -27,6 +29,9 @@ export const MainWrapper = () => {
     useEffect(() => {
         !isAuth && !token && navigate(Path.AUTH);
     }, [isAuth, navigate, token]);
+
+    const pathNames = location.pathname.split('/').filter((path) => path);
+    const isMain = location.pathname.includes(Path.MAIN);
 
     return (
         <>
@@ -46,7 +51,21 @@ export const MainWrapper = () => {
                     <ButtonMenu>{collapsed ? '' : 'Выход'}</ButtonMenu>
                 </Sider>
                 <Layout>
-                    <Breadcrumb className={s.breadcrums}>Главная</Breadcrumb>
+                    <Breadcrumb className={s.breadcrums}>
+                        <Breadcrumb.Item>
+                            <Link to={Path.MAIN}>{getPathName(Path.MAIN)}</Link>
+                        </Breadcrumb.Item>
+                        {!isMain &&
+                            pathNames.map((name, i) => {
+                                const to = `/${pathNames.slice(0, i + 1).join('/')}`;
+                                const label = getPathName(`/${name}`);
+                                return (
+                                    <Breadcrumb.Item key={to}>
+                                        <Link to={to}>{label}</Link>
+                                    </Breadcrumb.Item>
+                                );
+                            })}
+                    </Breadcrumb>
                     <Outlet />
                 </Layout>
             </Layout>

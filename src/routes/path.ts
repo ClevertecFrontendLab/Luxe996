@@ -2,6 +2,7 @@ export const Path = {
     INIT: '/',
     MAIN: '/main',
     FEEDBACKS: '/feedbacks',
+    CALENDAR: '/calendar',
     AUTH: '/auth',
     REGISTRATION: '/auth/registration',
     CONFIRM_EMAIL: '/auth/confirm-email',
