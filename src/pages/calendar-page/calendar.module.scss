@@ -1,0 +1,19 @@
+@import "src/assets/style/variables";
+
+.calendar {
+  background: $primaryLight1;
+  padding: 0 24px 93px;
+
+  :global {
+    thead {
+      background: $primaryLight1;
+    }
+    .ant-picker-panel{
+      .ant-picker-body {
+        padding: 0;
+
+      }
+    }
+
+  }
+}

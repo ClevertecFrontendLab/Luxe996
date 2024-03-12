@@ -1,6 +1,6 @@
 import { AppDispatch } from '@redux/configure-store';
-import { AuthApi } from '@redux/constants/api';
 import { loadingAC } from '@redux/reducers/app-reducer';
+import { AuthApi } from '@constants/api';
 
 const RESET_STORE = 'RESET_STORE';
 const LOGIN = 'LOGIN';

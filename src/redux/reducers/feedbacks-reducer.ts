@@ -1,7 +1,7 @@
 import { loadingAC } from '@redux/reducers/app-reducer';
 import { AppDispatch } from '@redux/configure-store';
-import { FeedbacksApi } from '@redux/constants/api';
 import { loginAC } from '@redux/reducers/auth-reducer';
+import { FeedbacksApi } from '@constants/api';
 
 const GET_FEEDBACKS = 'GET_FEEDBACKS';
 const POST_FEEDBACKS = 'POST_FEEDBACKS';
@@ -52,7 +52,7 @@ type ActionsType = GetFeedbacksAT | PostFeedbacksAT;
 
 // Get Feedbacks
 type GetFeedbacksAT = ReturnType<typeof getFeedbacksAC>;
-export const getFeedbacksAC = (feedbacks: feedbackT[] | null, isError: boolean | null) =>
+export const getFeedbacksAC = (feedbacks: FeedbackType[] | null, isError: boolean | null) =>
     ({
         type: GET_FEEDBACKS,
         feedbacks,

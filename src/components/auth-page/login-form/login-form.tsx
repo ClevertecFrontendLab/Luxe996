@@ -7,9 +7,9 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Path } from '../../../routes/path';
 import { Rule } from 'antd/lib/form';
-import { baseURL } from '@redux/constants/api';
-import { Endpoints } from '@redux/constants/endpoint-names';
 import { authSelector } from '../../../selectors';
+import { Endpoints } from '@constants/endpoint-names';
+import { baseURL } from '@constants/api';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();

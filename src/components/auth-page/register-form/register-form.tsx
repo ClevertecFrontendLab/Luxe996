@@ -5,8 +5,9 @@ import { registerTC } from '@redux/reducers/auth-reducer';
 import { useEffect } from 'react';
 import { Path } from '../../../routes/path';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { baseURL } from '@redux/constants/api';
 import { authSelector } from '../../../selectors';
+import { baseURL } from '@constants/api';
+import { Endpoints } from '@constants/endpoint-names';
 
 type RegisterFormType = {
     email: string;
@@ -28,7 +29,7 @@ export const RegisterForm = () => {
     };
 
     const onGoogleRegister = () => {
-        window.location.href = `${baseURL}/auth/google`;
+        window.location.href = `${baseURL}${Endpoints.Google}`;
     };
 
     useEffect(() => {

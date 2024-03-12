@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Endpoints } from '@redux/constants/endpoint-names';
+import { Endpoints } from '@constants/endpoint-names';
 
 export const baseURL = 'https://marathon-api.clevertec.ru';
 
