@@ -5,7 +5,7 @@ import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
 
 const { Header } = Layout;
 
-export default function AppHeader() {
+export const AppHeader = () => {
     const breakpoints = useBreakpoint();
     return (
         <Header className={s.header}>
@@ -22,4 +22,4 @@ export default function AppHeader() {
             )}
         </Header>
     );
-}
+};

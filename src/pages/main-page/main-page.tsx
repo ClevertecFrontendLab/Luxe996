@@ -1,6 +1,5 @@
 import { Button, Layout } from 'antd';
 import s from './main-page.module.scss';
-import AppHeader from '@components/layout/app-header/app-header';
 import { AppContent } from '@components/app-content/app-content';
 import { AppCard } from '@components/app-card/app-card';
 import { HeartFilled } from '@ant-design/icons';
@@ -9,6 +8,7 @@ import CalendarCard from '@public/calendar-card.svg?react';
 import ProfileCard from '@public/profile-card.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../routes/path';
+import { AppHeader } from '@components/layout/app-header/app-header';
 
 const { Footer, Content } = Layout;
 
