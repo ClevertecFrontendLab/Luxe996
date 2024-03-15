@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
-import { AppReducer, AuthReducer, FeedbacksReducer } from '@redux/reducers';
+import { AppReducer, AuthReducer, CalendarReducer, FeedbacksReducer } from '@redux/reducers';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -13,6 +13,7 @@ export const store = configureStore({
         app: AppReducer,
         auth: AuthReducer,
         feedbacks: FeedbacksReducer,
+        calendar: CalendarReducer,
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware),
 });

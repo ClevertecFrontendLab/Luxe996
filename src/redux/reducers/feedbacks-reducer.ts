@@ -1,7 +1,7 @@
 import { loadingAC } from '@redux/reducers/app-reducer';
 import { AppDispatch } from '@redux/configure-store';
 import { loginAC } from '@redux/reducers/auth-reducer';
-import { FeedbacksApi } from '@constants/api';
+import { feedbacksApi } from '@constants/api';
 
 const GET_FEEDBACKS = 'GET_FEEDBACKS';
 const POST_FEEDBACKS = 'POST_FEEDBACKS';
@@ -60,7 +60,8 @@ export const getFeedbacksAC = (feedbacks: FeedbackType[] | null, isError: boolea
     } as const);
 export const getFeedbacksTC = () => async (dispatch: AppDispatch) => {
     dispatch(loadingAC(true));
-    await FeedbacksApi.getFeedbacks()
+    await feedbacksApi
+        .getFeedbacks()
         .then((res) => {
             dispatch(getFeedbacksAC(res.data.reverse(), null));
             dispatch(loadingAC(false));
@@ -87,7 +88,8 @@ export const postFeedbacksAC = (isSuccess: boolean | null, isError: boolean | nu
 export const postFeedBackTC =
     (rating: number, message: string) => async (dispatch: AppDispatch) => {
         dispatch(loadingAC(true));
-        await FeedbacksApi.postFeedbacks(rating, message)
+        await feedbacksApi
+            .postFeedbacks(rating, message)
             .then((res) => {
                 dispatch(postFeedbacksAC(true, false));
                 dispatch(loadingAC(false));

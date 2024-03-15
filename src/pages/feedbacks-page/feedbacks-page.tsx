@@ -70,7 +70,7 @@ export const FeedbacksPage = () => {
 
             {!feedbacks && (
                 <Modal
-                    open={isError}
+                    open={Boolean(isError)}
                     onCancel={handleErrorModal}
                     footer={null}
                     centered

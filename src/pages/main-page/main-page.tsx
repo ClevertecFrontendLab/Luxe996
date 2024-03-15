@@ -1,4 +1,4 @@
-import { Button, Layout } from 'antd';
+import { Button, Layout, Modal, Result } from 'antd';
 import s from './main-page.module.scss';
 import { AppContent } from '@components/app-content/app-content';
 import { AppCard } from '@components/app-card/app-card';
@@ -9,11 +9,26 @@ import ProfileCard from '@public/profile-card.svg?react';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../routes/path';
 import { AppHeader } from '@components/layout/app-header/app-header';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { calendarSelector } from '../../selectors';
+import { useEffect } from 'react';
+import { ResetStateAC } from '@redux/reducers/calendar-reducer';
 
 const { Footer, Content } = Layout;
 
 export const MainPage = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const { isTrainingsError } = useAppSelector(calendarSelector);
+    const handleErrorModal = () => {
+        dispatch(ResetStateAC());
+    };
+
+    useEffect(() => {
+        if (isTrainingsError === false) {
+            navigate(Path.CALENDAR);
+        }
+    }, [isTrainingsError, navigate]);
 
     const onButtonClick = () => {
         navigate(Path.FEEDBACKS);
@@ -52,6 +67,26 @@ export const MainPage = () => {
                     <FooterCard />
                 </div>
             </Footer>
+
+            <Modal
+                open={isTrainingsError}
+                onCancel={handleErrorModal}
+                footer={null}
+                centered
+                closable={false}
+                maskStyle={{ background: '#799cd480', backdropFilter: 'blur(5px)' }}
+            >
+                <Result
+                    status='500'
+                    title='Что-то пошло не так'
+                    subTitle='Произошла ошибка, попробуйте ещё раз.'
+                    extra={
+                        <Button type='primary' onClick={handleErrorModal}>
+                            Назад
+                        </Button>
+                    }
+                />
+            </Modal>
         </Layout>
     );
 };

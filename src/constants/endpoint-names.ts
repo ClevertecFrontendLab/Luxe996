@@ -1,11 +1,15 @@
 export const Endpoints = {
     Auth: {
-        Login: '/auth/login',
-        Register: '/auth/registration',
-        CheckEmail: '/auth/check-email',
-        CheckCode: '/auth/confirm-email',
-        SetNewPass: '/auth/change-password',
+        login: '/auth/login',
+        register: '/auth/registration',
+        checkEmail: '/auth/check-email',
+        checkCode: '/auth/confirm-email',
+        setNewPass: '/auth/change-password',
     },
     FeedBacks: '/feedback',
     Google: '/auth/google',
+    Calendar: {
+        training: '/training',
+        catalog: '/catalogs/training-list',
+    },
 };

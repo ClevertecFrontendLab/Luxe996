@@ -14,6 +14,30 @@
 
       }
     }
+  }
+}
 
+
+.error{
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  .content{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+
+    .title{
+      color: #262626;
+      max-width: 250px;
+    }
+    .description{
+      color: #8C8C8C;
+    }
+    .btn {
+      align-self: flex-end;
+    }
   }
 }

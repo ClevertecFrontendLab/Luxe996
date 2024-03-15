@@ -1,6 +1,6 @@
 import { AppDispatch } from '@redux/configure-store';
 import { loadingAC } from '@redux/reducers/app-reducer';
-import { AuthApi } from '@constants/api';
+import { authApi } from '@constants/api';
 
 const RESET_STORE = 'RESET_STORE';
 const LOGIN = 'LOGIN';
@@ -131,7 +131,8 @@ export const loginAC = (isAuth: boolean | null, statusCode?: number | null) =>
 export const loginTC =
     (email: string, password: string, remember?: boolean) => async (dispatch: AppDispatch) => {
         dispatch(loadingAC(true));
-        await AuthApi.login(email, password)
+        await authApi
+            .login(email, password)
             .then((res) => {
                 remember
                     ? localStorage.setItem('token', res.data.accessToken)
@@ -161,7 +162,8 @@ const registerAC = (
     } as const);
 export const registerTC = (email: string, password: string) => async (dispatch: AppDispatch) => {
     dispatch(loadingAC(true));
-    await AuthApi.register(email, password)
+    await authApi
+        .register(email, password)
         .then((res) => {
             dispatch(registerAC(true, null, null, null));
             dispatch(loadingAC(false));
@@ -178,7 +180,8 @@ const checkEmailAC = (isCheckSuccess: boolean, statusCode: number | null, messag
     ({ type: CHECK_EMAIL, isCheckSuccess, statusCode, message } as const);
 export const checkEmailTC = (email: string) => async (dispatch: AppDispatch) => {
     dispatch(loadingAC(true));
-    await AuthApi.checkEmail(email)
+    await authApi
+        .checkEmail(email)
         .then((res) => {
             dispatch(checkEmailAC(true, null, null));
             dispatch(loadingAC(false));
@@ -194,7 +197,8 @@ type CheckCodeAT = ReturnType<typeof checkCodeAC>;
 const checkCodeAC = (code: boolean) => ({ type: CHECK_CODE, code } as const);
 export const checkCodeTC = (email: string, code: string) => async (dispatch: AppDispatch) => {
     dispatch(loadingAC(true));
-    await AuthApi.checkCode(email, code)
+    await authApi
+        .checkCode(email, code)
         .then((res) => {
             dispatch(checkCodeAC(true));
             dispatch(loadingAC(false));
@@ -211,7 +215,8 @@ const changePassAC = (isChanged: boolean, pass?: string, confPass?: string) =>
     ({ type: CHANGE_PASS, isChanged, pass, confPass } as const);
 export const changePassTC = (pass: string, confPass: string) => async (dispatch: AppDispatch) => {
     dispatch(loadingAC(true));
-    await AuthApi.setNewPass(pass, confPass)
+    await authApi
+        .setNewPass(pass, confPass)
         .then((res) => {
             dispatch(changePassAC(true));
             dispatch(loadingAC(false));
