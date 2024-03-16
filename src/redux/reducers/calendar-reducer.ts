@@ -20,7 +20,7 @@ type Exercise = {
     approaches: number;
     isImplementation: boolean;
 };
-type TrainingType = {
+export type TrainingType = {
     _id: string;
     name: string;
     date: string;

@@ -1,7 +1,6 @@
 import { Button, Calendar, Layout, Modal } from 'antd';
 import { AppHeader } from '@components/layout/app-header/app-header';
 import s from './calendar.module.scss';
-import moment from 'moment';
 import 'moment/locale/ru';
 import { Locale } from '@constants/locale';
 import { useEffect } from 'react';
@@ -9,15 +8,19 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { calendarSelector } from '../../selectors';
 import { catalogTC, ResetStateAC } from '@redux/reducers/calendar-reducer';
 import { CloseCircleOutlined } from '@ant-design/icons';
+import { DayData } from '@components/calendar/day-data';
 
-moment.locale('ru');
+// moment.updateLocale('ru', {
+//     week: {
+//         dow: 1,
+//     },
+// });
 
 export const CalendarPage = () => {
     const dispatch = useAppDispatch();
     const { trainings, catalogList, isCatalogError } = useAppSelector(calendarSelector);
-    // console.log(Boolean(trainings));
-    // console.log(catalogList);
-    // console.log(isCatalogError);
+
+    console.log(catalogList);
 
     useEffect(() => {
         dispatch(ResetStateAC());
@@ -35,7 +38,11 @@ export const CalendarPage = () => {
     return (
         <Layout>
             <AppHeader />
-            <Calendar className={s.calendar} locale={Locale} />
+            <Calendar
+                className={s.calendar}
+                locale={Locale}
+                dateCellRender={(date) => <DayData date={date} trainings={trainings} />}
+            />
             <Modal
                 open={isCatalogError}
                 onCancel={cancelModal}
