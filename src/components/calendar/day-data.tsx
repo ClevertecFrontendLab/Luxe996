@@ -1,8 +1,9 @@
 import { Badge } from 'antd';
 import { getBadgeColor } from '@utils/get-badge-color';
-import moment, { Moment } from 'moment';
+import { Moment } from 'moment';
 import { TrainingType } from '@redux/reducers/calendar-reducer';
 import s from './day-data.module.scss';
+import { filterTrainings } from '@utils/filter-trainings';
 
 type DayDataProps = {
     date: Moment;
@@ -10,10 +11,7 @@ type DayDataProps = {
 };
 
 export const DayData = ({ date, trainings }: DayDataProps) => {
-    const filteredTrainings = trainings.filter((training) => {
-        const trainingDate = moment(training.date).format('YYYY-MM-DD');
-        return trainingDate === date.format('YYYY-MM-DD');
-    });
+    const filteredTrainings = filterTrainings(trainings, date);
 
     const trainingNames = filteredTrainings.map((training) => training.name);
     return (

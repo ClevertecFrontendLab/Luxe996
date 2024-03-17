@@ -11,7 +11,6 @@ import { Path } from '../../routes/path';
 import { AppHeader } from '@components/layout/app-header/app-header';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { calendarSelector } from '../../selectors';
-import { useEffect } from 'react';
 import { ResetStateAC } from '@redux/reducers/calendar-reducer';
 
 const { Footer, Content } = Layout;
@@ -24,11 +23,11 @@ export const MainPage = () => {
         dispatch(ResetStateAC());
     };
 
-    useEffect(() => {
-        if (isTrainingsError === false) {
-            navigate(Path.CALENDAR);
-        }
-    }, [isTrainingsError, navigate]);
+    // useEffect(() => {
+    //     if (isTrainingsError === false) {
+    //         navigate(Path.CALENDAR);
+    //     }
+    // }, [isTrainingsError, navigate]);
 
     const onButtonClick = () => {
         navigate(Path.FEEDBACKS);

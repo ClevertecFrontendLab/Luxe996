@@ -6,9 +6,11 @@ import { Locale } from '@constants/locale';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { calendarSelector } from '../../selectors';
-import { catalogTC, ResetStateAC } from '@redux/reducers/calendar-reducer';
+import { catalogTC, getTrainingTC, ResetStateAC } from '@redux/reducers/calendar-reducer';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { DayData } from '@components/calendar/day-data';
+import { useNavigate } from 'react-router-dom';
+import { Path } from '../../routes/path';
 
 // moment.updateLocale('ru', {
 //     week: {
@@ -18,14 +20,11 @@ import { DayData } from '@components/calendar/day-data';
 
 export const CalendarPage = () => {
     const dispatch = useAppDispatch();
-    const { trainings, catalogList, isCatalogError } = useAppSelector(calendarSelector);
+    const navigate = useNavigate();
+    const { trainings, catalogList, isCatalogError, isTrainingsError } =
+        useAppSelector(calendarSelector);
 
     console.log(catalogList);
-
-    useEffect(() => {
-        dispatch(ResetStateAC());
-        dispatch(catalogTC());
-    }, [dispatch]);
 
     const cancelModal = () => {
         dispatch(ResetStateAC());
@@ -34,15 +33,32 @@ export const CalendarPage = () => {
         dispatch(ResetStateAC());
         dispatch(catalogTC());
     };
+    useEffect(() => {
+        dispatch(getTrainingTC());
+    }, [dispatch]);
+
+    useEffect(() => {
+        isTrainingsError && navigate(Path.MAIN);
+    }, [isTrainingsError, navigate]);
+
+    useEffect(() => {
+        if (trainings) {
+            dispatch(ResetStateAC());
+            dispatch(catalogTC());
+        }
+    }, [dispatch, trainings]);
 
     return (
         <Layout>
             <AppHeader />
-            <Calendar
-                className={s.calendar}
-                locale={Locale}
-                dateCellRender={(date) => <DayData date={date} trainings={trainings} />}
-            />
+            {trainings && (
+                <Calendar
+                    className={s.calendar}
+                    locale={Locale}
+                    dateCellRender={(date) => <DayData date={date} trainings={trainings} />}
+                />
+            )}
+
             <Modal
                 open={isCatalogError}
                 onCancel={cancelModal}

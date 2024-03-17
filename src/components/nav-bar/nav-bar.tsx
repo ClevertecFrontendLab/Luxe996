@@ -4,12 +4,10 @@ import CalendarSider from '@public/calendar-sider.svg?react';
 import ProfileSidebar from '@public/profile-sider.svg?react';
 import s from './nav-bar.module.scss';
 import { Path } from '../../routes/path';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { getTrainingTC } from '@redux/reducers/calendar-reducer';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
-    // const navigate = useNavigate();
-    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const items = [
         {
             key: `${Path.CALENDAR}`,
@@ -37,15 +35,15 @@ export const NavBar = () => {
         },
     ];
     const onMenuClick = (path: string) => {
-        switch (path) {
-            case Path.CALENDAR: {
-                dispatch(getTrainingTC());
-            }
-        }
+        // switch (path) {
+        //     case Path.CALENDAR: {
+        //         dispatch(getTrainingTC());
+        //     }
+        // }
         // if (path === Path.CALENDAR) {
         //     dispatch(getTrainingTC());
         // }
-        // navigate(path);
+        navigate(path);
     };
     return <Menu items={items} className={s.menu} onClick={({ key }) => onMenuClick(key)} />;
 };
