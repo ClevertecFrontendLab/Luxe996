@@ -1,0 +1,14 @@
+.container {
+  .exercises {
+    :global {
+      .ant-btn-text {
+        color: #7C7C7CFF;
+        padding: 0;
+        height: auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

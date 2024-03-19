@@ -1,0 +1,18 @@
+.container {
+  :global {
+    .ant-btn-primary {
+      width: 100%;
+    }
+    .ant-btn-primary:hover {
+      background: #597EF7FF;
+    }
+    .ant-btn-primary[disabled] {
+      border: 1px solid #D9D9D9FF;
+      background: #F5F5F5FF;
+      color: #BFBFBFFF;
+    }
+    .ant-divider {
+      margin: 16px 0;
+    }
+  }
+}

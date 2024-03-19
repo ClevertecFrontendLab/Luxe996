@@ -1,5 +1,5 @@
 import ruRU from 'antd/lib/calendar/locale/ru_RU';
-export const Locale = {
+export const locale = {
     lang: {
         ...ruRU.lang,
         shortWeekDays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],

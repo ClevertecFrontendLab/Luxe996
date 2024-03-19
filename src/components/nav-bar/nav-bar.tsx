@@ -35,14 +35,6 @@ export const NavBar = () => {
         },
     ];
     const onMenuClick = (path: string) => {
-        // switch (path) {
-        //     case Path.CALENDAR: {
-        //         dispatch(getTrainingTC());
-        //     }
-        // }
-        // if (path === Path.CALENDAR) {
-        //     dispatch(getTrainingTC());
-        // }
         navigate(path);
     };
     return <Menu items={items} className={s.menu} onClick={({ key }) => onMenuClick(key)} />;

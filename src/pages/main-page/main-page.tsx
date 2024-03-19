@@ -23,12 +23,6 @@ export const MainPage = () => {
         dispatch(ResetStateAC());
     };
 
-    // useEffect(() => {
-    //     if (isTrainingsError === false) {
-    //         navigate(Path.CALENDAR);
-    //     }
-    // }, [isTrainingsError, navigate]);
-
     const onButtonClick = () => {
         navigate(Path.FEEDBACKS);
     };
@@ -47,6 +41,8 @@ export const MainPage = () => {
                         title={'Назначить календарь'}
                         link={'Календарь'}
                         icon={<CalendarCard />}
+                        dataTestId={'menu-button-calendar'}
+                        path={Path.CALENDAR}
                     />
                     <AppCard title={'Заполнить профиль'} link={'Профиль'} icon={<ProfileCard />} />
                 </AppContent>
@@ -74,6 +70,7 @@ export const MainPage = () => {
                 centered
                 closable={false}
                 maskStyle={{ background: '#799cd480', backdropFilter: 'blur(5px)' }}
+                data-test-id='modal-no-review'
             >
                 <Result
                     status='500'

@@ -1,0 +1,22 @@
+@import "src/assets/style/variables";
+.container {
+  :global {
+    .ant-btn {
+      width: 100%;
+      border-radius: 2px;
+      height: 32px;
+    }
+
+    .ant-btn-default {
+      color: #262626FF;
+    }
+
+    .ant-btn[disabled] {
+      color: #BFBFBFFF;
+    }
+
+    .ant-btn-link {
+      color: $primaryLight6;
+    }
+  }
+}

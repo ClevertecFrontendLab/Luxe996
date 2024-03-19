@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Endpoints } from '@constants/endpoint-names';
+import { ExerciseType } from '@redux/reducers/calendar-reducer';
 
 export const baseURL = 'https://marathon-api.clevertec.ru';
 
@@ -78,5 +79,19 @@ export const calendarApi = {
     },
     getCatalog() {
         return instance.get(Endpoints.Calendar.catalog);
+    },
+    createTraining(name: string, date: string, exercises: ExerciseType[]) {
+        return instance.post(Endpoints.Calendar.training, {
+            name,
+            date,
+            exercises,
+        });
+    },
+    editTraining(name: string, date: string, exercises: ExerciseType[], _id: string) {
+        return instance.put(`${Endpoints.Calendar.training}/${_id}`, {
+            name,
+            date,
+            exercises,
+        });
     },
 };
