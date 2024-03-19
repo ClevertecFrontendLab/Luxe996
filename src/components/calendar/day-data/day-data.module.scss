@@ -1,7 +1,8 @@
+@import "src/assets/style/variables";
 .trainings {
   margin: 0;
   .training{
-    font-size: 12px;
+    font-size: $font-size-xs;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

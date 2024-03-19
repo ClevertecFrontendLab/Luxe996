@@ -1,4 +1,4 @@
-@import "../../../assets/style/variables";
+@import "src/assets/style/variables";
 
 .form {
   font-size: 12px;
@@ -6,8 +6,7 @@
   .title {
     text-align: center;
     margin-bottom: 32px;
-    font-weight: 500;
-    font-size: 24px;
+    font: $font-xl-tablet;
   }
   .button{
     background-color: $primaryLight6;

@@ -1,4 +1,4 @@
-@import "../../assets/style/variables";
+@import "src/assets/style/variables";
 .container {
   max-width: 1440px;
   min-height: 100vh;
@@ -9,10 +9,10 @@
   background: url('@public/main_page_light.jpeg') no-repeat center;
   background-size: cover;
 
-  @media (max-width: 992px) {
+  @media (max-width: $tablet-width) {
     height: 1194px;
   }
-  @media (max-width: 576px) {
+  @media (max-width: $mobile-width) {
     height: auto;
   }
 
@@ -23,7 +23,7 @@
     top: 0;
     z-index: 9;
 
-    @media (max-width: 576px) {
+    @media (max-width: $mobile-width) {
       position: fixed;
 
       :global {

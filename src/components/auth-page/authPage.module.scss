@@ -1,4 +1,4 @@
-@import "../../assets/style/variables";
+@import "src/assets/style/variables";
 
 .logo {
   width: 100%;
@@ -45,8 +45,7 @@
     }
     .ant-btn-link {
       color: $primaryLight6;
-      font-weight: 400;
-      font-size: 14px;
+      font:$font-s;
     }
     .ant-checkbox-checked .ant-checkbox-inner{
       background: $primaryLight6;
@@ -56,14 +55,13 @@
       color: #262626;
     }
     .ant-checkbox-wrapper{
-      font-weight: 500;
+      //font-weight: 500;
+      font:$font-weight-l;
       display: flex;
       width: 100%;
     }
     .ant-row-no-wrap {
       margin-bottom: 24px;
     }
-
-
   }
 }

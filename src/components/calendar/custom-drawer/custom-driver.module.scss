@@ -33,7 +33,7 @@
     }
 
     .ant-drawer-title {
-      font-size: 20px;
+      font:$font-l;
       color: #262626FF;
     }
 
@@ -71,7 +71,7 @@
     justify-content: space-between;
   }
   .placeholder{
-    font-size: 12px;
+    font:$font-xs;
     text-align: center;
     padding: 24px 24px 0;
     color: #8C8C8CFF;

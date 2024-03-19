@@ -1,18 +1,16 @@
-@import "../../../assets/style/variables";
+@import "src/assets/style/variables";
 
 .result {
   text-align: center;
 
   .title {
     margin-bottom: 0;
-    font-weight: 500;
-    font-size: 22px;
+    font:$font-xl-tablet;
   }
 
   .text {
     color: rgba(140, 140, 140, 1);
-    font-weight: 400;
-    font-size: 15px;
+    font:$font-m;
   }
 
   .button {

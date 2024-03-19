@@ -16,7 +16,7 @@
     margin-bottom: 130px;
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: $mobile-width) {
     .cards{
       margin-bottom: 48px;
     }

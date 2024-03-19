@@ -26,7 +26,7 @@
       fill: transparent;
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: $mobile-width) {
       .ant-comment-inner{
         height: auto;
         flex-direction: column;
@@ -35,8 +35,7 @@
         display: flex;
         margin-bottom: 12px;
         p{
-          margin: 0;
-          margin-left: 16px;
+          margin: 0 0 0 16px;
           text-align: left;
         }
       }

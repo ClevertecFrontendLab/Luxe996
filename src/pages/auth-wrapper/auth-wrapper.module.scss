@@ -1,4 +1,4 @@
-@import "../../assets/style/variables";
+@import "src/assets/style/variables";
 .wrapper {
   height: 100vh;
   background: url("@public/enter_page_light.png") center no-repeat;
@@ -39,12 +39,12 @@
     padding: 64px 80px;
     background: $white;
 
-    @media (max-width: 480px) {
+    @media (max-width: $mobile-width) {
       padding: 32px 16px;
       margin: 0 16px;
     }
   }
-  @media screen and (max-width: 570px) {
+  @media screen and (max-width: $mobile-width) {
     .auth-card .ant-card-body {
       padding: 32px 16px;
       margin: 0 16px;

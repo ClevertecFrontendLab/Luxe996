@@ -1,4 +1,4 @@
-
+@import "src/assets/style/variables";
 .confirm {
   text-align: center;
   .icon {
@@ -8,13 +8,13 @@
   }
 
   .title {
-    font-weight: 500;
-    font-size: 24px;
+    //font-weight: 500;
+    //font-size: 24px;
+    font: $font-xl-tablet;
     margin-bottom: 0;
   }
   .description{
-    font-weight: 400;
-    font-size: 14px;
+    font:$font-s;
     color: rgba(140, 140, 140, 1);
   }
   .container {
@@ -34,7 +34,8 @@
     background: none;
   }
   .filled {
-    font-size: 14px;
-    font-weight: 400;
+    //font-size: 14px;
+    //font-weight: 400;
+    font: $font-s;
   }
 }

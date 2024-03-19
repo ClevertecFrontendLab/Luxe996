@@ -1,6 +1,7 @@
+@import "src/assets/style/variables";
 .menu {
   :global {
-    @media (max-width: 576px) {
+    @media (max-width: $mobile-width) {
       .ant-menu-item-icon {
         display: none;
         text-align: center;
