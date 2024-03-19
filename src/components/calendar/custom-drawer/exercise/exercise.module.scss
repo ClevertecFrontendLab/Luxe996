@@ -23,7 +23,7 @@
       padding: 4px 8px;
       width: 90px;
       height: 24px;
-      background: #F0F0F0FF;
+      background: $gray4;
       &:first-child {
         width: 120px;
         margin-right: 16px;
@@ -37,7 +37,7 @@
     }
 
      .plus{
-      color: #BFBFBFFF;
+      color: $gray6;
       padding: 0 4px;
       width: 16px;
     }

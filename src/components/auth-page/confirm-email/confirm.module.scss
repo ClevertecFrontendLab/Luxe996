@@ -8,8 +8,6 @@
   }
 
   .title {
-    //font-weight: 500;
-    //font-size: 24px;
     font: $font-xl-tablet;
     margin-bottom: 0;
   }
@@ -22,7 +20,7 @@
   }
 
   .character {
-    border: 1px solid #d9d9d9;
+    border: 1px solid $gray5;
     border-radius: 2px;
   }
 
@@ -34,8 +32,6 @@
     background: none;
   }
   .filled {
-    //font-size: 14px;
-    //font-weight: 400;
     font: $font-s;
   }
 }

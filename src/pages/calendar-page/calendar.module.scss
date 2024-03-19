@@ -21,7 +21,7 @@
     .ant-picker-calendar-header {
       @media (max-width: $mobile-width) {
         display: flex;
-        background: #FFFFFFFF;
+        background: $gray1;
       }
 
       .ant-radio-group {
@@ -46,16 +46,16 @@
         padding: 0;
         background: $primaryLight1;
         @media (max-width: $mobile-width) {
-          background: #FFFFFFFF;
+          background: $gray1;
           padding-top: 8px;
         }
         thead {
           th {
-            color: #8C8C8CFF;
+            color: $gray7;
 
             @media (max-width: $mobile-width) {
-              background: #FFFFFFFF;
-              color: #000000D9;
+              background: $gray1;
+              color: $gray13;
               font-weight: $font-weight-l;
             }
           }
@@ -69,16 +69,16 @@
       .ant-picker-cell {
         .ant-picker-calendar-date-today {
           border-color: $primaryLight6;
-          background: #FFFFFFFF;
+          background: $gray1;
 
           .ant-picker-calendar-date-value {
-            color: #262626FF;
+            color: $gray10;
           }
         }
       }
 
       .ant-picker-cell-inner {
-        background: #FFFFFFFF;
+        background: $gray1;
         margin: 0 2px;
         padding: 4px 8px;
         &::before {
@@ -90,20 +90,20 @@
         }
 
         &:hover {
-          background: #FFFFFFFF;
+          background: $gray1;
         }
         &:has(div#hideTrainings) {
           @media (max-width: $mobile-width) {
-            background-color: #F5F5F5;
+            background-color: $gray3;
           }
         }
       }
 
       .ant-picker-cell-selected {
         .ant-picker-calendar-date {
-          background: #FFFFFFFF;
+          background: $gray1;
           .ant-picker-calendar-date-value {
-            color: #262626FF;
+            color: $gray10;
           }
         }
       }
@@ -123,11 +123,11 @@
     width: 100%;
 
     .title{
-      color: #262626;
+      color: $gray10;
       max-width: 250px;
     }
     .description{
-      color: #8C8C8C;
+      color: $gray7;
     }
     .btn {
       align-self: flex-end;

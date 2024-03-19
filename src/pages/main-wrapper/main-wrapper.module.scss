@@ -17,7 +17,7 @@
   }
 
   .sider {
-    background: $white;
+    background: $gray1;
     height: 100vh;
     position: sticky;
     top: 0;
@@ -50,7 +50,7 @@
     }
   }
   .breadcrums{
-    background: #F0F5FF;
+    background: $primaryLight1;
     padding: 16px 24px;
   }
 }

@@ -34,7 +34,7 @@
 
     .ant-drawer-title {
       font:$font-l;
-      color: #262626FF;
+      color: $gray10;
     }
 
     .ant-drawer-body {
@@ -52,11 +52,11 @@
     }
 
     .ant-btn-text {
-      color: #262626FF;
+      color: $gray10;
     }
 
     .ant-btn-text[disabled] {
-      color: #BFBFBFFF;
+      color: $gray6;
     }
   }
 
@@ -74,6 +74,6 @@
     font:$font-xs;
     text-align: center;
     padding: 24px 24px 0;
-    color: #8C8C8CFF;
+    color: $gray7;
   }
 }
