@@ -11,7 +11,7 @@ import { loginAC } from '@redux/reducers/auth-reducer';
 
 export const AuthPage = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const { pathname } = useLocation();
     const dispatch = useAppDispatch();
     const [key, setKey] = useState('1');
 
@@ -38,8 +38,8 @@ export const AuthPage = () => {
     }, [dispatch, navigate, token]);
 
     useEffect(() => {
-        location.pathname === `${Path.REGISTRATION}` ? setKey('2') : setKey('1');
-    }, [location.pathname]);
+        pathname === `${Path.REGISTRATION}` ? setKey('2') : setKey('1');
+    }, [pathname]);
 
     return (
         <>

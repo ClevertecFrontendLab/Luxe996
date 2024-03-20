@@ -9,8 +9,8 @@ const { Header } = Layout;
 
 export const AppHeader = () => {
     const breakpoints = useBreakpoint();
-    const location = useLocation();
-    const isMain = location.pathname.includes(Path.MAIN);
+    const { pathname } = useLocation();
+    const isMain = pathname.includes(Path.MAIN);
     return (
         <Header className={s.header}>
             {isMain && (

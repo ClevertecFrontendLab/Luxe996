@@ -16,7 +16,7 @@ import { getPathName } from '@utils/path-names';
 export const MainWrapper = () => {
     const breakpoint = useBreakpoint();
     const navigate = useNavigate();
-    const location = useLocation();
+    const { pathname } = useLocation();
     const { isAuth } = useAppSelector(authSelector);
     const { isLoading } = useAppSelector(appSelector);
 
@@ -30,8 +30,8 @@ export const MainWrapper = () => {
         !isAuth && !token && navigate(Path.AUTH);
     }, [isAuth, navigate, token]);
 
-    const pathNames = location.pathname.split('/').filter((path) => path);
-    const isMain = location.pathname.includes(Path.MAIN);
+    const pathNames = pathname.split('/').filter((path) => path);
+    const isMain = pathname.includes(Path.MAIN);
 
     return (
         <>
