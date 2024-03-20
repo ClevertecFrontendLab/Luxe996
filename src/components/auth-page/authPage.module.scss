@@ -3,7 +3,7 @@
 .logo {
   width: 100%;
   height: 76px;
-  margin-bottom: 48px;
+  margin-bottom: $gap-7xl;
 }
 
 .tabs {
@@ -31,7 +31,7 @@
     }
 
     .ant-tabs-nav {
-      margin-bottom: 24px;
+      margin-bottom: $gap-xl;
       max-height: 46px;
     }
 
@@ -60,7 +60,7 @@
       width: 100%;
     }
     .ant-row-no-wrap {
-      margin-bottom: 24px;
+      margin-bottom: $gap-xl;
     }
   }
 }

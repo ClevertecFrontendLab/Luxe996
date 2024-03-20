@@ -3,15 +3,15 @@
 .container {
   height: 100%;
   width: 100%;
-  padding: 0 24px;
+  padding: 0 $gap-xl;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   .card {
-    margin-bottom: 20px;
-    padding: 56px 130px;
+    margin-bottom: $gap-l;
+    padding: $gap-7xl $gap-11xl;
     text-align: center;
     width: 100%;
 
@@ -20,7 +20,7 @@
       margin: 0 auto;
 
       .title {
-        margin-bottom: 48px;
+        margin-bottom: $gap-7xl;
         font:$font-xl-tablet;
         color: $primaryLight9;
       }

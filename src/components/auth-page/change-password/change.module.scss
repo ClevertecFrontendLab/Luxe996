@@ -1,11 +1,11 @@
 @import "src/assets/style/variables";
 
 .form {
-  font-size: 12px;
+  font-size: $font-size-xs;
 
   .title {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: $gap-4xl;
     font: $font-xl-tablet;
   }
   .button{
@@ -17,11 +17,11 @@
       width: 100%;
     }
     .ant-form-item:last-child {
-      margin-top: 62px;
+      margin-top: $gap-8xl;
       margin-bottom: 0;
     }
     .ant-form-item-with-help{
-      margin-bottom: 32px;
+      margin-bottom: $gap-4xl;
     }
     .ant-input-password{
       height: 40px;

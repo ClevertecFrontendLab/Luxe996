@@ -5,6 +5,12 @@
             padding: 0;
         }
 
+        .ant-btn-link {
+            span{
+                margin: 0;
+            }
+        }
+
         @media (max-width: $mobile-width) {
             .ant-layout-footer {
                 padding-bottom: 0;

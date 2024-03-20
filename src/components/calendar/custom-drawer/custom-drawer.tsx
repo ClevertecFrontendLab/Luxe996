@@ -7,7 +7,7 @@ import { Exercise } from '@components/calendar/custom-drawer/exercise';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { calendarSelector } from '../../../selectors';
 import { useDrawer } from '@hooks/use-drawer';
-import s from './custom-driver.module.scss';
+import s from './custom-draver.module.scss';
 
 type CustomDrawerProps = {
     date: Moment;

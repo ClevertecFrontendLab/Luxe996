@@ -1,20 +1,20 @@
 @import "src/assets/style/variables";
 .comment {
-  margin-bottom: 20px;
+  margin-bottom: $gap-l;
   width: 100%;
   background:$gray1;
   :global{
     .ant-comment-inner{
       min-height: 128px;
-      padding: 16px;
+      padding: $gap-m;
     }
     .ant-comment-avatar {
       width: 175px;
       text-align: center;
     }
     .ant-rate {
-      margin-right: 16px;
-      font-size: 16px;
+      margin-right: $gap-m;
+      font-size: $font-size-m;
     }
 
     .ant-rate-star-full .anticon svg path:last-child,
@@ -33,14 +33,14 @@
       }
       .ant-comment-avatar {
         display: flex;
-        margin-bottom: 12px;
+        margin-bottom: $gap-s;
         p{
-          margin: 0 0 0 16px;
+          margin: 0 0 0 $gap-m;
           text-align: left;
         }
       }
       .ant-comment-content-author{
-        margin-bottom: 12px;
+        margin-bottom: $gap-s;
       }
     }
   }

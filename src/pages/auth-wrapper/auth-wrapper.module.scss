@@ -36,18 +36,18 @@
   .card {
     max-height: 742px;
     width: 540px;
-    padding: 64px 80px;
+    padding: $gap-8xl $gap-9xl;
     background: $gray1;
 
     @media (max-width: $mobile-width) {
-      padding: 32px 16px;
-      margin: 0 16px;
+      padding: $gap-4xl $gap-m;
+      margin: 0 $gap-m;
     }
   }
   @media screen and (max-width: $mobile-width) {
     .auth-card .ant-card-body {
-      padding: 32px 16px;
-      margin: 0 16px;
+      padding: $gap-4xl $gap-m;
+      margin: 0 $gap-m;
     }
   }
 }

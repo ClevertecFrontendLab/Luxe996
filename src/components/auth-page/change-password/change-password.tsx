@@ -1,4 +1,3 @@
-// import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { Button, Form, Input, Typography } from 'antd';
 import s from './change.module.scss';
 import { changePassTC, resetStoreAC } from '@redux/reducers/auth-reducer';
