@@ -38,21 +38,21 @@ export const CustomDrawer = ({
     const isPastDate = date.isSameOrBefore(moment(), 'day');
 
     const setTitle = () => {
-        if (editTraining && editTraining.name === selectTraining) {
-            if (editTraining.isImplementation === true) {
-                return <span>Просмотр упражнений</span>;
-            }
+        if (!editTraining || editTraining.name !== selectTraining) {
             return (
                 <>
-                    <EditOutlined style={{ marginRight: '8px' }} />
-                    <span>Редактирование</span>
+                    <PlusOutlined style={{ marginRight: '8px' }} />
+                    <span>Добавление упражнений</span>
                 </>
             );
         }
+        if (editTraining.isImplementation === true) {
+            return <span>Просмотр упражнений</span>;
+        }
         return (
             <>
-                <PlusOutlined style={{ marginRight: '8px' }} />
-                <span>Добавление упражнений</span>
+                <EditOutlined style={{ marginRight: '8px' }} />
+                <span>Редактирование</span>
             </>
         );
     };

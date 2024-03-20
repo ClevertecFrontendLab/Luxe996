@@ -37,7 +37,7 @@ export const ChangePassword = () => {
     }, [location.state?.from, navigate]);
 
     useEffect(() => {
-        if (isChanged === true) {
+        if (isChanged) {
             navigate(Path.RESULT.SUCCESS_CHANGE_PASSWORD);
             dispatch(resetStoreAC());
         } else {
