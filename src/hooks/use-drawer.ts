@@ -7,6 +7,7 @@ import {
     setNewTrainingAC,
 } from '@redux/reducers/calendar-reducer';
 import { Moment } from 'moment';
+import { dateFormat } from '@constants/date';
 
 export const useDrawer = (
     selectValue: string,
@@ -107,7 +108,7 @@ export const useDrawer = (
 
             dispatch(setEditTrainingAC(newTraining));
         } else if (updatedExercises.length > 0) {
-            const formattedDate = date.format('YYYY-MM-DDTHH:mm:ss');
+            const formattedDate = date.format(`${dateFormat}THH:mm:ss`);
             const newTraining = {
                 name: selectValue,
                 date: formattedDate,

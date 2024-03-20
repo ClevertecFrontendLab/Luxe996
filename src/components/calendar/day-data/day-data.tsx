@@ -6,6 +6,7 @@ import { filterTrainings } from '@utils/filter-trainings';
 import { CustomPopover } from '@components/calendar/custom-popover';
 import useBreakpoint from 'antd/es/grid/hooks/useBreakpoint';
 import s from './day-data.module.scss';
+import { dateFormat } from '@constants/date';
 
 type DayDataProps = {
     date: Moment;
@@ -27,11 +28,11 @@ export const DayData = ({
     const filteredTrainings = filterTrainings(trainings, date);
     const trainingNames = filteredTrainings.map((training) => training.name);
 
-    const formattedDate = date.format('YYYY-MM-DD');
+    const formattedDate = date.format(dateFormat);
     const isOpen = isPopoverVisible[formattedDate];
 
     const handlePopover = (value: Moment) => {
-        const formattedValue = value.format('YYYY-MM-DD');
+        const formattedValue = value.format(dateFormat);
 
         setIsPopoverVisible((prevState) => ({
             ...prevState,

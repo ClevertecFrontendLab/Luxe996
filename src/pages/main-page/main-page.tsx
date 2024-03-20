@@ -36,6 +36,7 @@ export const MainPage = () => {
                         title={'Расписать тренировки'}
                         link={'Тренировки'}
                         icon={<HeartFilled />}
+                        path=''
                     />
                     <AppCard
                         title={'Назначить календарь'}
@@ -44,7 +45,12 @@ export const MainPage = () => {
                         dataTestId={'menu-button-calendar'}
                         path={Path.CALENDAR}
                     />
-                    <AppCard title={'Заполнить профиль'} link={'Профиль'} icon={<ProfileCard />} />
+                    <AppCard
+                        title={'Заполнить профиль'}
+                        link={'Профиль'}
+                        icon={<ProfileCard />}
+                        path=''
+                    />
                 </AppContent>
             </Content>
             <Footer className={s.footer}>

@@ -229,10 +229,13 @@ export const editTrainingTC = (editedTraining: TrainingType) => async (dispatch:
     dispatch(setLoadingAC(true));
     await calendarApi
         .editTraining(name, date, exercises, _id)
-        .then(() => {
+        .then((res) => {
             dispatch(NewTrainingErrorAC(null));
-            // dispatch(EditTrainingAC(res.data, _id));
-            dispatch(getTrainingTC());
+            if (res.data) {
+                dispatch(EditTrainingAC(res.data, _id));
+            } else {
+                dispatch(getTrainingTC());
+            }
             dispatch(setLoadingAC(false));
         })
         .catch(() => {

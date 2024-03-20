@@ -7,14 +7,12 @@ type AppCardProps = {
     link: string;
     icon: ReactNode;
     dataTestId?: string;
-    path?: string;
+    path: string;
 };
 
 export const AppCard = ({ title, link, icon, dataTestId, path }: AppCardProps) => {
     const navigate = useNavigate();
-    const onButtonClick = () => {
-        navigate(path);
-    };
+    const onButtonClick = () => navigate(path);
     return (
         <Card
             headStyle={{ textAlign: 'center', fontSize: '16px' }}
