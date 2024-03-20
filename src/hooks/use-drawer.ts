@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { calendarSelector } from '../selectors';
 import { useState } from 'react';
 import {
+    ExerciseInputType,
     ExerciseType,
     setEditTrainingAC,
     setNewTrainingAC,
@@ -55,7 +56,7 @@ export const useDrawer = (
 
     const handleInputChange = (
         index: number,
-        name: keyof Omit<ExerciseType, '_id'>,
+        name: keyof ExerciseInputType,
         value: string | number | boolean,
     ) => {
         const updatedExercises = [...exerciseBlocks];

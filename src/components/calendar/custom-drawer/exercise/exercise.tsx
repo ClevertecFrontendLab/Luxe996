@@ -1,4 +1,4 @@
-import { ExerciseType } from '@redux/reducers/calendar-reducer';
+import { ExerciseInputType, ExerciseType } from '@redux/reducers/calendar-reducer';
 import React from 'react';
 import { Input, InputNumber } from 'antd';
 import s from './exercise.module.scss';
@@ -12,7 +12,7 @@ type ExerciseProps = {
     selectTraining: string;
     handleInputChange: (
         index: number,
-        name: keyof Omit<ExerciseType, '_id'>,
+        name: keyof ExerciseInputType,
         value: string | number | boolean,
     ) => void;
 };
@@ -21,7 +21,7 @@ export const Exercise = ({ exercise, index, selectTraining, handleInputChange }:
     const { editTraining } = useAppSelector(calendarSelector);
 
     const isChecked = exercise.isImplementation;
-    const handleNumberChange = (name: keyof Omit<ExerciseType, '_id'>, value: number | null) => {
+    const handleNumberChange = (name: keyof ExerciseInputType, value: number | null) => {
         let result;
 
         if (value === null) {
@@ -46,7 +46,7 @@ export const Exercise = ({ exercise, index, selectTraining, handleInputChange }:
         return `modal-drawer-right-input-${title}${index}`;
     };
 
-    const setValue = (name: keyof Omit<ExerciseType, '_id'>) => {
+    const setValue = (name: keyof ExerciseInputType) => {
         let value;
 
         if (exercise[name] === null) {
@@ -70,9 +70,7 @@ export const Exercise = ({ exercise, index, selectTraining, handleInputChange }:
         />
     );
     const inputTitles = ['Подходы', 'Вес, кг', 'Количество'];
-    const inputNames = ['replays', 'weight', 'approaches'] as Array<
-        keyof Omit<ExerciseType, '_id'>
-    >;
+    const inputNames = ['replays', 'weight', 'approaches'] as Array<keyof ExerciseInputType>;
 
     return (
         <section className={s.container}>
@@ -95,7 +93,7 @@ export const Exercise = ({ exercise, index, selectTraining, handleInputChange }:
             </div>
 
             <div className={s.input}>
-                {inputNames.map((name: keyof Omit<ExerciseType, '_id'>) => (
+                {inputNames.map((name: keyof ExerciseInputType) => (
                     <React.Fragment key={name}>
                         <InputNumber
                             data-test-id={dataTestIdInputNumber(name)}

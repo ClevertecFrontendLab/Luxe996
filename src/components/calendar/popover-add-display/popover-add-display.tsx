@@ -62,6 +62,16 @@ export const PopoverAddDisplay = ({
         editTraining,
         s,
     );
+    const list =
+        catalogList &&
+        catalogList
+            .filter((training: TrainingType) => !trainingNames.includes(training.name))
+            .map((training: TrainingType) => (
+                <Select.Option key={training.name} value={training.name}>
+                    {training.name}
+                </Select.Option>
+            ));
+
     return (
         <>
             <div className={s.container}>
@@ -78,16 +88,7 @@ export const PopoverAddDisplay = ({
                     onChange={handleTrainingChange}
                     value={selectTraining}
                 >
-                    {catalogList &&
-                        catalogList
-                            .filter(
-                                (training: TrainingType) => !trainingNames.includes(training.name),
-                            )
-                            .map((training: TrainingType) => (
-                                <Select.Option key={training.name} value={training.name}>
-                                    {training.name}
-                                </Select.Option>
-                            ))}
+                    {list}
                 </Select>
 
                 <Divider />

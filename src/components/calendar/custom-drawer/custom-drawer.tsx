@@ -104,7 +104,6 @@ export const CustomDrawer = ({
                         </Button>
                     )}
                 </div>
-                {/*)}*/}
             </div>
 
             {isPastDate && (

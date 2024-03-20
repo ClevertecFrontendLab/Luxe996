@@ -13,7 +13,9 @@ const IS_LOADING = 'IS_LOADING';
 
 const RESET_STATE = 'RESET_STATE';
 
-type Parameters = {
+export type ExerciseInputType = Omit<ExerciseType, '_id'>;
+
+type ParametersType = {
     repeat: boolean;
     period: number | null;
     jointTraining: boolean;
@@ -33,7 +35,7 @@ export type TrainingType = {
     date: string;
     isImplementation: boolean;
     userId: string;
-    parameters: Parameters;
+    parameters: ParametersType;
     exercises: ExerciseType[];
 };
 type CatalogType = {
