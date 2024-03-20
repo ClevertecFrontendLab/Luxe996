@@ -1,0 +1,15 @@
+@import "src/assets/style/variables";
+.container {
+  .exercises {
+    :global {
+      .ant-btn-text {
+        color: $gray7;
+        padding: 0;
+        height: auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

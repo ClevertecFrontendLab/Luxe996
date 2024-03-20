@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { Endpoints } from '@redux/constants/endpoint-names';
+import { Endpoints } from '@constants/endpoint-names';
+import { ExerciseType } from '@redux/reducers/calendar-reducer';
 
 export const baseURL = 'https://marathon-api.clevertec.ru';
 
@@ -9,11 +10,11 @@ export const instance = axios.create({
 });
 
 const urlsSkipAuth = [
-    Endpoints.Auth.Login,
-    Endpoints.Auth.Register,
-    Endpoints.Auth.CheckCode,
-    Endpoints.Auth.CheckEmail,
-    Endpoints.Auth.SetNewPass,
+    Endpoints.Auth.login,
+    Endpoints.Auth.register,
+    Endpoints.Auth.checkCode,
+    Endpoints.Auth.checkEmail,
+    Endpoints.Auth.setNewPass,
 ];
 
 instance.interceptors.request.use(async (config) => {
@@ -30,38 +31,38 @@ instance.interceptors.request.use(async (config) => {
     return config;
 });
 
-export const AuthApi = {
+export const authApi = {
     login(email: string, password: string) {
-        return instance.post(Endpoints.Auth.Login, {
+        return instance.post(Endpoints.Auth.login, {
             email,
             password,
         });
     },
     register(email: string, password: string) {
-        return instance.post(Endpoints.Auth.Register, {
+        return instance.post(Endpoints.Auth.register, {
             email,
             password,
         });
     },
     checkEmail(email: string) {
-        return instance.post(Endpoints.Auth.CheckEmail, {
+        return instance.post(Endpoints.Auth.checkEmail, {
             email,
         });
     },
     checkCode(email: string, code: string) {
-        return instance.post(Endpoints.Auth.CheckCode, {
+        return instance.post(Endpoints.Auth.checkCode, {
             email,
             code,
         });
     },
     setNewPass(password: string, confirmPassword: string) {
-        return instance.post(Endpoints.Auth.SetNewPass, {
+        return instance.post(Endpoints.Auth.setNewPass, {
             password,
             confirmPassword,
         });
     },
 };
-export const FeedbacksApi = {
+export const feedbacksApi = {
     getFeedbacks() {
         return instance.get(Endpoints.FeedBacks);
     },
@@ -69,6 +70,28 @@ export const FeedbacksApi = {
         return instance.post(Endpoints.FeedBacks, {
             message,
             rating,
+        });
+    },
+};
+export const calendarApi = {
+    getTrainings() {
+        return instance.get(Endpoints.Calendar.training);
+    },
+    getCatalog() {
+        return instance.get(Endpoints.Calendar.catalog);
+    },
+    createTraining(name: string, date: string, exercises: ExerciseType[]) {
+        return instance.post(Endpoints.Calendar.training, {
+            name,
+            date,
+            exercises,
+        });
+    },
+    editTraining(name: string, date: string, exercises: ExerciseType[], _id: string) {
+        return instance.put(`${Endpoints.Calendar.training}/${_id}`, {
+            name,
+            date,
+            exercises,
         });
     },
 };

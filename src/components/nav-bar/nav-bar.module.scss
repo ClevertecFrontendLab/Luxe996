@@ -1,6 +1,7 @@
+@import "src/assets/style/variables";
 .menu {
   :global {
-    @media (max-width: 576px) {
+    @media (max-width: $mobile-width) {
       .ant-menu-item-icon {
         display: none;
         text-align: center;
@@ -15,7 +16,7 @@
       }
 
       .ant-menu-vertical .ant-menu-item:not(:last-child) {
-        margin-bottom: 10px;
+        margin-bottom: $gap-2s;
       }
 
     }

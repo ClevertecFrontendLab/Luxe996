@@ -1,1 +1,1 @@
-export { feedbackSelector, authSelector, appSelector } from './selectors';
+export { feedbackSelector, authSelector, appSelector, calendarSelector } from './selectors';

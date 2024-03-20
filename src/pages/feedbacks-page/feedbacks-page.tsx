@@ -7,7 +7,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../routes/path';
 import { EmptyFeedback } from '@components/feedbacks/empty-feedback/empty-feedback';
-import { GetFeedbacksTC, PostFeedbacksAC, PostFeedBackTC } from '@redux/reducers/feedbacks-reducer';
+import { getFeedbacksTC, postFeedbacksAC, postFeedBackTC } from '@redux/reducers/feedbacks-reducer';
 import { Feedbacks } from '@components/feedbacks/feedbacks';
 import { feedbackSelector } from '../../selectors';
 
@@ -30,27 +30,27 @@ export const FeedbacksPage = () => {
     const addFeedBack = () => {
         setFormValues({ rating: 0, massage: '' });
         setShowModal(false);
-        dispatch(PostFeedBackTC(formValues.rating, formValues.massage));
+        dispatch(postFeedBackTC(formValues.rating, formValues.massage));
     };
 
     const tryAgain = () => {
-        dispatch(PostFeedbacksAC(null, null));
+        dispatch(postFeedbacksAC(null, null));
         setResultModal(false);
         setShowModal(true);
     };
     const closeError = () => {
-        dispatch(PostFeedbacksAC(null, null));
+        dispatch(postFeedbacksAC(null, null));
         setResultModal(false);
     };
 
     const updateFeedbacks = () => {
-        dispatch(GetFeedbacksTC());
-        dispatch(PostFeedbacksAC(null, null));
+        dispatch(getFeedbacksTC());
+        dispatch(postFeedbacksAC(null, null));
         setResultModal(false);
     };
 
     useEffect(() => {
-        dispatch(GetFeedbacksTC());
+        dispatch(getFeedbacksTC());
     }, [dispatch]);
 
     useEffect(() => {
@@ -70,7 +70,7 @@ export const FeedbacksPage = () => {
 
             {!feedbacks && (
                 <Modal
-                    open={isError}
+                    open={Boolean(isError)}
                     onCancel={handleErrorModal}
                     footer={null}
                     centered

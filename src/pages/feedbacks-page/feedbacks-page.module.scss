@@ -21,16 +21,16 @@
    padding: 0;
  }
   .ant-modal-content{
-    padding: 16px 24px;
+    padding: $gap-m $gap-xl;
   }
   .ant-result{
-    padding: 64px;
-    font-weight: 500;
+    padding: $gap-8xl;
+    font-weight: $font-weight-l;
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: $mobile-width) {
     .ant-result{
-      padding: 32px 16px;
+      padding: $gap-4xl $gap-m;
     }
   }
 }

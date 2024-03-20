@@ -1,11 +1,12 @@
 import { Avatar, Comment, Rate, Tooltip, Typography } from 'antd';
 import { StarTwoTone, UserOutlined } from '@ant-design/icons';
 import s from './card.module.scss';
-import { feedbackT } from '@redux/reducers/feedbacks-reducer';
+import { FeedbackType } from '@redux/reducers/feedbacks-reducer';
+import { DateConversion } from '@utils/date-conversion';
 
 const { Text } = Typography;
 
-export const CustomCard = ({ imageSrc, fullName, message, rating, createdAt }: feedbackT) => {
+export const CustomCard = ({ imageSrc, fullName, message, rating, createdAt }: FeedbackType) => {
     return (
         <Comment
             className={s.comment}
@@ -29,7 +30,7 @@ export const CustomCard = ({ imageSrc, fullName, message, rating, createdAt }: f
                 <>
                     <Rate disabled defaultValue={rating} character={<StarTwoTone />} />
                     <Tooltip>
-                        <span>{new Date(createdAt).toLocaleDateString('ru')}</span>
+                        <span>{DateConversion(createdAt)}</span>
                     </Tooltip>
                 </>
             }

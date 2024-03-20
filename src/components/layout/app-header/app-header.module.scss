@@ -1,32 +1,31 @@
 @import "src/assets/style/variables";
 
 .header {
-  background: #F0F5FF;
+  background: $primaryLight1;
   height: auto;
   line-height: 1;
 
-  display: grid;
-  grid-template-columns: minmax(min-content, 1190px) 1fr;
-  row-gap: 15px;
-  padding: 0 24px 24px 24px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 $gap-xl $gap-xl $gap-xl;
   overflow: hidden;
-  @media (max-width: 576px) {
-    row-gap: 10px;
+  @media (max-width: $mobile-width) {
+    row-gap: $gap-2s;
+  }
+  .title {
+    font:$font-xl ;
+    grid-column: 1/ 2;
+    margin: 0;
+    @media (max-width: $tablet-width) {
+      font: $font-xl-tablet;
+    }
+    @media (max-width: $mobile-width) {
+      font:$font-l;
+    }
+  }
+
+  .settings {
+    margin-left: auto;
   }
 }
 
-.title {
-  font-size: 38px;
-  font-weight: 700;
-  line-height: 110%;
-  grid-column: 1/ 2;
-  margin: 0;
-  @media (max-width: 992px) {
-    font-size: 24px;
-    font-weight: 500;
-  }
-  @media (max-width: 576px) {
-    font-size: 20px;
-    font-weight: 500;
-  }
-}

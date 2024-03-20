@@ -3,7 +3,7 @@
 .container {
   height: 100%;
   width: 100%;
-  padding: 24px 24px 0;
+  padding: $gap-xl $gap-xl 0;
 
   .cards {
     display: flex;
@@ -13,20 +13,21 @@
     max-height: 650px;
     overflow-y: auto;
     scrollbar-width: none;
-    margin-bottom: 130px;
+    margin-bottom: $gap-11xl;
   }
 
-  @media (max-width: 576px) {
-    .cards{
-      margin-bottom: 48px;
+  @media (max-width: $mobile-width) {
+    .cards {
+      margin-bottom: $gap-7xl;
     }
     .buttons {
       display: flex;
       flex-direction: column;
-      margin-bottom:42px;
-      :global{
+      margin-bottom: $gap-6xl;
+
+      :global {
         .ant-btn-primary {
-          margin-bottom: 16px;
+          margin-bottom: $gap-m;
         }
       }
     }

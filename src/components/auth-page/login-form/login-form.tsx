@@ -1,21 +1,21 @@
 import { Button, Checkbox, Form, Input, Row } from 'antd';
 import { GooglePlusOutlined } from '@ant-design/icons';
-import { LoginFormProps } from '@types/auth';
+import { LoginFormType } from '@types/auth';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { CheckEmailTC, LoginTC } from '@redux/reducers/auth-reducer';
+import { checkEmailTC, loginTC } from '@redux/reducers/auth-reducer';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Path } from '../../../routes/path';
 import { Rule } from 'antd/lib/form';
-import { baseURL } from '@redux/constants/api';
-import { Endpoints } from '@redux/constants/endpoint-names';
 import { authSelector } from '../../../selectors';
+import { Endpoints } from '@constants/endpoint-names';
+import { baseURL } from '@constants/api';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const { statusCode, message } = useAppSelector(authSelector).AuthError;
+    const { statusCode, message } = useAppSelector(authSelector).authError;
     const { isCheckSuccess, isAuth } = useAppSelector(authSelector);
     const [emailForm, setEmailForm] = useState('');
     const [forgotPass, setForgotPass] = useState(false);
@@ -29,15 +29,15 @@ export const LoginForm = () => {
     // Повторный запрос при 404
     useEffect(() => {
         if (location.state?.from === Path.RESULT.ERROR_CHECK_EMAIL && statusCode) {
-            email && dispatch(CheckEmailTC(email));
+            email && dispatch(checkEmailTC(email));
         }
     }, [dispatch, email, location.state?.from, statusCode]);
 
-    const onFinish = ({ email, password, remember }: LoginFormProps) => {
-        dispatch(LoginTC(email, password, remember));
+    const onFinish = ({ email, password, remember }: LoginFormType) => {
+        dispatch(loginTC(email, password, remember));
     };
     const onForgotClick = (email: string) => {
-        dispatch(CheckEmailTC(email));
+        dispatch(checkEmailTC(email));
         sessionStorage.setItem('email', email);
     };
     // Редирект на главную

@@ -1,11 +1,11 @@
+@import "src/assets/style/variables";
 .logo {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-top: 4.6rem;
-  margin-bottom: 6.5rem;
+  padding-top: $gap-9xl;
+  margin-bottom: $gap-8xl;
   flex-grow: 0;
-  //margin-left: -15px;
 }
 
 .logo.collapsed {
@@ -30,7 +30,7 @@
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $tablet-width) {
   .logo__text,
   .logo__icon {
     display: none;
@@ -40,7 +40,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: $mobile-width) {
   .logo {
     padding-top: 1.3rem;
     margin-left: 0;

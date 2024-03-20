@@ -7,11 +7,11 @@ import { RegisterForm } from '@components/auth-page/register-form/register-form'
 import { useEffect, useState } from 'react';
 import { Path } from '../../routes/path';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { LoginAC } from '@redux/reducers/auth-reducer';
+import { loginAC } from '@redux/reducers/auth-reducer';
 
 export const AuthPage = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const { pathname } = useLocation();
     const dispatch = useAppDispatch();
     const [key, setKey] = useState('1');
 
@@ -32,14 +32,14 @@ export const AuthPage = () => {
 
     useEffect(() => {
         if (token) {
-            dispatch(LoginAC(true, null));
+            dispatch(loginAC(true, null));
             navigate(Path.MAIN);
         }
     }, [dispatch, navigate, token]);
 
     useEffect(() => {
-        location.pathname === `${Path.REGISTRATION}` ? setKey('2') : setKey('1');
-    }, [location.pathname]);
+        pathname === `${Path.REGISTRATION}` ? setKey('2') : setKey('1');
+    }, [pathname]);
 
     return (
         <>

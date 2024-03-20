@@ -1,3 +1,4 @@
+@import "src/assets/style/variables";
 .button-menu {
   border-top: 1px solid transparent;
   transform: translateY(-100%);
@@ -7,7 +8,7 @@
 
   position: absolute;
   top: 100%;
-  font-size: 14px;
+  font:$font-s;
 
 }
 
@@ -15,7 +16,7 @@
   .ant-btn{
     border: none;
     span {
-      margin-left: 10px;
+      margin-left: $gap-2s;
     }
   }
 }

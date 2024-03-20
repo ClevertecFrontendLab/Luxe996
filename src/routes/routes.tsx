@@ -10,6 +10,7 @@ import { ChangePassword } from '@components/auth-page/change-password/change-pas
 import { MainWrapper } from '@components/../pages/main-wrapper/main-wrapper';
 import { FeedbacksPage } from '@pages/feedbacks-page';
 import { AppLayout } from '@components/layout/app-layout';
+import { CalendarPage } from '@pages/calendar-page/calendar-page';
 
 export const routes = (
     <Routes>
@@ -170,6 +171,7 @@ export const routes = (
         <Route element={<MainWrapper />}>
             <Route path={Path.MAIN} element={<MainPage />} />
             <Route path={Path.FEEDBACKS} element={<FeedbacksPage />} />
+            <Route path={Path.CALENDAR} element={<CalendarPage />} />
         </Route>
     </Routes>
 );

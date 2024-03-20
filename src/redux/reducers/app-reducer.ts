@@ -1,10 +1,10 @@
 const LOADING = 'LOADING';
 
-type initialState = {
+type initialStateType = {
     isLoading: boolean;
 };
 
-const initialState: initialState = {
+const initialState: initialStateType = {
     isLoading: false,
 };
 
@@ -24,5 +24,5 @@ export const AppReducer = (state = initialState, action: ActionType) => {
 
 type ActionType = LoadingAT;
 //Loader
-type LoadingAT = ReturnType<typeof LoadingAC>;
-export const LoadingAC = (loading: boolean) => ({ type: LOADING, loading } as const);
+type LoadingAT = ReturnType<typeof loadingAC>;
+export const loadingAC = (loading: boolean) => ({ type: LOADING, loading } as const);
